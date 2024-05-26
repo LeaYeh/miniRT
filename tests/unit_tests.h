@@ -6,7 +6,7 @@
 /*   By: lyeh <lyeh@student.42vienna.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/14 15:35:54 by lyeh              #+#    #+#             */
-/*   Updated: 2024/05/14 13:54:24 by lyeh             ###   ########.fr       */
+/*   Updated: 2024/05/26 16:23:53 by lyeh             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,6 @@
 # define TEST_H
 
 # include <criterion/criterion.h>
-# include "vec3.h"
+# include "vec3_private.h"
 
 #endif
