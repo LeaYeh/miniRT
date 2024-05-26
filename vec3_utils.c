@@ -1,39 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   vec3.c                                             :+:      :+:    :+:   */
+/*   vec3_utils.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lyeh <lyeh@student.42vienna.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/05/14 15:30:14 by lyeh              #+#    #+#             */
-/*   Updated: 2024/05/26 12:07:04 by lyeh             ###   ########.fr       */
+/*   Created: 2024/05/26 12:00:38 by lyeh              #+#    #+#             */
+/*   Updated: 2024/05/26 12:06:53 by lyeh             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "vec3_private.h"
 
-t_vec3	*create_vec3(double x, double y, double z)
+double	vec3_magnitude(t_vec3 a)
 {
-	t_vec3	*v;
-
-	v = (t_vec3 *)calloc(1, sizeof(t_vec3));
-	if (!v)
-		return (NULL);
-	v->x = x;
-	v->y = y;
-	v->z = z;
-	v->add = vec3_add;
-	v->sub = vec3_sub;
-	v->mul = vec3_mul;
-	v->div = vec3_div;
-	v->cross = vec3_cross;
-	v->normalize = vec3_normalize;
-	v->dot = vec3_dot;
-	v->magnitude = vec3_magnitude;
-	return (v);
+	return (sqrt(a.x * a.x + a.y * a.y + a.z * a.z));
 }
 
-t_vec3	*create_zero_vec3(void)
+t_vec3	*vec3_normalize(t_vec3 a)
 {
-	return (create_vec3(0, 0, 0));
+	t_vec3	*v;
+	double	mag;
+
+	v = create_zero_vec3();
+	if (!v)
+		return (NULL);
+	mag = vec3_magnitude(a);
+	v->x = a.x / mag;
+	v->y = a.y / mag;
+	v->z = a.z / mag;
+	return (v);
 }
