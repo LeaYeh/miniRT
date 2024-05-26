@@ -1,8 +1,8 @@
 NAME = miniRT
 CC = cc
-CFLAGS = -Wall -Wextra -Werror
-LDFLAGS = -lcriterion
-SRC = vec3.c test_vec3.c
+CFLAGS = -Wall -Wextra -Werror -Iinclude
+LDFLAGS = -lcriterion -lm
+SRC = $(wildcard source/*.c) $(wildcard tests/*.c)
 OBJ = $(SRC:.c=.o)
 
 all: $(NAME)
