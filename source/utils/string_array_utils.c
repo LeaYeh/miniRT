@@ -1,25 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ray.h                                              :+:      :+:    :+:   */
+/*   string_utils.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lyeh <lyeh@student.42vienna.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/05/26 12:37:47 by lyeh              #+#    #+#             */
-/*   Updated: 2024/05/26 14:53:14 by lyeh             ###   ########.fr       */
+/*   Created: 2024/05/28 14:44:52 by lyeh              #+#    #+#             */
+/*   Updated: 2024/05/28 14:47:15 by lyeh             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef RAY_H
-# define RAY_H
+#include "utils.h"
 
-# include "vec3.h"
-
-typedef struct s_ray
+int	get_array_size(char **array)
 {
-	t_vec3	*origin;
-	t_vec3	*direction;
-	t_vec3	*point_at_parameter;
-}	t_ray;
+	int	i;
 
-#endif
+	i = 0;
+	while (array[i])
+		i++;
+	return (i);
+}
+
+void free_array(char **array)
+{
+	int	i;
+
+	i = 0;
+	while (array[i])
+	{
+		free(array[i]);
+		i++;
+	}
+	free(array);
+}

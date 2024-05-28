@@ -1,25 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ray.h                                              :+:      :+:    :+:   */
+/*   utils.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lyeh <lyeh@student.42vienna.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/05/26 12:37:47 by lyeh              #+#    #+#             */
-/*   Updated: 2024/05/26 14:53:14 by lyeh             ###   ########.fr       */
+/*   Created: 2024/05/28 14:46:03 by lyeh              #+#    #+#             */
+/*   Updated: 2024/05/28 16:51:26 by lyeh             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef RAY_H
-# define RAY_H
+#ifndef UTILS_H
+# define UTILS_H
 
-# include "vec3.h"
+# include <stdlib.h>
 
-typedef struct s_ray
-{
-	t_vec3	*origin;
-	t_vec3	*direction;
-	t_vec3	*point_at_parameter;
-}	t_ray;
+void	free_array(char **array);
+int		get_array_size(char **array);
 
 #endif

@@ -1,25 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ray.h                                              :+:      :+:    :+:   */
+/*   reader_check.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lyeh <lyeh@student.42vienna.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/05/26 12:37:47 by lyeh              #+#    #+#             */
-/*   Updated: 2024/05/26 14:53:14 by lyeh             ###   ########.fr       */
+/*   Created: 2024/05/26 17:51:22 by lyeh              #+#    #+#             */
+/*   Updated: 2024/05/28 10:21:42 by lyeh             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef RAY_H
-# define RAY_H
+#include "reader_private.h"
 
-# include "vec3.h"
-
-typedef struct s_ray
+bool	is_valid_filename(char *filename)
 {
-	t_vec3	*origin;
-	t_vec3	*direction;
-	t_vec3	*point_at_parameter;
-}	t_ray;
+	int	len;
 
-#endif
+	len = ft_strlen(filename);
+	if (len < 4)
+		return (false);
+	if (ft_strcmp(filename + len - 4, ".rt") != 0)
+		return (false);
+	return (true);
+}
