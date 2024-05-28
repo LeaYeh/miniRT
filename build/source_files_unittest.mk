@@ -1,20 +1,24 @@
 # **************************************************************************** #
 #                                                                              #
 #                                                         :::      ::::::::    #
-#    source_files.mk                                    :+:      :+:    :+:    #
+#    source_files_unittest.mk                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: ldulling <ldulling@student.42.fr>          +#+  +:+       +#+         #
+#    By: lyeh <lyeh@student.42vienna.com>           +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/03/19 16:15:33 by ldulling          #+#    #+#              #
-#    Updated: 2024/05/26 19:51:00 by ldulling         ###   ########.fr        #
+#    Updated: 2024/05/28 12:26:06 by lyeh             ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-# Initialize SRC
-SRC		:= $(SRC)
+include				$(BUILD_DIR)/source_files_miniRT.mk
+
+# Filter out main.c from SRC
+SRC             :=  $(filter-out main.c, $(SRC))
+
+SRC				+=	$(wildcard tests/*.c tests/**/*.c)
 
 # Main:
-DIR		:=	./
-SRC		+=	$(addprefix $(DIR), \
-            main.c \
-)
+# DIR		:=	./
+# SRC		+=	$(addprefix $(DIR), \
+#             main.c \
+# )

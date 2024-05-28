@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: ldulling <ldulling@student.42.fr>          +#+  +:+       +#+         #
+#    By: lyeh <lyeh@student.42vienna.com>           +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/12/23 03:22:46 by ldulling          #+#    #+#              #
-#    Updated: 2024/05/26 20:27:50 by ldulling         ###   ########.fr        #
+#    Updated: 2024/05/28 14:34:29 by lyeh             ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,6 +16,7 @@
 #	Executable
 
 NAME 			:=	miniRT
+TEST_NAME		:=	unittest
 
 
 #	Directories
@@ -34,7 +35,8 @@ LIBRARIES		:=	$(LIB_DIR)/libft
 LIBRARIES_EXT	:=	m criterion
 LIB_INCLUDES 	:=	$(LIB_DIR)/libft/inc
 BUILDFILES		:=	Makefile \
-					$(BUILD_DIR)/source_files.mk
+					$(BUILD_DIR)/source_files_miniRT.mk \
+					$(BUILD_DIR)/source_files_unittest.mk
 
 
 #	Flags
@@ -81,9 +83,12 @@ TERMINALFLAGS	:=	--title="$(TERMINALTITLE)" -- /bin/sh -c
 
 #	Files
 
-#TODO Temporary solution to get all source files
-SRC				:=	$(patsubst source/%,%,$(wildcard source/*.c source/**/*.c))
-# include				$(BUILD_DIR)/source_files.mk
+# ifeq ($(MAKECMDGOALS),test)
+# include				$(BUILD_DIR)/source_files_unittest.mk
+# else
+include				$(BUILD_DIR)/source_files_miniRT.mk
+# endif
+
 OBJ 			:=	$(SRC:%.c=$(OBJ_DIR)/%.o)
 DEP				:=	$(SRC:%.c=$(DEP_DIR)/%.d)
 
@@ -96,7 +101,7 @@ DEP_SUBDIRS		:=	$(sort $(dir $(DEP)))
 
 # ***************************** BUILD PROCESS ******************************** #
 
-.PHONY			:	all run val valfd build lib waitforlib clean \
+.PHONY			:	all run test val valfd build lib waitforlib clean \
 					fclean ffclean re
 
 
@@ -110,6 +115,9 @@ all				:
 
 run				:	all
 					"./$(NAME)"
+
+test			:	all
+					"./$(TEST_NAME)"
 
 val				:	all
 					$(VALGRIND) $(VALGRINDFLAGS) "./$(NAME)"
