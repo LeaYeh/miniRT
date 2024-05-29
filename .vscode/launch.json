@@ -5,7 +5,7 @@
             "type": "cppdbg",
             "request": "launch",
             "program": "${workspaceFolder}/miniRT",
-            "args": [],
+            "args": ["${workspaceFolder}/assets/basic.rt"],
             "stopAtEntry": false,
             "cwd": "${fileDirname}",
             "environment": [],
