@@ -57,7 +57,7 @@ void	print_scene(t_scene *sence)
 {
 	t_list	*obj_list;
 
-	printf("[Scene]\n");
+	printf("\n==================== [Scene] ====================\n");
 	print_amblight(sence->amblight);
 	print_camera(sence->camera);
 	print_light(sence->light);
