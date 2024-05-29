@@ -6,7 +6,7 @@
 /*   By: lyeh <lyeh@student.42vienna.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/26 15:41:00 by lyeh              #+#    #+#             */
-/*   Updated: 2024/05/29 21:30:02 by lyeh             ###   ########.fr       */
+/*   Updated: 2024/05/30 01:14:45 by lyeh             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,10 @@
 /* Error Codes */
 # define SUCCESS			0
 # define ERR_ARGC			1
+
+# define SPHERE_ARG_NUM		3
+# define PLANE_ARG_NUM		3
+# define CYLINDER_ARG_NUM	5
 
 # define INVALID_FILE			"invalid file format.\n"
 # define INVALID_CONTENT_FMT	"invalid content format.\n"
