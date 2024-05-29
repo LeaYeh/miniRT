@@ -1,25 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ray.h                                              :+:      :+:    :+:   */
+/*   debug.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lyeh <lyeh@student.42vienna.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/05/26 12:37:47 by lyeh              #+#    #+#             */
-/*   Updated: 2024/05/29 20:27:22 by lyeh             ###   ########.fr       */
+/*   Created: 2024/05/29 20:33:20 by lyeh              #+#    #+#             */
+/*   Updated: 2024/05/29 19:07:31 by lyeh             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef RAY_H
-# define RAY_H
+#ifndef DEBUG_H
+# define DEBUG_H
 
+# include "reader.h"
 # include "vec3.h"
 
-typedef struct s_ray
-{
-	t_vec3	*origin;
-	t_vec3	*direction;
-	t_vec3	*point_at_parameter;
-}	t_ray;
+void	print_vector(t_vec3 *vec);
+void	print_scene(t_scene *scene);
+void	print_object(t_obj *object);
+void	print_amblight(t_amblight *amblight);
+void	print_camera(t_camera *camera);
+void	print_light(t_light *light);
 
 #endif

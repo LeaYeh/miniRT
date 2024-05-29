@@ -1,25 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ray.h                                              :+:      :+:    :+:   */
+/*   print_vector.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lyeh <lyeh@student.42vienna.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/05/26 12:37:47 by lyeh              #+#    #+#             */
-/*   Updated: 2024/05/29 20:27:22 by lyeh             ###   ########.fr       */
+/*   Created: 2024/05/29 20:37:11 by lyeh              #+#    #+#             */
+/*   Updated: 2024/05/29 20:38:16 by lyeh             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef RAY_H
-# define RAY_H
+#include "debug.h"
 
-# include "vec3.h"
-
-typedef struct s_ray
+void	print_vector(t_vec3 *vec)
 {
-	t_vec3	*origin;
-	t_vec3	*direction;
-	t_vec3	*point_at_parameter;
-}	t_ray;
-
-#endif
+	if (!vec)
+	{
+		printf("NULL\n");
+		return ;
+	}
+	printf("(%f, %f, %f)\n", vec->x, vec->y, vec->z);
+}

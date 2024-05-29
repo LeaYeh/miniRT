@@ -6,7 +6,7 @@
 /*   By: lyeh <lyeh@student.42vienna.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/26 15:41:00 by lyeh              #+#    #+#             */
-/*   Updated: 2024/05/28 15:10:09 by lyeh             ###   ########.fr       */
+/*   Updated: 2024/05/29 21:30:02 by lyeh             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,10 +16,19 @@
 # include <stdio.h>
 # include <stdbool.h>
 # include "vec3.h"
+# include "libft.h"
 
 /* Error Codes */
 # define SUCCESS			0
 # define ERR_ARGC			1
+
+# define INVALID_FILE			"invalid file format.\n"
+# define INVALID_CONTENT_FMT	"invalid content format.\n"
+# define FAILED_OPEN_FILE		"failed to open file.\n"
+# define FAILED_ALLOC_MEM		"failed to allocate memory.\n"
+# define INVALID_NUM_ARG		"invalid number of argument.\n"
+# define INVALID_NUM_FMT		"invalid number format.\n"
+# define FAILED_PARSE_VEC		"parse vector failed.\n"
 
 typedef struct s_amblight
 {
@@ -50,7 +59,7 @@ typedef enum e_object_type
 
 typedef struct s_object
 {
-	t_obj_type  type;
+	t_obj_type	type;
 	t_vec3		*position;
 	t_vec3		*color;
 	t_vec3		*norm;
@@ -60,10 +69,10 @@ typedef struct s_object
 
 typedef struct s_scene
 {
-	t_light		*light;
 	t_amblight	*amblight;
 	t_camera	*camera;
-	t_obj		**objects;
+	t_light		*light;
+	t_list		*objects;
 }	t_scene;
 
 #endif
