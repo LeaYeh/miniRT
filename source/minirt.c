@@ -1,26 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ray.c                                              :+:      :+:    :+:   */
+/*   minirt.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lyeh <lyeh@student.42vienna.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/05/26 14:57:25 by lyeh              #+#    #+#             */
-/*   Updated: 2024/05/26 14:58:59 by lyeh             ###   ########.fr       */
+/*   Created: 2024/05/30 19:36:14 by lyeh              #+#    #+#             */
+/*   Updated: 2024/05/30 19:37:50 by lyeh             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ray.h"
+#include "minirt.h"
 
-t_ray	*create_ray(t_vec3 *origin, t_vec3 *direction)
+bool	init_minirt(t_minirt *minirt, char *filename)
 {
-    t_ray	*r;
+	minirt->scene = read_scene(filename);
+	if (!minirt->scene)
+		return (false);
+	minirt->vec3 = create_zero_vec3();
+	if (!minirt->vec3)
+		return (false);
+	return (true);
+}
 
-    r = (t_ray *)calloc(1, sizeof(t_ray));
-    if (!r)
-        return (NULL);
-    r->origin = origin;
-    r->direction = direction;
-    r->point_at_parameter = NULL;
-    return (r);
+bool	free_minirt(t_minirt *minirt)
+{
+	free_scene(&minirt->scene);
+	free(minirt->vec3);
+	return (true);
 }

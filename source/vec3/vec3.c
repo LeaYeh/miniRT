@@ -6,7 +6,7 @@
 /*   By: lyeh <lyeh@student.42vienna.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/14 15:30:14 by lyeh              #+#    #+#             */
-/*   Updated: 2024/05/26 12:07:04 by lyeh             ###   ########.fr       */
+/*   Updated: 2024/05/30 19:37:40 by lyeh             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ t_vec3	*create_vec3(double x, double y, double z)
 {
 	t_vec3	*v;
 
-	v = (t_vec3 *)calloc(1, sizeof(t_vec3));
+	v = (t_vec3 *)malloc(sizeof(t_vec3));
 	if (!v)
 		return (NULL);
 	v->x = x;

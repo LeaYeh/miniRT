@@ -1,28 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   vec3_private.h                                     :+:      :+:    :+:   */
+/*   ray_private.h                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lyeh <lyeh@student.42vienna.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/05/26 12:03:30 by lyeh              #+#    #+#             */
-/*   Updated: 2024/05/30 19:08:25 by lyeh             ###   ########.fr       */
+/*   Created: 2024/05/30 18:45:16 by lyeh              #+#    #+#             */
+/*   Updated: 2024/05/30 18:50:44 by lyeh             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef VEC3_PRIVATE_H
-# define VEC3_PRIVATE_H
+#ifndef RAY_PRIVATE_H
+# define RAY_PRIVATE_H
 
-# include <stdbool.h>
-# include "vec3.h"
-
-t_vec3	*vec3_add(t_vec3 a, t_vec3 b);
-t_vec3	*vec3_sub(t_vec3 a, t_vec3 b);
-t_vec3	*vec3_mul(t_vec3 a, double scalar);
-t_vec3	*vec3_div(t_vec3 a, double scalar);
-double	vec3_dot(t_vec3 a, t_vec3 b);
-t_vec3	*vec3_cross(t_vec3 a, t_vec3 b);
-double	vec3_magnitude(t_vec3 a);
-t_vec3	*vec3_normalize(t_vec3 a);
+# include "defines.h"
+# include "ray.h"
 
 #endif

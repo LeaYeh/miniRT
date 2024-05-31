@@ -1,5 +1,8 @@
 {
     "files.associations": {
-        "reader_private.h": "c"
+        "reader_private.h": "c",
+        "minirt.h": "c",
+        "vec3.h": "c",
+        "debug.h": "c"
     }
 }
