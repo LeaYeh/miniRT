@@ -6,7 +6,7 @@
 /*   By: lyeh <lyeh@student.42vienna.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/29 20:33:13 by lyeh              #+#    #+#             */
-/*   Updated: 2024/05/29 21:39:49 by lyeh             ###   ########.fr       */
+/*   Updated: 2024/05/31 17:20:10 by lyeh             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,32 +25,32 @@ void	print_object(t_obj *object)
 	print_vector(object->color);
 }
 
-void	print_camera(t_camera *camera)
+void	print_camera(t_camera camera)
 {
 	printf("Camera:\n");
 	printf("\tPosition: ");
-	print_vector(camera->position);
+	print_vector(camera.position);
 	printf("\tNorm: ");
-	print_vector(camera->norm);
-	printf("\tFOV: %f\n", camera->fov);
+	print_vector(camera.norm);
+	printf("\tFOV: %f\n", camera.fov);
 }
 
-void	print_light(t_light *light)
+void	print_light(t_light light)
 {
 	printf("Light:\n");
 	printf("\tPosition: ");
-	print_vector(light->position);
-	printf("\tRatio: %f\n", light->ratio);
+	print_vector(light.position);
+	printf("\tRatio: %f\n", light.ratio);
 	printf("\tColor: ");
-	print_vector(light->color);
+	print_vector(light.color);
 }
 
-void	print_amblight(t_amblight *amblight)
+void	print_amblight(t_amblight amblight)
 {
 	printf("Ambient Light:\n");
 	printf("\tColor: ");
-	print_vector(amblight->color);
-	printf("\tRatio: %f\n", amblight->ratio);
+	print_vector(amblight.color);
+	printf("\tRatio: %f\n", amblight.ratio);
 }
 
 void	print_scene(t_scene *sence)
