@@ -6,7 +6,7 @@
 /*   By: lyeh <lyeh@student.42vienna.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/28 10:22:39 by lyeh              #+#    #+#             */
-/*   Updated: 2024/05/30 19:18:29 by lyeh             ###   ########.fr       */
+/*   Updated: 2024/05/31 16:46:42 by lyeh             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,10 +49,9 @@ bool	parse_sphere(t_scene *scene, char **tokens)
 	if (!object)
 		return (false);
 	object->type = SPHERE;
-	object->position = parse_vector(tokens[0]);
 	object->d_param1 = ft_atof(tokens[1]);
-	object->color = parse_vector(tokens[2]);
-	if (object->position == NULL || object->color == NULL)
+	if (!parse_vector(object->position, tokens[0]) || \
+		!parse_vector(object->color, tokens[2]))
 		return (printf("parse_sphere: %s",
 				FAILED_PARSE_VEC), free_object(object), false);
 	if (!ft_lstnew_back(&scene->objects, object))
@@ -74,11 +73,9 @@ bool	parse_plane(t_scene *scene, char **tokens)
 	if (!object)
 		return (printf("parse_plane: %s", FAILED_ALLOC_MEM), false);
 	object->type = PLANE;
-	object->position = parse_vector(tokens[0]);
-	object->norm = parse_vector(tokens[1]);
-	object->color = parse_vector(tokens[2]);
-	if (object->position == NULL || \
-		object->color == NULL || object->norm == NULL)
+	if (!parse_vector(object->position, tokens[0]) || \
+		!parse_vector(object->norm, tokens[1]) || \
+		!parse_vector(object->color, tokens[2]))
 		return (printf("parse_plane: %s", FAILED_PARSE_VEC),
 			free_object(object), false);
 	if (!ft_lstnew_back(&scene->objects, object))
@@ -101,13 +98,11 @@ bool	parse_cylinder(t_scene *scene, char **tokens)
 	if (!object)
 		return (printf("parse_cylinder: %s", FAILED_ALLOC_MEM), false);
 	object->type = CYLINDER;
-	object->position = parse_vector(tokens[0]);
-	object->norm = parse_vector(tokens[1]);
 	object->d_param1 = ft_atof(tokens[2]);
 	object->d_param2 = ft_atof(tokens[3]);
-	object->color = parse_vector(tokens[4]);
-	if (object->position == NULL || \
-		object->color == NULL || object->norm == NULL)
+	if (!parse_vector(object->position, tokens[0]) || \
+		!parse_vector(object->norm, tokens[1]) || \
+		parse_vector(object->color, tokens[4]))
 		return (printf("parse_cylinder: %s", FAILED_PARSE_VEC),
 			free_object(object), false);
 	if (!ft_lstnew_back(&scene->objects, object))

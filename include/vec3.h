@@ -6,7 +6,7 @@
 /*   By: lyeh <lyeh@student.42vienna.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/13 17:19:11 by lyeh              #+#    #+#             */
-/*   Updated: 2024/05/30 19:28:20 by lyeh             ###   ########.fr       */
+/*   Updated: 2024/05/31 16:33:30 by lyeh             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,22 +16,26 @@
 # include <stdlib.h>
 # include <math.h>
 
+typedef struct s_vector_3d	t_vec3;
+
+typedef struct s_vector_3d_ops
+{
+	t_vec3	(*add)(t_vec3, t_vec3);
+	t_vec3	(*sub)(t_vec3, t_vec3);
+	t_vec3	(*mul)(t_vec3, double);
+	t_vec3	(*div)(t_vec3, double);
+	t_vec3	(*cross)(t_vec3, t_vec3);
+	t_vec3	(*normalize)(t_vec3);
+	double	(*dot)(t_vec3, t_vec3);
+	double	(*magnitude)(t_vec3);
+}	t_vec3_ops;
+
 typedef struct s_vector_3d
 {
 	double				x;
 	double				y;
 	double				z;
-	struct s_vector_3d	*(*add)(struct s_vector_3d, struct s_vector_3d);
-	struct s_vector_3d	*(*sub)(struct s_vector_3d, struct s_vector_3d);
-	struct s_vector_3d	*(*mul)(struct s_vector_3d, double);
-	struct s_vector_3d	*(*div)(struct s_vector_3d, double);
-	struct s_vector_3d	*(*cross)(struct s_vector_3d, struct s_vector_3d);
-	struct s_vector_3d	*(*normalize)(struct s_vector_3d);
-	double				(*dot)(struct s_vector_3d, struct s_vector_3d);
-	double				(*magnitude)(struct s_vector_3d);
+	const t_vec3_ops	*ops;
 }	t_vec3;
-
-t_vec3	*create_vec3(double x, double y, double z);
-t_vec3	*create_zero_vec3(void);
 
 #endif
