@@ -1,27 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minirt.c                                           :+:      :+:    :+:   */
+/*   object.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lyeh <lyeh@student.42vienna.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/05/30 19:36:14 by lyeh              #+#    #+#             */
-/*   Updated: 2024/06/01 11:32:50 by lyeh             ###   ########.fr       */
+/*   Created: 2024/06/01 11:23:43 by lyeh              #+#    #+#             */
+/*   Updated: 2024/06/01 11:31:48 by lyeh             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minirt.h"
+#ifndef OBJECT_H
+# define OBJECT_H
 
-bool	init_minirt(t_minirt *minirt, char *filename)
-{
-	minirt->scene = read_scene(filename);
-	if (!minirt->scene)
-		return (false);
-	return (true);
-}
+# include "vec3.h"
 
-bool	free_minirt(t_minirt *minirt)
+typedef enum e_object_type
 {
-	free_scene(&minirt->scene);
-	return (true);
-}
+	SPHERE		= 0,
+	PLANE,
+	CYLINDER
+}	t_obj_type;
+
+typedef struct s_object
+{
+	t_obj_type	type;
+	t_vec3		position;
+	t_vec3		color;
+	t_vec3		norm;
+	double		d_param1;
+	double		d_param2;
+}	t_obj;
+
+#endif

@@ -12,7 +12,8 @@
 
 #include "reader_private.h"
 
-bool	parse_vector(t_vec3 *v, char *str)
+bool	parse_vector(
+t_vec3 *v, char *str)
 {
 	char	**tokens;
 

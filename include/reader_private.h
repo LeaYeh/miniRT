@@ -6,10 +6,9 @@
 /*   By: lyeh <lyeh@student.42vienna.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/26 17:57:56 by lyeh              #+#    #+#             */
-/*   Updated: 2024/05/31 17:25:31 by lyeh             ###   ########.fr       */
+/*   Updated: 2024/06/01 11:33:58 by lyeh             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
 
 #ifndef READER_PRIVATE_H
 # define READER_PRIVATE_H

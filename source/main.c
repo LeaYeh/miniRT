@@ -6,7 +6,7 @@
 /*   By: lyeh <lyeh@student.42vienna.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/26 16:00:13 by lyeh              #+#    #+#             */
-/*   Updated: 2024/05/30 19:38:51 by lyeh             ###   ########.fr       */
+/*   Updated: 2024/06/01 11:15:04 by lyeh             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,4 +28,3 @@ int	main(int argc, char **argv)
 	free_minirt(&minirt);
 	return (SUCCESS);
 }
-
