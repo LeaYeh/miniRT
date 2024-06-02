@@ -1,23 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ray.c                                              :+:      :+:    :+:   */
+/*   camera_private.h                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lyeh <lyeh@student.42vienna.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/05/26 14:57:25 by lyeh              #+#    #+#             */
-/*   Updated: 2024/06/02 19:50:54 by lyeh             ###   ########.fr       */
+/*   Created: 2024/06/02 20:38:42 by lyeh              #+#    #+#             */
+/*   Updated: 2024/06/02 20:39:16 by lyeh             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ray_private.h"
+#ifndef CAMERA_PRIVATE_H
+# define CAMERA_PRIVATE_H
 
-t_ray	ray(t_vec3 origin, t_vec3 direction)
-{
-	t_ray	ray;
+# include "camera.h"
 
-	ray.origin = origin;
-	ray.direction = direction;
-	// ray->point_at_parameter = NULL;
-	return (ray);
-}
+double	degree_to_radian(double degrees);
+
+#endif

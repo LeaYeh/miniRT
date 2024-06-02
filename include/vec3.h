@@ -6,15 +6,14 @@
 /*   By: lyeh <lyeh@student.42vienna.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/13 17:19:11 by lyeh              #+#    #+#             */
-/*   Updated: 2024/05/31 16:33:30 by lyeh             ###   ########.fr       */
+/*   Updated: 2024/06/01 15:43:59 by lyeh             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef VEC3_H
 # define VEC3_H
 
-# include <stdlib.h>
-# include <math.h>
+# include "defines.h"
 
 typedef struct s_vector_3d	t_vec3;
 
@@ -37,5 +36,7 @@ typedef struct s_vector_3d
 	double				z;
 	const t_vec3_ops	*ops;
 }	t_vec3;
+
+t_vec3_ops	*init_ops(void);
 
 #endif

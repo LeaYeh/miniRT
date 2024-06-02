@@ -5,6 +5,11 @@
         "vec3.h": "c",
         "debug.h": "c",
         "vec3_private.h": "c",
-        "random": "c"
+        "random": "c",
+        "hit.h": "c",
+        "defines.h": "c",
+        "stdio.h": "c",
+        "math.h": "c",
+        "camera.h": "c"
     }
 }
