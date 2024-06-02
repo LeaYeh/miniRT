@@ -6,7 +6,7 @@
 /*   By: lyeh <lyeh@student.42vienna.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/01 11:49:22 by lyeh              #+#    #+#             */
-/*   Updated: 2024/06/02 18:22:00 by lyeh             ###   ########.fr       */
+/*   Updated: 2024/06/02 21:00:12 by lyeh             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,5 +46,7 @@ typedef struct s_camera
 	t_pixel_grid	pixel;
 	t_list			*ray_list;
 }	t_camera;
+
+bool	init_camera(t_camera *camera);
 
 #endif
