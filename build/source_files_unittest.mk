@@ -13,9 +13,9 @@
 include				$(BUILD_DIR)/source_files_miniRT.mk
 
 # Filter out main.c from SRC
-SRC             :=  $(filter-out main.c, $(SRC))
+SRC             :=  $(filter-out $(SRC_DIR)/main.c, $(SRC))
 
-SRC				+=	$(wildcard tests/*.c tests/**/*.c)
+SRC				+=	$(wildcard $(TEST_DIR)/*.c $(TEST_DIR)/**/*.c)
 
 # Main:
 # DIR		:=	./

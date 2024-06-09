@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: lyeh <lyeh@student.42vienna.com>           +#+  +:+       +#+         #
+#    By: ldulling <ldulling@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/12/23 03:22:46 by ldulling          #+#    #+#              #
-#    Updated: 2024/05/28 14:34:29 by lyeh             ###   ########.fr        #
+#    Updated: 2024/06/09 17:37:05 by ldulling         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,13 +15,16 @@
 
 #	Executable
 
+ifeq ($(MAKELEVEL), 0)
 NAME 			:=	miniRT
+endif
 TEST_NAME		:=	unittest
 
 
 #	Directories
 
 SRC_DIR			:=	source
+TEST_DIR		:=	tests
 INC_DIR			:=	include
 BUILD_DIR		:=	build
 OBJ_DIR			:=	$(BUILD_DIR)/_obj
@@ -83,11 +86,11 @@ TERMINALFLAGS	:=	--title="$(TERMINALTITLE)" -- /bin/sh -c
 
 #	Files
 
-# ifeq ($(MAKECMDGOALS),test)
-# include				$(BUILD_DIR)/source_files_unittest.mk
-# else
+ifeq ($(MAKECMDGOALS),test)
+include				$(BUILD_DIR)/source_files_unittest.mk
+else
 include				$(BUILD_DIR)/source_files_miniRT.mk
-# endif
+endif
 
 OBJ 			:=	$(SRC:%.c=$(OBJ_DIR)/%.o)
 DEP				:=	$(SRC:%.c=$(DEP_DIR)/%.d)
@@ -101,8 +104,7 @@ DEP_SUBDIRS		:=	$(sort $(dir $(DEP)))
 
 # ***************************** BUILD PROCESS ******************************** #
 
-.PHONY			:	all run test val valfd build lib waitforlib clean \
-					fclean ffclean re
+.PHONY			:	all run test val valfd build lib waitforlib clean fclean re
 
 
 #	Compilation
@@ -116,6 +118,7 @@ all				:
 run				:	all
 					"./$(NAME)"
 
+test			:	NAME := $(TEST_NAME)
 test			:	all
 					"./$(TEST_NAME)"
 
@@ -161,14 +164,14 @@ $(NAME)			:	$(LIBRARIES) $(OBJ)
 
 #	Source file compiling
 
-$(OBJ_DIR)/%.o	:	$(SRC_DIR)/%.c $(BUILDFILES) | $(OBJ_SUBDIRS)
+$(OBJ_DIR)/%.o	:	%.c $(BUILDFILES) | $(OBJ_SUBDIRS)
 					$(CC) $(CFLAGS) $(MACROS) $(INCFLAGS) -c $< -o $@ \
 						&& echo -n $(MSG_PROGRESS)
 
 
 #	Pre-processing and dependency file creation
 
-$(DEP_DIR)/%.d	:	$(SRC_DIR)/%.c $(BUILDFILES) | $(DEP_SUBDIRS)
+$(DEP_DIR)/%.d	:	%.c $(BUILDFILES) | $(DEP_SUBDIRS)
 					$(CC) $(CFLAGS) $(MACROS) $(INCFLAGS) \
 						-M -MP -MF $@ -MT "$(OBJ_DIR)/$*.o $@" $<
 
@@ -184,20 +187,11 @@ $(DEP_SUBDIRS)	:
 
 clean			:
 					$(MAKE) clean -C $(LIBRARIES)
-					rm -f $(OBJ) $(DEP)
-ifneq (,$(wildcard $(OBJ_DIR)))
-					-find $(OBJ_DIR) -type d -empty -delete
-endif
-ifneq (,$(wildcard $(DEP_DIR)))
-					-find $(DEP_DIR) -type d -empty -delete
-endif
+					rm -rf $(OBJ_DIR) $(DEP_DIR)
 
 fclean			:	clean
 					$(MAKE) fclean -C $(LIBRARIES)
-					rm -f $(NAME)
-
-ffclean			:	fclean
-					rm -rf $(OBJ_DIR) $(DEP_DIR)
+					rm -f $(NAME) $(TEST_NAME)
 
 re				:
 					$(MAKE) fclean
@@ -246,7 +240,7 @@ STY_WHI_BRI_BG	:=	"\e[107m"
 MSG_INFO		:=	$(STY_ITA)$(STY_WHI)" Make version: $(MAKE_VERSION)\n\
 					Compiler version: $(CC_VERSION)\n"$(STY_RES)
 ################################################################################
-MSG_START		:=	$(STY_ITA)"Building $(NAME) ... "$(STY_RES)
+MSG_START		=	$(STY_ITA)"Building $(NAME) ... "$(STY_RES)
 ################################################################################
 MSG_PROGRESS	:=	"💡"
 ################################################################################
