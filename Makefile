@@ -128,9 +128,9 @@ val				:	all
 valfd			:	all
 ifneq ($(TERMINAL),)
 					$(TERMINAL) $(TERMINALFLAGS) \
-					"bash --posix -c 'trap \"\" SIGINT ; \
+					"bash -c 'trap \"\" SIGINT ; \
 					$(VALGRIND) $(VALGRINDFLAGS) $(VALGRINDFDFLAGS) ./$(NAME) ; \
-					exec bash --posix'"
+					exec bash'"
 else
 					$(VALGRIND) $(VALGRINDFLAGS) $(VALGRINDFDFLAGS) "./$(NAME)"
 endif
