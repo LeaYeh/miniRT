@@ -16,7 +16,7 @@
 #	Executable
 
 ifeq ($(MAKELEVEL), 0)
-NAME 			:=	miniRT
+export NAME 	:=	miniRT
 endif
 TEST_NAME		:=	unittest
 
