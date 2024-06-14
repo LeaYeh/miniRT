@@ -6,7 +6,7 @@
 /*   By: lyeh <lyeh@student.42vienna.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/01 12:13:23 by lyeh              #+#    #+#             */
-/*   Updated: 2024/06/02 20:39:56 by lyeh             ###   ########.fr       */
+/*   Updated: 2024/06/14 20:19:13 by lyeh             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,7 @@ void	setup_viewport(t_camera *camera)
 	t_vec3			vec3;
 
 	vec3 = (t_vec3){.ops = init_ops()};
+	camera->viewport.height = 2 * tan(camera->theta / 2);
 	camera->viewport.width = camera->aspect_ratio * camera->viewport.height;
 	camera->viewport.w = vec3.ops->normalize(vec3.ops->mul(camera->norm, -1));
 	camera->viewport.u = vec3.ops->normalize(
@@ -45,6 +46,9 @@ void	setup_viewport(t_camera *camera)
 		.x = camera->position.x - camera->viewport.width / 2,
 		.y = camera->position.y - camera->viewport.height / 2,
 		.z = camera->position.z};
+	camera->viewport.origin_corner = vec3.ops->add(
+			camera->viewport.origin_corner,
+			vec3.ops->mul(camera->viewport.w, camera->focal_length));
 }
 
 void	setup_pixel_grid(t_camera *camera)
@@ -73,13 +77,12 @@ bool	setup_ray_list(t_camera *camera)
 	int	col;
 
 	row = 0;
-	while (row < WINDOW_HEIGHT)
+	while (row < camera->viewport.height)
 	{
 		col = 0;
-		while (col < WINDOW_WIDTH)
+		while (col < camera->viewport.width)
 		{
-			if (!setup_ray(camera,
-					(double)row / WINDOW_HEIGHT, (double)col / WINDOW_HEIGHT))
+			if (!setup_ray(camera, row, col))
 				return (false);
 			col++;
 		}
