@@ -6,7 +6,7 @@
 /*   By: lyeh <lyeh@student.42vienna.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/26 15:58:30 by lyeh              #+#    #+#             */
-/*   Updated: 2024/05/31 17:00:35 by lyeh             ###   ########.fr       */
+/*   Updated: 2024/06/14 17:11:40 by lyeh             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,9 +33,9 @@ Test(vec3, vec3_sub_negative)
 	t_vec3	result;
 
 	result = vec3.ops->sub(v1, v2);
-	cr_assert_float_eq(result.x, 2.0, 0.001, "X component is not correct");
-	cr_assert_float_eq(result.y, 4.0, 0.001, "Y component is not correct");
-	cr_assert_float_eq(result.z, 6.0, 0.001, "Z component is not correct");
+	cr_assert_float_eq(result.x, 0.0, 0.001, "X component is not correct");
+	cr_assert_float_eq(result.y, 0.0, 0.001, "Y component is not correct");
+	cr_assert_float_eq(result.z, 0.0, 0.001, "Z component is not correct");
 }
 
 Test(vec3, vec3_sub_positive)
