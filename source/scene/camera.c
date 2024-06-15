@@ -6,7 +6,7 @@
 /*   By: lyeh <lyeh@student.42vienna.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/01 12:13:23 by lyeh              #+#    #+#             */
-/*   Updated: 2024/06/15 14:27:36 by lyeh             ###   ########.fr       */
+/*   Updated: 2024/06/15 14:32:06 by lyeh             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,6 +87,7 @@ void	setup_ray_list(t_camera *camera)
 		j = 0;
 		while (j < WINDOW_WIDTH)
 		{
+			// TODO: How to avoid duplicate ray?
 			camera->ray_pool[i * WINDOW_WIDTH + j] = get_ray(camera, j, i);
 			j++;
 		}
