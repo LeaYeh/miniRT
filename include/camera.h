@@ -6,7 +6,7 @@
 /*   By: lyeh <lyeh@student.42vienna.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/01 11:49:22 by lyeh              #+#    #+#             */
-/*   Updated: 2024/06/02 21:00:12 by lyeh             ###   ########.fr       */
+/*   Updated: 2024/06/15 13:43:29 by lyeh             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,8 @@ typedef struct s_pixel_grid
 	t_vec3	origin_corner;
 	t_vec3	delta_u;
 	t_vec3	delta_v;
+	double	width;
+	double	height;
 }	t_pixel_grid;
 
 typedef struct s_viewport
