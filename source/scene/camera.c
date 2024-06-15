@@ -6,7 +6,7 @@
 /*   By: lyeh <lyeh@student.42vienna.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/01 12:13:23 by lyeh              #+#    #+#             */
-/*   Updated: 2024/06/15 14:32:06 by lyeh             ###   ########.fr       */
+/*   Updated: 2024/06/15 14:57:16 by lyeh             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,21 +14,18 @@
 
 static void		setup_viewport(t_camera *camera);
 static void		setup_pixel_grid(t_camera *camera);
-static void		setup_ray_list(t_camera *camera);
+static bool		init_ray_pool(t_camera *camera);
 static t_ray	get_ray(t_camera *camera, int px, int py);
 
 bool	init_camera(t_camera *camera)
 {
-	camera->ray_pool = (t_ray *)malloc(
-			sizeof(t_ray) * WINDOW_WIDTH * WINDOW_HEIGHT);
-	if (!camera->ray_pool)
-		return (false);
 	camera->theta = degree_to_radian(camera->fov);
 	camera->focal_length = 1.0;
 	camera->aspect_ratio = (double)WINDOW_WIDTH / (double)WINDOW_HEIGHT;
 	setup_viewport(camera);
 	setup_pixel_grid(camera);
-	setup_ray_list(camera);
+	if (!init_ray_pool(camera))
+		return (false);
 	return (true);
 }
 
@@ -76,11 +73,15 @@ void	setup_pixel_grid(t_camera *camera)
 			vec3.ops->mul(camera->viewport.w, camera->focal_length));
 }
 
-void	setup_ray_list(t_camera *camera)
+bool	init_ray_pool(t_camera *camera)
 {
 	int	i;
 	int	j;
 
+	camera->ray_pool = (t_ray *)malloc(
+			sizeof(t_ray) * WINDOW_WIDTH * WINDOW_HEIGHT);
+	if (!camera->ray_pool)
+		return (false);
 	i = 0;
 	while (i < WINDOW_HEIGHT)
 	{
@@ -93,6 +94,7 @@ void	setup_ray_list(t_camera *camera)
 		}
 		i++;
 	}
+	return (true);
 }
 
 t_ray	get_ray(t_camera *camera, int px, int py)
@@ -107,7 +109,8 @@ t_ray	get_ray(t_camera *camera, int px, int py)
 				vec3.ops->mul(camera->pixel.delta_v, py)));
 	return ((t_ray){
 		.origin = camera->position,
-		.direction = vec3.ops->sub(pixel_positon, camera->position)});
+		.direction = vec3.ops->sub(pixel_positon, camera->position),
+		.hit_record_list = NULL});
 }
 
 // bool	setup_ray(t_camera *camera, double u, double v)
