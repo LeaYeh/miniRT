@@ -6,7 +6,7 @@
 /*   By: lyeh <lyeh@student.42vienna.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/30 19:36:14 by lyeh              #+#    #+#             */
-/*   Updated: 2024/06/15 13:46:30 by lyeh             ###   ########.fr       */
+/*   Updated: 2024/06/15 14:28:54 by lyeh             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ bool	init_minirt(t_minirt *minirt, char *filename)
 
 bool	free_minirt(t_minirt *minirt)
 {
+	ft_free_and_null((void **)&minirt->scene->camera.ray_pool);
 	free_scene(&minirt->scene);
 	return (true);
 }

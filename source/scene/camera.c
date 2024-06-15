@@ -6,7 +6,7 @@
 /*   By: lyeh <lyeh@student.42vienna.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/01 12:13:23 by lyeh              #+#    #+#             */
-/*   Updated: 2024/06/14 20:19:13 by lyeh             ###   ########.fr       */
+/*   Updated: 2024/06/15 14:27:36 by lyeh             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,18 +14,21 @@
 
 static void		setup_viewport(t_camera *camera);
 static void		setup_pixel_grid(t_camera *camera);
-static bool		setup_ray_list(t_camera *camera);
-static bool		setup_ray(t_camera *camera, double u, double v);
+static void		setup_ray_list(t_camera *camera);
+static t_ray	get_ray(t_camera *camera, int px, int py);
 
 bool	init_camera(t_camera *camera)
 {
+	camera->ray_pool = (t_ray *)malloc(
+			sizeof(t_ray) * WINDOW_WIDTH * WINDOW_HEIGHT);
+	if (!camera->ray_pool)
+		return (false);
 	camera->theta = degree_to_radian(camera->fov);
 	camera->focal_length = 1.0;
 	camera->aspect_ratio = (double)WINDOW_WIDTH / (double)WINDOW_HEIGHT;
 	setup_viewport(camera);
 	setup_pixel_grid(camera);
-	if (!setup_ray_list(camera))
-		return (false);
+	setup_ray_list(camera);
 	return (true);
 }
 
@@ -73,45 +76,58 @@ void	setup_pixel_grid(t_camera *camera)
 			vec3.ops->mul(camera->viewport.w, camera->focal_length));
 }
 
-bool	setup_ray_list(t_camera *camera)
+void	setup_ray_list(t_camera *camera)
 {
-	int	row;
-	int	col;
+	int	i;
+	int	j;
 
-	row = 0;
-	while (row < camera->viewport.height)
+	i = 0;
+	while (i < WINDOW_HEIGHT)
 	{
-		col = 0;
-		while (col < camera->viewport.width)
+		j = 0;
+		while (j < WINDOW_WIDTH)
 		{
-			if (!setup_ray(camera, row, col))
-				return (false);
-			col++;
+			camera->ray_pool[i * WINDOW_WIDTH + j] = get_ray(camera, j, i);
+			j++;
 		}
-		row++;
+		i++;
 	}
-	return (true);
 }
 
-bool	setup_ray(t_camera *camera, double u, double v)
+t_ray	get_ray(t_camera *camera, int px, int py)
 {
-	t_vec3	vec3;
-	t_ray	*ray;
+	const t_vec3	vec3 = (t_vec3){.ops = init_ops()};
+	t_vec3			pixel_positon;
 
-	vec3 = (t_vec3){.ops = init_ops()};
-	ray = (t_ray *)malloc(sizeof(t_ray));
-	if (!ray)
-		return (false);
-	ray->origin = camera->position;
-	ray->direction = vec3.ops->add(
-			camera->viewport.origin_corner,
+	pixel_positon = vec3.ops->add(
+			camera->pixel.origin_corner,
 			vec3.ops->add(
-				vec3.ops->mul(camera->viewport.u, u),
-				vec3.ops->mul(camera->viewport.v, v)));
-	ray->direction = vec3.ops->sub(ray->direction, camera->position);
-	ray->direction = vec3.ops->sub(ray->direction, vec3.ops->mul(
-				camera->viewport.w, camera->focal_length));
-	if (!ft_lstnew_back(&camera->ray_list, ray))
-		return (free(ray), false);
-	return (true);
+				vec3.ops->mul(camera->pixel.delta_u, px),
+				vec3.ops->mul(camera->pixel.delta_v, py)));
+	return ((t_ray){
+		.origin = camera->position,
+		.direction = vec3.ops->sub(pixel_positon, camera->position)});
 }
+
+// bool	setup_ray(t_camera *camera, double u, double v)
+// {
+// 	t_vec3	vec3;
+// 	t_ray	*ray;
+
+// 	vec3 = (t_vec3){.ops = init_ops()};
+// 	ray = (t_ray *)malloc(sizeof(t_ray));
+// 	if (!ray)
+// 		return (false);
+// 	ray->origin = camera->position;
+// 	ray->direction = vec3.ops->add(
+// 			camera->viewport.origin_corner,
+// 			vec3.ops->add(
+// 				vec3.ops->mul(camera->viewport.u, u),
+// 				vec3.ops->mul(camera->viewport.v, v)));
+// 	ray->direction = vec3.ops->sub(ray->direction, camera->position);
+// 	ray->direction = vec3.ops->sub(ray->direction, vec3.ops->mul(
+// 				camera->viewport.w, camera->focal_length));
+// 	if (!ft_lstnew_back(&camera->ray_list, ray))
+// 		return (free(ray), false);
+// 	return (true);
+// }
