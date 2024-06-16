@@ -6,13 +6,11 @@
 /*   By: lyeh <lyeh@student.42vienna.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/15 16:30:43 by lyeh              #+#    #+#             */
-/*   Updated: 2024/06/16 12:53:25 by lyeh             ###   ########.fr       */
+/*   Updated: 2024/06/16 15:45:53 by lyeh             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "hit_private.h"
-
-static double	calc_sphere_min_root(double a, double b, double c);
 
 /*
 rec->point = P(t) = O + tD
@@ -33,15 +31,7 @@ bool	hit_sphere(t_vec3 vec3, t_ray *ray, t_obj *sphere, t_hit_record *rec)
 	t_intersection = calc_sphere_min_root(a, b, c);
 	if (t_intersection < 0)
 		return (false);
-	rec->ray = *ray;
-	rec->point = vec3.ops->add(ray->origin,
-			vec3.ops->mul(ray->direction, t_intersection));
-	rec->norm = vec3.ops->div(
-			vec3.ops->sub(rec->point, sphere->position), sphere->d_param1);
-	rec->color = sphere->color;
-	rec->front_face = vec3.ops->dot(ray->direction, rec->norm) < 0;
-	if (!rec->front_face)
-		rec->norm = vec3.ops->mul(rec->norm, -1);
+	setup_hit_record(rec, t_intersection, ray, sphere);
 	return (true);
 }
 
