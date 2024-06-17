@@ -6,7 +6,7 @@
 /*   By: lyeh <lyeh@student.42vienna.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/17 15:28:28 by lyeh              #+#    #+#             */
-/*   Updated: 2024/06/17 16:07:18 by lyeh             ###   ########.fr       */
+/*   Updated: 2024/06/17 19:47:14 by lyeh             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@ Test(hit, hit_sphere_outside)
 		.origin = (t_vec3){.x = 0, .y = 2.0, .z = 0},
 		.direction = (t_vec3){.x = 0, .y = -1, .z = 0}};
 	shpere = (t_obj){
+		.type = SPHERE,
 		.position = (t_vec3){.x = 0, .y = 0, .z = 0},
 		.norm = (t_vec3){.x = 0, .y = 1, .z = 0},
 		.d_param1 = 1.0};
@@ -49,8 +50,10 @@ Test(hit, hit_sphere_inside)
 		.origin = (t_vec3){.x = 0, .y = 0, .z = 5},
 		.direction = (t_vec3){.x = 0, .y = 0, .z = 1}};
 	shpere = (t_obj){
+		.type = SPHERE,
 		.position = (t_vec3){.x = 0, .y = 0, .z = 0},
 		.norm = (t_vec3){.x = 0, .y = 1, .z = 0},
+		.color = (t_vec3){.x = 0, .y = 255, .z = 0},
 		.d_param1 = 10.0};
 	cr_assert_eq(hit_sphere(vec3, &ray, &shpere, &rec), true, "hit_sphere() detection incorrect");
 	cr_assert_eq(rec.t, 5.0, "hit_sphere() t value incorrect");
@@ -59,8 +62,11 @@ Test(hit, hit_sphere_inside)
 	cr_assert_eq(rec.point.y, 0.0, "hit_sphere() point.y value incorrect");
 	cr_assert_eq(rec.point.z, 10.0, "hit_sphere() point.z value incorrect");
 	cr_assert_eq(rec.norm.x, 0.0, "hit_sphere() norm.x value incorrect");
-	cr_assert_eq(rec.norm.y, -1.0, "hit_sphere() norm.y value incorrect");
-	cr_assert_eq(rec.norm.z, 0.0, "hit_sphere() norm.z value incorrect");
+	cr_assert_eq(rec.norm.y, 0.0, "hit_sphere() norm.y value incorrect");
+	cr_assert_eq(rec.norm.z, -1.0, "hit_sphere() norm.z value incorrect");
+	cr_assert_eq(rec.color.x, 0.0, "hit_sphere() color.x value incorrect");
+	cr_assert_eq(rec.color.y, 255.0, "hit_sphere() color.y value incorrect");
+	cr_assert_eq(rec.color.z, 0.0, "hit_sphere() color.z value incorrect");
 }
 
 Test(hit, hit_sphere_miss)
@@ -74,6 +80,7 @@ Test(hit, hit_sphere_miss)
 		.origin = (t_vec3){.x = 2.0, .y = 0, .z = 0},
 		.direction = (t_vec3){.x = 1, .y = 0, .z = 0}};
 	shpere = (t_obj){
+		.type = SPHERE,
 		.position = (t_vec3){.x = 0, .y = 0, .z = 0},
 		.norm = (t_vec3){.x = 0, .y = 1, .z = 0},
 		.d_param1 = 1.0};

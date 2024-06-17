@@ -6,7 +6,7 @@
 /*   By: lyeh <lyeh@student.42vienna.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/16 13:27:23 by lyeh              #+#    #+#             */
-/*   Updated: 2024/06/17 15:17:00 by lyeh             ###   ########.fr       */
+/*   Updated: 2024/06/17 18:09:22 by lyeh             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@ Test(hit, hit_plane_under)
 		.origin = (t_vec3){.x = 0, .y = -1.0, .z = 0},
 		.direction = (t_vec3){.x = 0, .y = 1, .z = 0}};
 	plane = (t_obj){
+		.type = PLANE,
 		.position = (t_vec3){.x = 0, .y = 0, .z = 0},
 		.norm = (t_vec3){.x = 0, .y = 1, .z = 0}};
 	cr_assert_eq(hit_plane(vec3, &ray, &plane, &rec), true, "hit_plane() detection incorrect");
@@ -48,6 +49,7 @@ Test(hit, hit_plane_above)
 		.origin = (t_vec3){.x = 0, .y = 2.0, .z = 0},
 		.direction = (t_vec3){.x = 0, .y = -1, .z = 0}};
 	plane = (t_obj){
+		.type = PLANE,
 		.position = (t_vec3){.x = 0, .y = 0, .z = 0},
 		.norm = (t_vec3){.x = 0, .y = 1, .z = 0}};
 	cr_assert_eq(hit_plane(vec3, &ray, &plane, &rec), true, "hit_plane() detection incorrect");
@@ -72,6 +74,7 @@ Test(hit, hit_plane_miss)
 		.origin = (t_vec3){.x = 0, .y = 1.0, .z = 0},
 		.direction = (t_vec3){.x = 0, .y = 1, .z = 0}};
 	plane = (t_obj){
+		.type = PLANE,
 		.position = (t_vec3){.x = 0, .y = 0, .z = 0},
 		.norm = (t_vec3){.x = 0, .y = 1, .z = 0}};
 	cr_assert_eq(hit_plane(vec3, &ray, &plane, &rec), false, "hit_plane() detection incorrect");
