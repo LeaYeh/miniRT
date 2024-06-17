@@ -6,7 +6,7 @@
 /*   By: lyeh <lyeh@student.42vienna.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/15 16:35:18 by lyeh              #+#    #+#             */
-/*   Updated: 2024/06/17 11:52:43 by lyeh             ###   ########.fr       */
+/*   Updated: 2024/06/17 12:01:54 by lyeh             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,7 @@ static bool	hit_cylinder_side(t_vec3 vec3,
 				t_ray *ray, t_obj *cylinder, t_hit_record *rec);
 static bool	hit_cylinder_caps(t_vec3 vec3,
 				t_ray *ray, t_obj *cylinder, t_hit_record *rec);
-static bool	is_point_in_height_range(
-				t_vec3 vec3, t_vec3 p, t_obj *cylinder, t_hit_record *rec);
+static bool	is_point_in_height_range(t_vec3 vec3, t_vec3 p, t_obj *cylinder);
 
 /*
 formula: (P−P0−(P−P0)⋅D⋅D)⋅(P−P0−(P−P0)⋅D⋅D)−r^2=0
@@ -67,17 +66,13 @@ bool	hit_cylinder_side(t_vec3 vec3,
 	if (!is_point_in_height_range(vec3,
 			vec3.ops->add(
 				ray->origin, vec3.ops->mul(ray->direction, t_intersection)),
-			cylinder,
-			rec))
+			cylinder))
 		return (false);
 	setup_hit_record(rec, t_intersection, ray, cylinder);
+	return (true);
 }
 
-bool	is_point_in_height_range(
-	t_vec3 vec3,
-	t_vec3 p,
-	t_obj *cylinder,
-	t_hit_record *rec)
+bool	is_point_in_height_range(t_vec3 vec3, t_vec3 p, t_obj *cylinder)
 {
 	double	pc_proj;
 	double	cy_proj_min;
