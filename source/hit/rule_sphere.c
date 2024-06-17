@@ -6,7 +6,7 @@
 /*   By: lyeh <lyeh@student.42vienna.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/15 16:30:43 by lyeh              #+#    #+#             */
-/*   Updated: 2024/06/16 15:45:53 by lyeh             ###   ########.fr       */
+/*   Updated: 2024/06/17 16:04:58 by lyeh             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,13 @@ double	calc_sphere_min_root(double a, double b, double c)
 	sqrt_discriminant = sqrt(discriminant);
 	t1 = (-b - sqrt_discriminant) / (2.0 * a);
 	t2 = (-b + sqrt_discriminant) / (2.0 * a);
-	if (t1 < t2)
+	if (t1 < 0 && t2 < 0)
+		return (-1);
+	else if (t1 < 0)
+		return (t2);
+	else if (t2 < 0)
+		return (t1);
+	else if (t1 < t2)
 		return (t1);
 	return (t2);
 }
