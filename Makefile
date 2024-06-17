@@ -15,9 +15,7 @@
 
 #	Executable
 
-ifeq ($(MAKELEVEL), 0)
-export NAME 	:=	miniRT
-endif
+NAME 			:=	miniRT
 TEST_NAME		:=	unittest
 
 
@@ -34,8 +32,9 @@ LIB_DIR			:=	libraries
 
 #	Dependencies
 
-LIBRARIES		:=	$(LIB_DIR)/libft
-LIBRARIES_EXT	:=	m criterion
+LIBS			:=	$(LIB_DIR)/libft
+LIBS_EXT		:=	m mlx X11 Xext
+TEST_LIBS_EXT	:=	criterion
 LIB_INCLUDES 	:=	$(LIB_DIR)/libft/inc
 BUILDFILES		:=	Makefile \
 					$(BUILD_DIR)/source_files_miniRT.mk \
@@ -48,9 +47,9 @@ CC 				:=	cc
 CC_VERSION		:=	$(shell $(CC) --version | head -1)
 CFLAGS 			:=	-Wall -Wextra -Werror -ggdb3
 INCFLAGS 		:=	$(addprefix -I,$(INC_DIR) $(LIB_INCLUDES))
-LIBFLAGS		:=	$(addprefix -L,$(LIBRARIES)) \
-					$(addprefix -l,$(patsubst lib%,%,$(notdir \
-					$(LIBRARIES) $(LIBRARIES_EXT))))
+LIBFLAGS		:=	$(addprefix -L,$(LIBS)) \
+					$(addprefix -l,$(patsubst lib%,%,$(notdir $(LIBS) $(LIBS_EXT))))
+TEST_LIBFLAGS	:=	$(addprefix -l,$(TEST_LIBS_EXT))
 MAKEFLAGS		:=	-j -s
 
 
@@ -104,7 +103,7 @@ DEP_SUBDIRS		:=	$(sort $(dir $(DEP)))
 
 # ***************************** BUILD PROCESS ******************************** #
 
-.PHONY			:	all run test val valfd build lib waitforlib clean fclean re
+.PHONY			:	all run test val valfd build build_test lib waitforlib clean fclean re
 
 
 #	Compilation
@@ -118,8 +117,11 @@ all				:
 run				:	all
 					"./$(NAME)"
 
-test			:	NAME := $(TEST_NAME)
-test			:	all
+test			:
+					($(MAKE) --question build_test && echo $(MSG_NO_CHNG)) \
+						|| (echo -n $(MSG_INFO)$(MSG_TEST_START) \
+							&& ($(MAKE) build_test && echo $(MSG_SUCCESS)) \
+							|| (echo $(MSG_FAILURE) && exit 42))
 					"./$(TEST_NAME)"
 
 val				:	all
@@ -145,21 +147,31 @@ build			:	waitforlib
 					$(MAKE) $(NAME)
 endif
 
+ifeq ($(firstword $(sort $(MAKE_VERSION) 4.4)),4.4)
+build_test		:	lib .WAIT $(TEST_NAME)
+else
+build_test		:	waitforlib
+					$(MAKE) $(TEST_NAME)
+endif
+
 
 #	Library compilation
 
 export				CC CFLAGS MAKECMDGOALS MAKEFLAGS
 
 lib				:
-					$(MAKE) -C $(LIBRARIES)
+					$(MAKE) -C $(LIBS)
 
 waitforlib		:	lib
 
 
 #	Executable linking
 
-$(NAME)			:	$(LIBRARIES) $(OBJ)
-					$(CC) $(CFLAGS) $(INCFLAGS) $(OBJ) $(LIBFLAGS) -o $(NAME)
+$(NAME)			:	$(LIBS) $(OBJ)
+					$(CC) $(CFLAGS) $(INCFLAGS) $(OBJ) $(LIBFLAGS) -o $@
+
+$(TEST_NAME)	:	$(LIBS) $(OBJ)
+					$(CC) $(CFLAGS) $(INCFLAGS) $(OBJ) $(LIBFLAGS) $(TEST_LIBFLAGS) -o $@
 
 
 #	Source file compiling
@@ -186,11 +198,11 @@ $(DEP_SUBDIRS)	:
 #	Cleaning
 
 clean			:
-					$(MAKE) clean -C $(LIBRARIES)
+					$(MAKE) clean -C $(LIBS)
 					rm -rf $(OBJ_DIR) $(DEP_DIR)
 
 fclean			:	clean
-					$(MAKE) fclean -C $(LIBRARIES)
+					$(MAKE) fclean -C $(LIBS)
 					rm -f $(NAME) $(TEST_NAME)
 
 re				:
@@ -240,7 +252,9 @@ STY_WHI_BRI_BG	:=	"\e[107m"
 MSG_INFO		:=	$(STY_ITA)$(STY_WHI)" Make version: $(MAKE_VERSION)\n\
 					Compiler version: $(CC_VERSION)\n"$(STY_RES)
 ################################################################################
-MSG_START		=	$(STY_ITA)"Building $(NAME) ... "$(STY_RES)
+MSG_START		:=	$(STY_ITA)"Building $(NAME) ... "$(STY_RES)
+################################################################################
+MSG_TEST_START	:=	$(STY_ITA)"Building $(TEST_NAME) ... "$(STY_RES)
 ################################################################################
 MSG_PROGRESS	:=	"💡"
 ################################################################################
