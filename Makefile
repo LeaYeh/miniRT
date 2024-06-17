@@ -16,13 +16,13 @@
 #	Executable
 
 NAME 			:=	miniRT
-TEST_NAME		:=	unittest
+NAME_TEST		:=	unittest
 
 
 #	Directories
 
 SRC_DIR			:=	source
-TEST_DIR		:=	tests
+SRC_DIR_TEST	:=	tests
 INC_DIR			:=	include
 BUILD_DIR		:=	build
 OBJ_DIR			:=	$(BUILD_DIR)/_obj
@@ -34,7 +34,7 @@ LIB_DIR			:=	libraries
 
 LIBS			:=	$(LIB_DIR)/libft
 LIBS_EXT		:=	m mlx X11 Xext
-TEST_LIBS_EXT	:=	criterion
+LIBS_EXT_TEST	:=	criterion
 LIB_INCLUDES 	:=	$(LIB_DIR)/libft/inc
 BUILDFILES		:=	Makefile \
 					$(BUILD_DIR)/source_files_miniRT.mk \
@@ -49,7 +49,7 @@ CFLAGS 			:=	-Wall -Wextra -Werror -ggdb3
 INCFLAGS 		:=	$(addprefix -I,$(INC_DIR) $(LIB_INCLUDES))
 LIBFLAGS		:=	$(addprefix -L,$(LIBS)) \
 					$(addprefix -l,$(patsubst lib%,%,$(notdir $(LIBS) $(LIBS_EXT))))
-TEST_LIBFLAGS	:=	$(addprefix -l,$(TEST_LIBS_EXT))
+LIBFLAGS_TEST	:=	$(addprefix -l,$(LIBS_EXT_TEST))
 MAKEFLAGS		:=	-j -s
 
 
@@ -119,10 +119,10 @@ run				:	all
 
 test			:
 					($(MAKE) --question build_test && echo $(MSG_NO_CHNG)) \
-						|| (echo -n $(MSG_INFO)$(MSG_TEST_START) \
+						|| (echo -n $(MSG_INFO)$(MSG_START_TEST) \
 							&& ($(MAKE) build_test && echo $(MSG_SUCCESS)) \
 							|| (echo $(MSG_FAILURE) && exit 42))
-					"./$(TEST_NAME)"
+					"./$(NAME_TEST)"
 
 val				:	all
 					$(VALGRIND) $(VALGRINDFLAGS) "./$(NAME)"
@@ -148,10 +148,10 @@ build			:	waitforlib
 endif
 
 ifeq ($(firstword $(sort $(MAKE_VERSION) 4.4)),4.4)
-build_test		:	lib .WAIT $(TEST_NAME)
+build_test		:	lib .WAIT $(NAME_TEST)
 else
 build_test		:	waitforlib
-					$(MAKE) $(TEST_NAME)
+					$(MAKE) $(NAME_TEST)
 endif
 
 
@@ -170,8 +170,8 @@ waitforlib		:	lib
 $(NAME)			:	$(LIBS) $(OBJ)
 					$(CC) $(CFLAGS) $(INCFLAGS) $(OBJ) $(LIBFLAGS) -o $@
 
-$(TEST_NAME)	:	$(LIBS) $(OBJ)
-					$(CC) $(CFLAGS) $(INCFLAGS) $(OBJ) $(LIBFLAGS) $(TEST_LIBFLAGS) -o $@
+$(NAME_TEST)	:	$(LIBS) $(OBJ)
+					$(CC) $(CFLAGS) $(INCFLAGS) $(OBJ) $(LIBFLAGS) $(LIBFLAGS_TEST) -o $@
 
 
 #	Source file compiling
@@ -203,7 +203,7 @@ clean			:
 
 fclean			:	clean
 					$(MAKE) fclean -C $(LIBS)
-					rm -f $(NAME) $(TEST_NAME)
+					rm -f $(NAME) $(NAME_TEST)
 
 re				:
 					$(MAKE) fclean
@@ -254,7 +254,7 @@ MSG_INFO		:=	$(STY_ITA)$(STY_WHI)" Make version: $(MAKE_VERSION)\n\
 ################################################################################
 MSG_START		:=	$(STY_ITA)"Building $(NAME) ... "$(STY_RES)
 ################################################################################
-MSG_TEST_START	:=	$(STY_ITA)"Building $(TEST_NAME) ... "$(STY_RES)
+MSG_START_TEST	:=	$(STY_ITA)"Building $(NAME_TEST) ... "$(STY_RES)
 ################################################################################
 MSG_PROGRESS	:=	"💡"
 ################################################################################
