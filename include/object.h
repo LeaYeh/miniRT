@@ -6,7 +6,7 @@
 /*   By: lyeh <lyeh@student.42vienna.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/01 11:23:43 by lyeh              #+#    #+#             */
-/*   Updated: 2024/06/01 11:31:48 by lyeh             ###   ########.fr       */
+/*   Updated: 2024/06/17 19:57:46 by lyeh             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,8 @@ typedef struct s_object
 	t_vec3		norm;
 	double		d_param1;
 	double		d_param2;
+	t_vec3		translation;
+	t_vec3		rotation;
 }	t_obj;
 
 #endif
