@@ -6,7 +6,7 @@
 /*   By: lyeh <lyeh@student.42vienna.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/01 11:21:25 by lyeh              #+#    #+#             */
-/*   Updated: 2024/06/17 11:40:37 by lyeh             ###   ########.fr       */
+/*   Updated: 2024/06/18 18:28:30 by lyeh             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@
 
 typedef struct s_hit_record
 {
+	t_vec3	shoot_direction;
 	t_vec3	point;
 	t_vec3	norm;
 	t_vec3	color;

@@ -6,7 +6,7 @@
 /*   By: lyeh <lyeh@student.42vienna.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/17 13:13:21 by lyeh              #+#    #+#             */
-/*   Updated: 2024/06/17 13:36:35 by lyeh             ###   ########.fr       */
+/*   Updated: 2024/06/18 18:29:21 by lyeh             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,8 @@
 void	print_hit_record(t_hit_record *rec)
 {
 	printf("Hit Record:\n");
+	printf("Shoot direction: ");
+	print_vector(rec->shoot_direction);
 	printf("Point: ");
 	print_vector(rec->point);
 	printf("Normal: ");
