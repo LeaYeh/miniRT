@@ -1,23 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utils.h                                            :+:      :+:    :+:   */
+/*   error_message.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lyeh <lyeh@student.42vienna.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/05/28 14:46:03 by lyeh              #+#    #+#             */
-/*   Updated: 2024/06/18 16:56:59 by lyeh             ###   ########.fr       */
+/*   Created: 2024/06/18 16:55:01 by lyeh              #+#    #+#             */
+/*   Updated: 2024/06/18 16:56:21 by lyeh             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef UTILS_H
-# define UTILS_H
+#include "utils.h"
 
-# include <stdlib.h>
-# include <stdio.h>
-
-void	free_array(char **array);
-int		get_array_size(char **array);
-void	error_message(char *reason);
-
-#endif
+void	error_message(char *reason)
+{
+	printf("Error\n");
+	printf("%s\n", reason);
+	exit(EXIT_FAILURE);
+}
