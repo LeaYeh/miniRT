@@ -6,7 +6,7 @@
 /*   By: lyeh <lyeh@student.42vienna.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/14 19:49:52 by lyeh              #+#    #+#             */
-/*   Updated: 2024/06/18 15:58:16 by lyeh             ###   ########.fr       */
+/*   Updated: 2024/06/18 17:05:34 by lyeh             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,4 +57,6 @@ void	print_pixel_grid(t_pixel_grid pixel)
 	print_vector(pixel.delta_v);
 	printf("\tWidth: %f\n", pixel.width);
 	printf("\tHeight: %f\n", pixel.height);
+	printf("\tRow Size: %d\n", pixel.row_size);
+	printf("\tCol Size: %d\n", pixel.col_size);
 }

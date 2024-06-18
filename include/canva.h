@@ -6,7 +6,7 @@
 /*   By: lyeh <lyeh@student.42vienna.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/18 10:29:46 by lyeh              #+#    #+#             */
-/*   Updated: 2024/06/18 16:16:49 by lyeh             ###   ########.fr       */
+/*   Updated: 2024/06/18 17:05:27 by lyeh             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,8 @@ typedef struct s_pixel_grid
 	t_vec3	delta_v;
 	double	width;
 	double	height;
+	int		row_size;
+	int		col_size;
 }	t_pixel_grid;
 
 t_vec3	get_pixel_position(t_pixel_grid pixel, int row, int col);
