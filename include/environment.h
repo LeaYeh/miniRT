@@ -6,7 +6,7 @@
 /*   By: lyeh <lyeh@student.42vienna.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/01 11:22:43 by lyeh              #+#    #+#             */
-/*   Updated: 2024/06/01 11:50:18 by lyeh             ###   ########.fr       */
+/*   Updated: 2024/06/18 19:02:59 by lyeh             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@ typedef struct s_light
 
 typedef struct s_scene
 {
+	t_vec3		bg_color;
 	t_amblight	amblight;
 	t_camera	camera;
 	t_light		light;
