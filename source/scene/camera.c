@@ -6,7 +6,7 @@
 /*   By: lyeh <lyeh@student.42vienna.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/01 12:13:23 by lyeh              #+#    #+#             */
-/*   Updated: 2024/06/18 15:53:34 by lyeh             ###   ########.fr       */
+/*   Updated: 2024/06/18 16:07:23 by lyeh             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ static t_ray	get_ray_from_pixel_grid(t_camera *camera, int px, int py);
 bool	init_camera(t_camera *camera)
 {
 	camera->theta = degree_to_radian(camera->fov);
-	camera->focal_length = 2.0;
+	camera->focal_length = 1.0;
 	camera->aspect_ratio = (double)WINDOW_WIDTH / (double)WINDOW_HEIGHT;
 	camera->translation = (t_vec3){0, 0, 0, NULL};
 	camera->rotation = (t_vec3){0, 0, 0, NULL};
