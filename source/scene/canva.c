@@ -6,7 +6,7 @@
 /*   By: lyeh <lyeh@student.42vienna.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/18 10:26:09 by lyeh              #+#    #+#             */
-/*   Updated: 2024/06/18 15:44:18 by lyeh             ###   ########.fr       */
+/*   Updated: 2024/06/18 16:16:27 by lyeh             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,4 +68,17 @@ void	setup_pixel_grid(t_camera *camera)
 	camera->pixel.pixel00 = vec3.ops->sub(
 			camera->pixel.pixel00,
 			vec3.ops->mul(camera->viewport.w, camera->focal_length));
+}
+
+t_vec3	get_pixel_position(t_pixel_grid pixel, int row, int col)
+{
+	const t_vec3	vec3 = (t_vec3){.ops = init_ops()};
+	t_vec3			pixel_position;
+
+	pixel_position = vec3.ops->add(
+			pixel.pixel00,
+			vec3.ops->add(
+				vec3.ops->mul(pixel.delta_u, col),
+				vec3.ops->mul(pixel.delta_v, row)));
+	return (pixel_position);
 }
