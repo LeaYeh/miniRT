@@ -14,7 +14,7 @@
 #include "minirt.h"
 #include "mlx_utils.h"
 
-int	main(int argc, char **argv)
+int	main(int argc, char *argv[])
 {
 	t_minirt	minirt;
 
