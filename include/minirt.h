@@ -17,9 +17,29 @@
 # include "environment.h"
 # include "camera.h"
 # include "utils.h"
+# include <mlx.h>
+# include <X11/X.h>
+# include <X11/keysym.h>
+
+typedef struct s_img
+{
+	void	*img_ptr;
+	char	*addr;
+	int		bits_per_pixel;
+	int		size_line;
+	int		endian;
+}	t_img;
+
+typedef struct s_mlx
+{
+	void	*mlx_ptr;
+	void	*win_ptr;
+	t_img	img;
+}	t_mlx;
 
 typedef struct s_minirt
 {
+	t_mlx	mlx;
 	t_scene	*scene;
 	t_ray	*ray_pool;
 }	t_minirt;

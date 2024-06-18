@@ -12,6 +12,7 @@
 
 #include "debug.h"
 #include "minirt.h"
+#include "mlx_utils.h"
 
 int	main(int argc, char **argv)
 {
@@ -23,6 +24,8 @@ int	main(int argc, char **argv)
 		return (ERR_ARGC);
 	}
 	if (!init_minirt(&minirt, argv[1]))
+		return (free_minirt(&minirt), ERR_INIT);
+	if (!init_mlx(&minirt.mlx))
 		return (free_minirt(&minirt), ERR_INIT);
 	print_scene(minirt.scene);
 	free_minirt(&minirt);
