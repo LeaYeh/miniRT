@@ -34,6 +34,7 @@
 # define INVALID_NUM_ARG		"invalid number of argument.\n"
 # define INVALID_NUM_FMT		"invalid number format.\n"
 # define FAILED_PARSE_VEC		"parse vector failed.\n"
+# define INCORRECT_VIEWPORT		"incorrect viewport size.\n"
 
 # define WINDOW_WIDTH		1600
 # define WINDOW_HEIGHT		900
