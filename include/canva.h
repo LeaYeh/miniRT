@@ -1,31 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ray.h                                              :+:      :+:    :+:   */
+/*   canva.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lyeh <lyeh@student.42vienna.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/05/26 12:37:47 by lyeh              #+#    #+#             */
-/*   Updated: 2024/06/18 10:35:43 by lyeh             ###   ########.fr       */
+/*   Created: 2024/06/18 10:29:46 by lyeh              #+#    #+#             */
+/*   Updated: 2024/06/18 11:03:55 by lyeh             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef RAY_H
-# define RAY_H
+#ifndef CANVA_H
+# define CANVA_H
 
 # include "vec3.h"
-# include "camera.h"
 
-typedef struct s_camera	t_camera;
-
-typedef struct s_ray
+typedef struct s_viewport
 {
-	t_vec3	origin;
-	t_vec3	direction;
-	t_list	*hit_record_list;
-	t_vec3	*cache_color;
-}	t_ray;
+	t_vec3	origin_corner;
+	t_vec3	v;
+	t_vec3	u;
+	t_vec3	w;
+	double	width;
+	double	height;
+}	t_viewport;
 
-t_ray	get_ray(t_camera *camera, int px, int py);
+typedef struct s_pixel_grid
+{
+	t_vec3	origin_corner;
+	t_vec3	delta_u;
+	t_vec3	delta_v;
+	double	width;
+	double	height;
+}	t_pixel_grid;
 
 #endif

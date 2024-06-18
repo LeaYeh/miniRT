@@ -6,7 +6,7 @@
 /*   By: lyeh <lyeh@student.42vienna.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/01 11:49:22 by lyeh              #+#    #+#             */
-/*   Updated: 2024/06/17 20:06:18 by lyeh             ###   ########.fr       */
+/*   Updated: 2024/06/18 12:55:02 by lyeh             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,25 +16,11 @@
 # include "defines.h"
 # include "vec3.h"
 # include "ray.h"
+# include "canva.h"
 
-typedef struct s_pixel_grid
-{
-	t_vec3	origin_corner;
-	t_vec3	delta_u;
-	t_vec3	delta_v;
-	double	width;
-	double	height;
-}	t_pixel_grid;
-
-typedef struct s_viewport
-{
-	t_vec3	origin_corner;
-	t_vec3	v;
-	t_vec3	u;
-	t_vec3	w;
-	double	width;
-	double	height;
-}	t_viewport;
+typedef struct s_viewport	t_viewport;
+typedef struct s_pixel_grid	t_pixel_grid;
+typedef struct s_ray		t_ray;
 
 typedef struct s_camera
 {
