@@ -6,7 +6,7 @@
 /*   By: lyeh <lyeh@student.42vienna.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/18 10:26:09 by lyeh              #+#    #+#             */
-/*   Updated: 2024/06/18 11:06:19 by lyeh             ###   ########.fr       */
+/*   Updated: 2024/06/18 15:44:18 by lyeh             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,13 +59,13 @@ void	setup_pixel_grid(t_camera *camera)
 			camera->viewport.u, camera->pixel.width);
 	camera->pixel.delta_v = vec3.ops->mul(
 			camera->viewport.v, camera->pixel.height);
-	camera->pixel.origin_corner = vec3.ops->sub(
+	camera->pixel.pixel00 = vec3.ops->sub(
 			camera->viewport.origin_corner,
 			vec3.ops->add(
 				vec3.ops->mul(camera->viewport.u, camera->viewport.width / 2),
 				vec3.ops->mul(camera->viewport.v, camera->viewport.height / 2))
 			);
-	camera->pixel.origin_corner = vec3.ops->sub(
-			camera->pixel.origin_corner,
+	camera->pixel.pixel00 = vec3.ops->sub(
+			camera->pixel.pixel00,
 			vec3.ops->mul(camera->viewport.w, camera->focal_length));
 }

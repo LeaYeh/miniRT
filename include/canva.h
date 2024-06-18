@@ -6,7 +6,7 @@
 /*   By: lyeh <lyeh@student.42vienna.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/18 10:29:46 by lyeh              #+#    #+#             */
-/*   Updated: 2024/06/18 11:03:55 by lyeh             ###   ########.fr       */
+/*   Updated: 2024/06/18 15:44:03 by lyeh             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ typedef struct s_viewport
 
 typedef struct s_pixel_grid
 {
-	t_vec3	origin_corner;
+	t_vec3	pixel00;
 	t_vec3	delta_u;
 	t_vec3	delta_v;
 	double	width;

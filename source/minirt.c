@@ -6,7 +6,7 @@
 /*   By: lyeh <lyeh@student.42vienna.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/30 19:36:14 by lyeh              #+#    #+#             */
-/*   Updated: 2024/06/16 12:40:45 by lyeh             ###   ########.fr       */
+/*   Updated: 2024/06/18 15:58:49 by lyeh             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,6 @@ bool	init_minirt(t_minirt *minirt, char *filename)
 	if (!init_camera(&minirt->scene->camera) || !init_color_map(minirt))
 		return (false);
 	print_camera_detail(minirt->scene->camera);
-	print_pixel_grid(minirt->scene->camera.pixel);
 	return (true);
 }
 

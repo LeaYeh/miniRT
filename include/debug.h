@@ -6,7 +6,7 @@
 /*   By: lyeh <lyeh@student.42vienna.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/29 20:33:20 by lyeh              #+#    #+#             */
-/*   Updated: 2024/06/17 13:15:12 by lyeh             ###   ########.fr       */
+/*   Updated: 2024/06/18 15:57:47 by lyeh             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ void	print_object(t_obj *object);
 void	print_amblight(t_amblight amblight);
 void	print_camera(t_camera camera);
 void	print_camera_detail(t_camera camera);
+void	print_viewport(t_viewport viewport);
 void	print_pixel_grid(t_pixel_grid pixel);
 void	print_light(t_light light);
 void	print_hit_record_list(t_list *rec_list);
