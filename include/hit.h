@@ -26,7 +26,6 @@ typedef struct s_hit_record
 	double	t;
 }	t_hit_record;
 
-bool	find_nearest_object(t_list *object_list,
-			t_ray *ray, t_hit_record *rec);
+bool	setup_nearest_object(t_list *object_list, t_ray *ray);
 
 #endif
