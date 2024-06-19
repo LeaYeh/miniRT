@@ -96,7 +96,7 @@ t_ray	get_reflected_ray(t_hit_record *rec)
 			rec->shoot_direction,
 			rec->norm),
 		.hit_record_list = NULL,
-		.cache_color = NULL};
+		.cache_color = (t_vec3){.x = 0, .y = 0, .z = 0}};
 	return (reflected_ray);
 }
 
