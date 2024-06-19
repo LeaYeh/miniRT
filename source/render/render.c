@@ -25,6 +25,7 @@ void	render(t_scene *scene, t_pixel_grid *pixel, t_ray *ray_pool)
 		j = 0;
 		while (j < pixel->col_size)
 		{
+			shoot_ray(scene->objects, &(ray_pool[i * pixel->col_size + j]));
 			render_pixel(scene, &(ray_pool[i * pixel->col_size + j]));
 			j++;
 		}

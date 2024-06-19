@@ -34,11 +34,7 @@ int	display(void *arg)
 
 static int	get_pixel_color(t_ray *ray)
 {
-	t_vec3	color;
-
-	if (!ray->cache_color)
-		return (0);
-	color = *ray->cache_color;
-	print_vector(color);
-	return ((int)color.x << 16 | (int)color.y << 8 | (int)color.z);
+	return ((int)ray->cache_color.x << 16 | \
+			(int)ray->cache_color.y << 8 | \
+			(int)ray->cache_color.z);
 }
