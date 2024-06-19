@@ -40,7 +40,7 @@ void	render_pixel(t_scene *scene, t_ray *ray)
 	while (hit_record)
 	{
 		// TODO: Need to handle front_face == false
-		*(ray->cache_color) = compute_color(scene, hit_record->content);
+		ray->cache_color = compute_color(scene, hit_record->content);
 		hit_record = hit_record->next;
 	}
 }

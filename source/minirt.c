@@ -91,5 +91,5 @@ t_ray	create_ray_from_pixel_grid(t_camera *camera, int row, int col)
 		.origin = camera->position,
 		.direction = vec3.ops->sub(pixel_positon, camera->position),
 		.hit_record_list = NULL,
-		.cache_color = NULL});
+		.cache_color = (t_vec3){0, 0, 0, NULL}});
 }
