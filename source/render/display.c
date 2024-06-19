@@ -34,7 +34,7 @@ int	display(void *arg)
 
 static int	get_pixel_color(t_ray *ray)
 {
-	return ((int)ray->cache_color.x << 16 | \
-			(int)ray->cache_color.y << 8 | \
-			(int)ray->cache_color.z);
+	return ((int)(ray->cache_color.x * 255.0) << 16 | \
+			(int)(ray->cache_color.y * 255.0) << 8 | \
+			(int)(ray->cache_color.z * 255.0));
 }
