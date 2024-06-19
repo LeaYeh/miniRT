@@ -23,7 +23,7 @@ typedef struct s_ray
 	t_vec3	origin;
 	t_vec3	direction;
 	t_list	*hit_record_list;
-	t_vec3	*cache_color;
+	t_vec3	cache_color;
 }	t_ray;
 
 t_vec3	reflect_direction(t_vec3 shoot_dir, t_vec3 p_norm);
