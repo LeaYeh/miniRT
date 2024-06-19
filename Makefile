@@ -33,7 +33,7 @@ LIB_DIR			:=	libraries
 #	Dependencies
 
 LIBS			:=	$(LIB_DIR)/libft
-LIBS_EXT		:=	m mlx X11 Xext
+LIBS_EXT		:=	m mlx Xext X11
 LIBS_EXT_TEST	:=	criterion
 LIB_INCLUDES 	:=	$(LIB_DIR)/libft/inc
 BUILDFILES		:=	Makefile \
