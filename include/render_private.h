@@ -1,23 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utils.h                                            :+:      :+:    :+:   */
+/*   render_private.h                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lyeh <lyeh@student.42vienna.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/05/28 14:46:03 by lyeh              #+#    #+#             */
-/*   Updated: 2024/06/18 16:56:59 by lyeh             ###   ########.fr       */
+/*   Created: 2024/06/18 17:10:23 by lyeh              #+#    #+#             */
+/*   Updated: 2024/06/19 15:28:05 by lyeh             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef UTILS_H
-# define UTILS_H
+#ifndef RENDERER_PRIVATE_H
+# define RENDERER_PRIVATE_H
 
-# include <stdlib.h>
-# include <stdio.h>
+# include "render.h"
+# include "hit.h"
+# include "vec3.h"
 
-void	free_array(char **array);
-int		get_array_size(char **array);
-void	error_message(char *reason);
+t_vec3	ambient(t_hit_record *rec, t_amblight *ambient_light);
+t_vec3	diffuse(t_hit_record *rec, t_light *light);
+t_vec3	specular(t_hit_record *rec, t_light *light);
 
 #endif

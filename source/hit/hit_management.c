@@ -1,23 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utils.h                                            :+:      :+:    :+:   */
+/*   hit_management.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lyeh <lyeh@student.42vienna.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/05/28 14:46:03 by lyeh              #+#    #+#             */
-/*   Updated: 2024/06/18 16:56:59 by lyeh             ###   ########.fr       */
+/*   Created: 2024/06/19 16:40:42 by lyeh              #+#    #+#             */
+/*   Updated: 2024/06/19 16:40:55 by lyeh             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef UTILS_H
-# define UTILS_H
+#include "hit_private.h"
 
-# include <stdlib.h>
-# include <stdio.h>
+bool	hit_object(t_ray *ray, t_obj *obj, t_hit_record *rec)
+{
+	const t_vec3	vec3 = {.ops = init_ops()};
 
-void	free_array(char **array);
-int		get_array_size(char **array);
-void	error_message(char *reason);
-
-#endif
+	if (obj->type == SPHERE)
+		return (hit_sphere(vec3, ray, obj, rec));
+	else if (obj->type == PLANE)
+		return (hit_plane(vec3, ray, obj, rec));
+	else if (obj->type == CYLINDER)
+		return (hit_cylinder(vec3, ray, obj, rec));
+	return (false);
+}

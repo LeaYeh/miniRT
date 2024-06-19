@@ -1,23 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utils.h                                            :+:      :+:    :+:   */
+/*   renderer.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lyeh <lyeh@student.42vienna.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/05/28 14:46:03 by lyeh              #+#    #+#             */
-/*   Updated: 2024/06/18 16:56:59 by lyeh             ###   ########.fr       */
+/*   Created: 2024/06/17 20:28:36 by lyeh              #+#    #+#             */
+/*   Updated: 2024/06/18 19:45:07 by lyeh             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef UTILS_H
-# define UTILS_H
+#ifndef RENDERER_H
+# define RENDERER_H
 
-# include <stdlib.h>
-# include <stdio.h>
+# include "minirt.h"
+# include "ray.h"
+# include "canva.h"
+# include "hit.h"
 
-void	free_array(char **array);
-int		get_array_size(char **array);
-void	error_message(char *reason);
+void	render(t_scene *scene, t_pixel_grid *pixel, t_ray *ray_pool);
+t_vec3	compute_color(t_scene *scene, t_hit_record *rec);
 
 #endif

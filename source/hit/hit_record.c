@@ -6,7 +6,7 @@
 /*   By: lyeh <lyeh@student.42vienna.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/16 15:42:14 by lyeh              #+#    #+#             */
-/*   Updated: 2024/06/17 19:48:04 by lyeh             ###   ########.fr       */
+/*   Updated: 2024/06/18 18:28:26 by lyeh             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@ void	setup_hit_record(t_hit_record *rec, double t, t_ray *ray, t_obj *obj)
 	t_vec3			oc;
 	t_vec3			projection;
 
+	rec->shoot_direction = ray->direction;
 	rec->point = vec3.ops->add(ray->origin, vec3.ops->mul(ray->direction, t));
 	if (obj->type == PLANE)
 		rec->norm = obj->norm;

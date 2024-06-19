@@ -6,11 +6,12 @@
 /*   By: lyeh <lyeh@student.42vienna.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/02 20:58:00 by lyeh              #+#    #+#             */
-/*   Updated: 2024/06/14 20:31:06 by lyeh             ###   ########.fr       */
+/*   Updated: 2024/06/18 16:07:31 by lyeh             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "unit_tests.h"
+#include "debug.h"
 
 Test(camera, camera_utils_degree_to_radian)
 {
@@ -38,8 +39,7 @@ Test(camera, camera_init)
 
 	cr_assert_float_eq(cam.viewport.width, 2.490066, 0.001, "Viewport width is not correct");
 	cr_assert_float_eq(cam.viewport.height, 1.400414, 0.001, "Viewport height is not correct");
-
-	cr_assert_float_eq(cam.viewport.origin_corner.x, -51.245033, 0.001,
+	cr_assert_float_eq(cam.viewport.origin_corner.x, -48.7551865, 0.001,
 		"Origin corner x is not correct");
 	cr_assert_float_eq(cam.viewport.origin_corner.y, -0.700207, 0.001,
 		"Origin corner y is not correct");

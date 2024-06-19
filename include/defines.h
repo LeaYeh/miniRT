@@ -6,7 +6,7 @@
 /*   By: lyeh <lyeh@student.42vienna.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/26 15:41:00 by lyeh              #+#    #+#             */
-/*   Updated: 2024/06/01 15:04:51 by lyeh             ###   ########.fr       */
+/*   Updated: 2024/06/19 15:02:39 by lyeh             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,10 +34,13 @@
 # define INVALID_NUM_ARG		"invalid number of argument.\n"
 # define INVALID_NUM_FMT		"invalid number format.\n"
 # define FAILED_PARSE_VEC		"parse vector failed.\n"
+# define INCORRECT_VIEWPORT		"incorrect viewport size.\n"
 
 # define WINDOW_WIDTH		1600
 # define WINDOW_HEIGHT		900
 # define HORIZONTAL_UNIT	1
 # define VERTICAL_UNIT		1
+
+# define MAX_DEPTH			5
 
 #endif

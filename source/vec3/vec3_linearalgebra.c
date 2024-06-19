@@ -6,7 +6,7 @@
 /*   By: lyeh <lyeh@student.42vienna.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/26 11:57:40 by lyeh              #+#    #+#             */
-/*   Updated: 2024/06/01 18:18:42 by lyeh             ###   ########.fr       */
+/*   Updated: 2024/06/18 17:39:02 by lyeh             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,5 +41,15 @@ t_vec3	vec3_normalize(t_vec3 v)
 	result.x = v.x / magnitude;
 	result.y = v.y / magnitude;
 	result.z = v.z / magnitude;
+	return (result);
+}
+
+t_vec3	vec3_mul_components(t_vec3 v1, t_vec3 v2)
+{
+	t_vec3	result;
+
+	result.x = v1.x * v2.x;
+	result.y = v1.y * v2.y;
+	result.z = v1.z * v2.z;
 	return (result);
 }

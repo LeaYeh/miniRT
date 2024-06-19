@@ -6,7 +6,7 @@
 /*   By: lyeh <lyeh@student.42vienna.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/13 17:19:11 by lyeh              #+#    #+#             */
-/*   Updated: 2024/06/01 15:43:59 by lyeh             ###   ########.fr       */
+/*   Updated: 2024/06/18 17:39:47 by lyeh             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ typedef struct s_vector_3d_ops
 	t_vec3	(*div)(t_vec3, double);
 	t_vec3	(*cross)(t_vec3, t_vec3);
 	t_vec3	(*normalize)(t_vec3);
+	t_vec3	(*mul_components)(t_vec3, t_vec3);
 	double	(*dot)(t_vec3, t_vec3);
 	double	(*magnitude)(t_vec3);
 }	t_vec3_ops;

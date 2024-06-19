@@ -6,7 +6,7 @@
 /*   By: lyeh <lyeh@student.42vienna.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/28 12:18:37 by lyeh              #+#    #+#             */
-/*   Updated: 2024/06/16 12:20:59 by lyeh             ###   ########.fr       */
+/*   Updated: 2024/06/19 19:29:02 by lyeh             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,11 +15,13 @@
 
 # include "reader.h"
 # include "environment.h"
+# include "camera.h"
+# include "utils.h"
 
 typedef struct s_minirt
 {
 	t_scene	*scene;
-	t_vec3	*color_map;
+	t_ray	*ray_pool;
 }	t_minirt;
 
 bool	init_minirt(t_minirt *minirt, char *filename);
