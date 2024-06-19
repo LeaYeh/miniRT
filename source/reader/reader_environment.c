@@ -6,7 +6,7 @@
 /*   By: lyeh <lyeh@student.42vienna.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/28 10:24:15 by lyeh              #+#    #+#             */
-/*   Updated: 2024/05/31 17:25:03 by lyeh             ###   ########.fr       */
+/*   Updated: 2024/06/19 19:36:37 by lyeh             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ bool	parse_ambient(t_scene *scene, char **tokens)
 	if (!is_valid_number(tokens[0]) || !is_valid_vector(tokens[1]))
 		return (printf("parse_ambient: %s", INVALID_CONTENT_FMT), false);
 	scene->amblight.ratio = ft_atof(tokens[0]);
-	if (!parse_vector(&scene->amblight.color, tokens[1]))
+	if (!parse_color_vector(&scene->amblight.color, tokens[1]))
 		return (printf("parse_ambient: %s", FAILED_PARSE_VEC), false);
 	return (true);
 }
@@ -73,7 +73,7 @@ bool	parse_light(t_scene *scene, char **tokens)
 	if (!parse_vector(&scene->light.position, tokens[0]))
 		return (printf("parse_light: %s", FAILED_PARSE_VEC), false);
 	scene->light.ratio = ft_atof(tokens[1]);
-	if (!parse_vector(&scene->light.color, tokens[2]))
+	if (!parse_color_vector(&scene->light.color, tokens[2]))
 		return (printf("parse_light: %s", FAILED_PARSE_VEC), false);
 	return (true);
 }
