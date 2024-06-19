@@ -1,0 +1,27 @@
+# .github/workflows/test.yaml
+name: Test Workflow
+on:
+  pull_request:
+  workflow_dispatch:
+  push:
+    tags:
+      - 'v*'
+env:
+  home: /home/runner
+
+jobs:
+  compilation_test:
+    name: Compilation Test
+    runs-on: ubuntu-latest
+    timeout-minutes: 2
+    strategy:
+      fail-fast: false
+      matrix:
+        compiler: [gcc, clang, clang-12]
+    steps:
+      - name: Checkout source branch of pull request
+        uses: actions/checkout@v4
+      - name: Set up test environment
+        uses: ./.github/actions/setup
+      - name: 🔨 Compile with Makefile
+        run: make CC="${{ matrix.compiler }}"
