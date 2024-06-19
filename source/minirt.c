@@ -6,14 +6,13 @@
 /*   By: lyeh <lyeh@student.42vienna.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/30 19:36:14 by lyeh              #+#    #+#             */
-/*   Updated: 2024/06/19 16:50:51 by lyeh             ###   ########.fr       */
+/*   Updated: 2024/06/19 19:36:52 by lyeh             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
 #include "debug.h"
 
-static bool		init_color_map(t_minirt *minirt);
 static bool		init_ray_pool(t_ray **ray_pool, t_camera *camera);
 static t_ray	create_ray_from_pixel_grid(t_camera *camera, int row, int col);
 
@@ -23,7 +22,6 @@ bool	init_minirt(t_minirt *minirt, char *filename)
 	if (!minirt->scene)
 		return (false);
 	if (!init_camera(&minirt->scene->camera) || \
-		!init_color_map(minirt) || \
 		!init_ray_pool(&minirt->ray_pool, &minirt->scene->camera))
 		return (false);
 	print_camera_detail(minirt->scene->camera);
@@ -33,7 +31,6 @@ bool	init_minirt(t_minirt *minirt, char *filename)
 void	free_minirt(t_minirt *minirt)
 {
 	ft_free_and_null((void **)&minirt->ray_pool);
-	ft_free_and_null((void **)&minirt->color_map);
 	free_scene(&minirt->scene);
 }
 
@@ -59,23 +56,6 @@ bool	init_ray_pool(t_ray **ray_pool, t_camera *camera)
 				create_ray_from_pixel_grid(camera, i, j);
 			j++;
 		}
-		i++;
-	}
-	return (true);
-}
-
-bool	init_color_map(t_minirt *minirt)
-{
-	int	i;
-
-	minirt->color_map = (t_vec3 *)malloc(
-			sizeof(t_vec3) * WINDOW_WIDTH * WINDOW_HEIGHT);
-	if (!minirt->color_map)
-		return (false);
-	i = 0;
-	while (i < WINDOW_WIDTH * WINDOW_HEIGHT)
-	{
-		minirt->color_map[i] = (t_vec3){0, 0, 0, NULL};
 		i++;
 	}
 	return (true);
