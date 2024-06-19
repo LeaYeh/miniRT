@@ -6,11 +6,11 @@
 /*   By: lyeh <lyeh@student.42vienna.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/17 20:28:05 by lyeh              #+#    #+#             */
-/*   Updated: 2024/06/18 20:02:17 by lyeh             ###   ########.fr       */
+/*   Updated: 2024/06/19 15:28:00 by lyeh             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "renderer_private.h"
+#include "render_private.h"
 
 static void	render_pixel(t_scene *scene, t_ray *ray_pool);
 

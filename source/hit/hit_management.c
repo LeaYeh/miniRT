@@ -1,31 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ray.h                                              :+:      :+:    :+:   */
+/*   hit_management.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lyeh <lyeh@student.42vienna.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/05/26 12:37:47 by lyeh              #+#    #+#             */
-/*   Updated: 2024/06/19 17:00:09 by lyeh             ###   ########.fr       */
+/*   Created: 2024/06/19 16:40:42 by lyeh              #+#    #+#             */
+/*   Updated: 2024/06/19 16:40:55 by lyeh             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef RAY_H
-# define RAY_H
+#include "hit_private.h"
 
-# include "vec3.h"
-# include "camera.h"
-
-typedef struct s_camera	t_camera;
-
-typedef struct s_ray
+bool	hit_object(t_ray *ray, t_obj *obj, t_hit_record *rec)
 {
-	t_vec3	origin;
-	t_vec3	direction;
-	t_list	*hit_record_list;
-	t_vec3	*cache_color;
-}	t_ray;
+	const t_vec3	vec3 = {.ops = init_ops()};
 
-t_vec3	reflect_direction(t_vec3 shoot_dir, t_vec3 p_norm);
-
-#endif
+	if (obj->type == SPHERE)
+		return (hit_sphere(vec3, ray, obj, rec));
+	else if (obj->type == PLANE)
+		return (hit_plane(vec3, ray, obj, rec));
+	else if (obj->type == CYLINDER)
+		return (hit_cylinder(vec3, ray, obj, rec));
+	return (false);
+}

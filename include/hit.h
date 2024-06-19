@@ -6,7 +6,7 @@
 /*   By: lyeh <lyeh@student.42vienna.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/01 11:21:25 by lyeh              #+#    #+#             */
-/*   Updated: 2024/06/18 18:28:30 by lyeh             ###   ########.fr       */
+/*   Updated: 2024/06/19 17:08:59 by lyeh             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 # include "defines.h"
 # include "ray.h"
 # include "object.h"
+# include "environment.h"
 
 typedef struct s_hit_record
 {
@@ -27,6 +28,6 @@ typedef struct s_hit_record
 	double	t;
 }	t_hit_record;
 
-bool	setup_nearest_object(t_list *object_list, t_ray *ray);
+bool	shoot_ray(t_list *object_list, t_ray *ray);
 
 #endif
