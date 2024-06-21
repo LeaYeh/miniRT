@@ -6,7 +6,7 @@
 /*   By: lyeh <lyeh@student.42vienna.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/01 11:20:20 by lyeh              #+#    #+#             */
-/*   Updated: 2024/06/19 17:09:48 by lyeh             ###   ########.fr       */
+/*   Updated: 2024/06/21 13:41:24 by lyeh             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,13 +90,11 @@ t_ray	get_reflected_ray(t_hit_record *rec)
 {
 	t_ray			reflected_ray;
 
-	reflected_ray = (t_ray){
-		.origin = rec->point,
-		.direction = reflect_direction(
-			rec->shoot_direction,
-			rec->norm),
-		.hit_record_list = NULL,
-		.cache_color = (t_vec3){.x = 0, .y = 0, .z = 0}};
+	reflected_ray = init_ray(
+			rec->point,
+			reflect_direction(
+				rec->shoot_direction,
+				rec->norm));
 	return (reflected_ray);
 }
 
@@ -107,9 +105,9 @@ bool	setup_infinite_record(t_ray *ray)
 	rec = (t_hit_record *)malloc(sizeof(t_hit_record));
 	if (!rec)
 		return (false);
-	rec->point = (t_vec3){.x = 0, .y = 0, .z = 0, NULL};
-	rec->norm = (t_vec3){.x = 0, .y = 0, .z = 0, NULL};
-	rec->color = (t_vec3){.x = 0, .y = 0, .z = 0, NULL};
+	rec->point = vector(0, 0, 0);
+	rec->norm = vector(0, 0, 0);
+	rec->color = vector(0, 0, 0);
 	rec->front_face = false;
 	rec->t = INFINITY;
 	if (!handle_hit_record(ray, rec, 1))

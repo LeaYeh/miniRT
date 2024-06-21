@@ -17,7 +17,7 @@ static void	setup_viewport_origin_corner(t_camera *camera);
 
 void	setup_viewport(t_camera *camera)
 {
-	const t_vec3	world_up = (t_vec3){.x = 0, .y = 1, .z = 0};
+	const t_vec3	world_up = vector(0.0, 1.0, 0.0);
 	const t_vec3	vec3 = (t_vec3){.ops = init_ops()};
 
 	camera->viewport.height = 2 * tan(camera->theta / 2);
@@ -50,9 +50,8 @@ void	setup_viewport_origin_corner(t_camera *camera)
 
 void	setup_pixel_grid(t_camera *camera)
 {
-	t_vec3			vec3;
+	const t_vec3	vec3 = (t_vec3){.ops = init_ops()};
 
-	vec3 = (t_vec3){.ops = init_ops()};
 	camera->pixel.width = camera->viewport.width / WINDOW_WIDTH;
 	camera->pixel.height = camera->viewport.height / WINDOW_HEIGHT;
 	camera->pixel.delta_u = vec3.ops->mul(

@@ -6,7 +6,7 @@
 /*   By: lyeh <lyeh@student.42vienna.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/16 13:27:23 by lyeh              #+#    #+#             */
-/*   Updated: 2024/06/17 18:09:22 by lyeh             ###   ########.fr       */
+/*   Updated: 2024/06/21 15:43:24 by lyeh             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,13 +20,13 @@ Test(hit, hit_plane_under)
 	t_obj			plane;
 	t_hit_record	rec;
 
-	ray = (t_ray){
-		.origin = (t_vec3){.x = 0, .y = -1.0, .z = 0},
-		.direction = (t_vec3){.x = 0, .y = 1, .z = 0}};
+	ray = init_ray(vector(0, -1.0, 0), vector(0, 1, 0));
+	plane = (t_obj){0};
 	plane = (t_obj){
 		.type = PLANE,
-		.position = (t_vec3){.x = 0, .y = 0, .z = 0},
-		.norm = (t_vec3){.x = 0, .y = 1, .z = 0}};
+		.position = vector(0, 0, 0),
+		.color = vector(0, 0, 0),
+		.norm = vector(0, 1, 0)};
 	cr_assert_eq(hit_plane(vec3, &ray, &plane, &rec), true, "hit_plane() detection incorrect");
 	cr_assert_eq(rec.t, 1.0, "hit_plane() t value incorrect");
 	cr_assert_eq(rec.front_face, false, "hit_plane() front_face value incorrect");
@@ -45,13 +45,13 @@ Test(hit, hit_plane_above)
 	t_obj			plane;
 	t_hit_record	rec;
 
-	ray = (t_ray){
-		.origin = (t_vec3){.x = 0, .y = 2.0, .z = 0},
-		.direction = (t_vec3){.x = 0, .y = -1, .z = 0}};
+	ray = init_ray(vector(0, 2.0, 0), vector(0, -1, 0));
+	plane = (t_obj){0};
 	plane = (t_obj){
 		.type = PLANE,
-		.position = (t_vec3){.x = 0, .y = 0, .z = 0},
-		.norm = (t_vec3){.x = 0, .y = 1, .z = 0}};
+		.position = vector(0, 0, 0),
+		.color = vector(0, 0, 0),
+		.norm = vector(0, 1, 0)};
 	cr_assert_eq(hit_plane(vec3, &ray, &plane, &rec), true, "hit_plane() detection incorrect");
 	cr_assert_eq(rec.t, 2.0, "hit_plane() t value incorrect");
 	cr_assert_eq(rec.front_face, true, "hit_plane() front_face value incorrect");
@@ -70,12 +70,12 @@ Test(hit, hit_plane_miss)
 	t_obj			plane;
 	t_hit_record	rec;
 
-	ray = (t_ray){
-		.origin = (t_vec3){.x = 0, .y = 1.0, .z = 0},
-		.direction = (t_vec3){.x = 0, .y = 1, .z = 0}};
+	ray = init_ray(vector(0, 1.0, 0), vector(0, 1, 0));
+	plane = (t_obj){0};
 	plane = (t_obj){
 		.type = PLANE,
-		.position = (t_vec3){.x = 0, .y = 0, .z = 0},
-		.norm = (t_vec3){.x = 0, .y = 1, .z = 0}};
+		.position = vector(0, 0, 0),
+		.norm = vector(0, 1, 0),
+		.color = vector(0, 0, 0)};
 	cr_assert_eq(hit_plane(vec3, &ray, &plane, &rec), false, "hit_plane() detection incorrect");
 }
