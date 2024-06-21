@@ -6,7 +6,7 @@
 /*   By: lyeh <lyeh@student.42vienna.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/26 15:41:00 by lyeh              #+#    #+#             */
-/*   Updated: 2024/06/19 15:02:39 by lyeh             ###   ########.fr       */
+/*   Updated: 2024/06/21 14:35:48 by lyeh             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,6 @@
 # define HORIZONTAL_UNIT	1
 # define VERTICAL_UNIT		1
 
-# define MAX_DEPTH			5
+# define MAX_DEPTH			1
 
 #endif

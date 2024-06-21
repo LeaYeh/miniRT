@@ -67,9 +67,6 @@ t_ray	create_ray_from_pixel_grid(t_camera *camera, int row, int col)
 	t_vec3			pixel_positon;
 
 	pixel_positon = get_pixel_position(camera->pixel, row, col);
-	return ((t_ray){
-		.origin = camera->position,
-		.direction = vec3.ops->sub(pixel_positon, camera->position),
-		.hit_record_list = NULL,
-		.cache_color = (t_vec3){.x = 0, .y = 0, .z = 0}});
+	return (init_ray(camera->position,
+			vec3.ops->sub(pixel_positon, camera->position)));
 }

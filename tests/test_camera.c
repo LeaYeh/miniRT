@@ -6,7 +6,7 @@
 /*   By: lyeh <lyeh@student.42vienna.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/02 20:58:00 by lyeh              #+#    #+#             */
-/*   Updated: 2024/06/18 16:07:31 by lyeh             ###   ########.fr       */
+/*   Updated: 2024/06/21 15:43:54 by lyeh             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,8 +29,10 @@ Test(camera, camera_init)
 {
 	t_camera	cam;
 
-	cam = (t_camera){.position = (t_vec3){.x = -50, .y = 0, .z = 20},
-		.norm = (t_vec3){.x = 0, .y = 0, .z = 1},
+	cam = (t_camera){0};
+	cam = (t_camera){
+		.position = vector(-50, 0, 20),
+		.norm = vector(0, 0, 1),
 		.fov = 70};
 
 	if (!init_camera(&cam))

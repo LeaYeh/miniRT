@@ -6,7 +6,7 @@
 /*   By: lyeh <lyeh@student.42vienna.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/14 15:35:54 by lyeh              #+#    #+#             */
-/*   Updated: 2024/06/19 20:01:46 by lyeh             ###   ########.fr       */
+/*   Updated: 2024/06/19 20:37:40 by lyeh             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,6 @@
 # include "ray_private.h"
 # include "hit_private.h"
 # include "object.h"
-# include "renderer_private.h"
+# include "render_private.h"
 
 #endif

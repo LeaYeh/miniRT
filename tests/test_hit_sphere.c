@@ -6,7 +6,7 @@
 /*   By: lyeh <lyeh@student.42vienna.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/17 15:28:28 by lyeh              #+#    #+#             */
-/*   Updated: 2024/06/17 19:47:14 by lyeh             ###   ########.fr       */
+/*   Updated: 2024/06/21 15:42:42 by lyeh             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,13 +20,12 @@ Test(hit, hit_sphere_outside)
 	t_obj			shpere;
 	t_hit_record	rec;
 
-	ray = (t_ray){
-		.origin = (t_vec3){.x = 0, .y = 2.0, .z = 0},
-		.direction = (t_vec3){.x = 0, .y = -1, .z = 0}};
+	ray = init_ray(vector(0, 2.0, 0), vector(0, -1, 0));
+	shpere = (t_obj){0};
 	shpere = (t_obj){
 		.type = SPHERE,
-		.position = (t_vec3){.x = 0, .y = 0, .z = 0},
-		.norm = (t_vec3){.x = 0, .y = 1, .z = 0},
+		.position = vector(0, 0, 0),
+		.norm = vector(0, 1, 0),
 		.d_param1 = 1.0};
 	cr_assert_eq(hit_sphere(vec3, &ray, &shpere, &rec), true, "hit_sphere() detection incorrect");
 	cr_assert_eq(rec.t, 1.0, "hit_sphere() t value incorrect");
@@ -46,14 +45,13 @@ Test(hit, hit_sphere_inside)
 	t_obj			shpere;
 	t_hit_record	rec;
 
-	ray = (t_ray){
-		.origin = (t_vec3){.x = 0, .y = 0, .z = 5},
-		.direction = (t_vec3){.x = 0, .y = 0, .z = 1}};
+	ray = init_ray(vector(0, 0, 5), vector(0, 0, 1));
+	shpere = (t_obj){0};
 	shpere = (t_obj){
 		.type = SPHERE,
-		.position = (t_vec3){.x = 0, .y = 0, .z = 0},
-		.norm = (t_vec3){.x = 0, .y = 1, .z = 0},
-		.color = (t_vec3){.x = 0, .y = 255, .z = 0},
+		.position = vector(0, 0, 0),
+		.norm = vector(0, 1, 0),
+		.color= vector(0, 255, 0),
 		.d_param1 = 10.0};
 	cr_assert_eq(hit_sphere(vec3, &ray, &shpere, &rec), true, "hit_sphere() detection incorrect");
 	cr_assert_eq(rec.t, 5.0, "hit_sphere() t value incorrect");
@@ -76,13 +74,12 @@ Test(hit, hit_sphere_miss)
 	t_obj			shpere;
 	t_hit_record	rec;
 
-	ray = (t_ray){
-		.origin = (t_vec3){.x = 2.0, .y = 0, .z = 0},
-		.direction = (t_vec3){.x = 1, .y = 0, .z = 0}};
+	ray = init_ray(vector(2.0, 0, 0), vector(1, 0, 0));
+	shpere = (t_obj){0};
 	shpere = (t_obj){
 		.type = SPHERE,
-		.position = (t_vec3){.x = 0, .y = 0, .z = 0},
-		.norm = (t_vec3){.x = 0, .y = 1, .z = 0},
+		.position = vector(0, 0, 0),
+		.norm = vector(0, 1, 0),
 		.d_param1 = 1.0};
 	cr_assert_eq(hit_sphere(vec3, &ray, &shpere, &rec), false, "hit_sphere() detection incorrect");
 }
