@@ -6,7 +6,7 @@
 /*   By: lyeh <lyeh@student.42vienna.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/14 19:49:52 by lyeh              #+#    #+#             */
-/*   Updated: 2024/06/18 17:05:34 by lyeh             ###   ########.fr       */
+/*   Updated: 2024/06/22 19:36:04 by lyeh             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,10 +36,10 @@ void	print_viewport(t_viewport viewport)
 	printf("Viewport:\n");
 	printf("\tOrigin Corner: ");
 	print_vector(viewport.origin_corner);
-	printf("\tV: ");
-	print_vector(viewport.v);
 	printf("\tU: ");
 	print_vector(viewport.u);
+	printf("\tV: ");
+	print_vector(viewport.v);
 	printf("\tW: ");
 	print_vector(viewport.w);
 	printf("\tWidth: %f\n", viewport.width);
