@@ -6,13 +6,14 @@
 /*   By: lyeh <lyeh@student.42vienna.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/17 20:28:05 by lyeh              #+#    #+#             */
-/*   Updated: 2024/06/19 15:28:00 by lyeh             ###   ########.fr       */
+/*   Updated: 2024/06/22 19:31:22 by lyeh             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "render_private.h"
 
-static void	render_pixel(t_scene *scene, t_ray *ray_pool);
+static void		render_pixel(t_scene *scene, t_ray *ray_pool);
+static t_vec3	clamp_color(t_vec3 color);
 
 void	render(t_scene *scene, t_pixel_grid *pixel, t_ray *ray_pool)
 {
@@ -62,5 +63,13 @@ t_vec3	compute_color(t_scene *scene, t_hit_record *rec)
 	specular_color = specular(rec, &scene->light);
 	color = vec3.ops->add(ambient_color, diffuse_color);
 	color = vec3.ops->add(color, specular_color);
+	return (clamp_color(color));
+}
+
+static t_vec3	clamp_color(t_vec3 color)
+{
+	color.x = fminf(color.x, 1);
+	color.y = fminf(color.y, 1);
+	color.z = fminf(color.z, 1);
 	return (color);
 }
