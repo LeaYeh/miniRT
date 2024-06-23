@@ -24,6 +24,7 @@ bool	init_minirt(t_minirt *minirt, char *filename)
 	if (!init_camera(&minirt->scene->camera) || \
 		!init_ray_pool(&minirt->ray_pool, &minirt->scene->camera))
 		return (false);
+	minirt->mod_key = 0;
 	print_camera_detail(minirt->scene->camera);
 	return (true);
 }

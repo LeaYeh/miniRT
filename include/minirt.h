@@ -17,6 +17,7 @@
 # include "environment.h"
 # include "camera.h"
 # include "utils.h"
+# include "mlx_utils.h"
 # include <mlx.h>
 # include <X11/X.h>
 # include <X11/keysym.h>
@@ -39,9 +40,10 @@ typedef struct s_mlx
 
 typedef struct s_minirt
 {
-	t_mlx	mlx;
-	t_scene	*scene;
-	t_ray	*ray_pool;
+	t_mlx		mlx;
+	t_scene		*scene;
+	t_ray		*ray_pool;
+	t_mod_key	mod_key;
 }	t_minirt;
 
 bool	init_minirt(t_minirt *minirt, char *filename);
