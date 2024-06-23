@@ -18,7 +18,7 @@
 # include "canva.h"
 # include "hit.h"
 
-int		display(void *arg);
+int		display(t_minirt *minirt);
 void	render(t_scene *scene, t_pixel_grid *pixel, t_ray *ray_pool);
 t_vec3	compute_color(t_scene *scene, t_hit_record *rec);
 
