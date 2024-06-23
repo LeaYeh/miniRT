@@ -6,7 +6,7 @@
 /*   By: lyeh <lyeh@student.42vienna.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/30 19:36:14 by lyeh              #+#    #+#             */
-/*   Updated: 2024/06/22 20:00:39 by lyeh             ###   ########.fr       */
+/*   Updated: 2024/06/23 09:49:05 by lyeh             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,5 +65,6 @@ t_ray	create_ray_from_pixel_grid(t_camera *camera, int row, int col)
 
 	pixel_positon = get_pixel_position(camera->pixel, row, col);
 	return (init_ray(camera->position,
-			vec3.ops->sub(pixel_positon, camera->position)));
+			vec3.ops->normalize(
+				vec3.ops->sub(pixel_positon, camera->position))));
 }
