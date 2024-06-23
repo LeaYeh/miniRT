@@ -6,7 +6,7 @@
 /*   By: lyeh <lyeh@student.42vienna.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/17 20:28:05 by lyeh              #+#    #+#             */
-/*   Updated: 2024/06/22 19:31:22 by lyeh             ###   ########.fr       */
+/*   Updated: 2024/06/23 08:50:50 by lyeh             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,8 +57,9 @@ t_vec3	compute_color(t_scene *scene, t_hit_record *rec)
 
 	if (rec->t == INFINITY)
 		return (scene->bg_color);
-	// TODO: Implemet shadow
 	ambient_color = ambient(rec, &scene->amblight);
+	if (is_shadow(scene->light, scene->objects, *rec))
+		return (ambient_color);
 	diffuse_color = diffuse(rec, &scene->light);
 	specular_color = specular(rec, &scene->light);
 	color = vec3.ops->add(ambient_color, diffuse_color);
