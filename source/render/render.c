@@ -6,7 +6,7 @@
 /*   By: lyeh <lyeh@student.42vienna.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/17 20:28:05 by lyeh              #+#    #+#             */
-/*   Updated: 2024/06/23 08:50:50 by lyeh             ###   ########.fr       */
+/*   Updated: 2024/06/23 14:44:15 by lyeh             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,9 @@ void	render(t_scene *scene, t_pixel_grid *pixel, t_ray *ray_pool)
 		j = 0;
 		while (j < pixel->col_size)
 		{
+			// printf("current: %d %d\n", i, j);
+			// if (i == pixel->row_size / 2 && j == pixel->col_size / 2)
+			// 	printf("center\n");
 			shoot_ray(scene->objects, &(ray_pool[i * pixel->col_size + j]));
 			render_pixel(scene, &(ray_pool[i * pixel->col_size + j]));
 			j++;
@@ -36,14 +39,15 @@ void	render(t_scene *scene, t_pixel_grid *pixel, t_ray *ray_pool)
 
 void	render_pixel(t_scene *scene, t_ray *ray)
 {
-	t_list	*hit_record;
+	t_list			*cur_node;
+	t_hit_record	*hit_record;
 
-	hit_record = ray->hit_record_list;
-	while (hit_record)
+	cur_node = ray->hit_record_list;
+	while (cur_node)
 	{
-		// TODO: Need to handle front_face == false
-		ray->cache_color = compute_color(scene, hit_record->content);
-		hit_record = hit_record->next;
+		hit_record = cur_node->content;
+		ray->cache_color = compute_color(scene, hit_record);
+		cur_node = cur_node->next;
 	}
 }
 
@@ -55,7 +59,7 @@ t_vec3	compute_color(t_scene *scene, t_hit_record *rec)
 	t_vec3			diffuse_color;
 	t_vec3			specular_color;
 
-	if (rec->t == INFINITY)
+	if (rec->t == INFINITY || rec->front_face == false)
 		return (scene->bg_color);
 	ambient_color = ambient(rec, &scene->amblight);
 	if (is_shadow(scene->light, scene->objects, *rec))
