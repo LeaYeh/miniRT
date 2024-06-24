@@ -42,12 +42,12 @@ void	render_pixel(t_scene *scene, t_ray *ray)
 	t_list			*cur_node;
 	t_hit_record	*hit_record;
 
-	hit_record = ray->hit_record_list;
-	while (hit_record)
+	cur_node = ray->hit_record_list;
+	while (cur_node)
 	{
-		// TODO: Need to handle front_face == false
-		ray->cache_color = compute_color(scene, hit_record->content);
-		hit_record = hit_record->next;
+		hit_record = cur_node->content;
+		ray->cache_color = compute_color(scene, hit_record);
+		cur_node = cur_node->next;
 	}
 }
 
@@ -59,8 +59,10 @@ t_vec3	compute_color(t_scene *scene, t_hit_record *rec)
 	t_vec3			diffuse_color;
 	t_vec3			specular_color;
 
-	if (rec->t == INFINITY || rec->front_face == false)
+	if (rec->t == INFINITY)
 		return (scene->bg_color);
+	else if (rec->front_face == false)
+		return (vector(0, 0, 0));
 	ambient_color = ambient(rec, &scene->amblight);
 	if (is_shadow(scene->light, scene->objects, *rec))
 		return (ambient_color);
