@@ -6,7 +6,7 @@
 /*   By: lyeh <lyeh@student.42vienna.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/15 16:35:18 by lyeh              #+#    #+#             */
-/*   Updated: 2024/06/20 16:55:15 by lyeh             ###   ########.fr       */
+/*   Updated: 2024/06/24 22:55:43 by lyeh             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,20 +17,10 @@ static bool	hit_cylinder_side(t_vec3 vec3,
 				t_ray *ray, t_obj *cylinder, t_hit_record *rec);
 static bool	hit_cylinder_caps(t_vec3 vec3,
 				t_ray *ray, t_obj *cylinder, t_hit_record *rec);
-static bool	is_point_in_height_range(t_vec3 vec3, t_vec3 p, t_obj *cylinder);
 static void	setup_hit_record_side(
 				t_hit_record *rec, double t, t_ray *ray, t_obj *cylinder);
 static void	setup_hit_record_caps(
 				t_hit_record *rec, double t, t_ray *ray, t_obj *cylinder);
-
-/*
-formula: (P−P0−(P−P0)⋅D⋅D)⋅(P−P0−(P−P0)⋅D⋅D)−r^2=0
-rec->point = P
-rec->norm = N
-ray->origin = P0
-ray->direction = D
-*/
-
 
 bool	hit_cylinder(t_vec3 vec3,
 			t_ray *ray, t_obj *cylinder, t_hit_record *rec)
@@ -48,7 +38,7 @@ bool	hit_cylinder(t_vec3 vec3,
 		*rec = rec_side;
 	else if (!hit_side && hit_caps)
 		*rec = rec_caps;
-	else if (rec_side.t < rec_caps.t)
+	else if (is_min_positive_t(rec_side.t, rec_caps.t))
 		*rec = rec_side;
 	else
 		*rec = rec_caps;
@@ -66,16 +56,16 @@ bool	hit_cylinder_side(t_vec3 vec3,
 
 	a = vec3.ops->dot(ray->direction, ray->direction) - \
 			pow(vec3.ops->dot(ray->direction, cylinder->norm), 2);
-	b = 2 * (vec3.ops->dot(ray->direction, oc) - \
+	b = 2 * (vec3.ops->dot(oc, ray->direction) - \
 			vec3.ops->dot(ray->direction, cylinder->norm) * \
 			vec3.ops->dot(oc, cylinder->norm));
 	c = vec3.ops->dot(oc, oc) - \
 			pow(vec3.ops->dot(oc, cylinder->norm), 2) - \
-			pow(cylinder->d_param1, 2);
+			pow(cylinder->d_param1 / 2.0, 2);
 	t_intersection = calc_sphere_min_root(a, b, c);
 	if (t_intersection < 0)
 		return (false);
-	if (!is_point_in_height_range(vec3,
+	if (!is_point_in_height_range(
 			vec3.ops->add(
 				ray->origin, vec3.ops->mul(ray->direction, t_intersection)),
 			cylinder))
@@ -87,49 +77,30 @@ bool	hit_cylinder_side(t_vec3 vec3,
 bool	hit_cylinder_caps(t_vec3 vec3,
 			t_ray *ray, t_obj *cylinder, t_hit_record *rec)
 {
-	double	t_intersection;
-	double	t1;
-	double	t2;
+	t_obj	top_plane;
+	t_obj	bottom_plane;
+	t_vec3	center_top;
+	t_vec3	center_bottom;
+	t_hit_record	top_rec;
+	t_hit_record	bottom_rec;
 
-	t1 = (cylinder->d_param2 / 2 - vec3.ops->dot(
-				ray->origin, cylinder->norm)) / vec3.ops->dot(
-			ray->direction, cylinder->norm);
-	t2 = (-cylinder->d_param2 / 2 - vec3.ops->dot(
-				ray->origin, cylinder->norm)) / vec3.ops->dot(
-			ray->direction, cylinder->norm);
-	if (t1 < 0 && t2 < 0)
+	center_top = vec3.ops->add(cylinder->position,
+			vec3.ops->mul(cylinder->norm, cylinder->d_param2 / 2));
+	center_bottom = vec3.ops->sub(cylinder->position,
+			vec3.ops->mul(cylinder->norm, cylinder->d_param2 / 2));
+	top_plane = init_plane(center_top, cylinder->norm, cylinder->color);
+	bottom_plane = init_plane(center_bottom, vec3.ops->mul(cylinder->norm, -1),
+			cylinder->color);
+	if (hit_plane(vec3, ray, (t_obj *)&top_plane, &top_rec))
+		*rec = top_rec;
+	if (hit_plane(vec3, ray, (t_obj *)&bottom_plane, &bottom_rec))
+	{
+		if (is_min_positive_t(bottom_rec.t, rec->t))
+			*rec = bottom_rec;
+	}
+	if (!is_point_in_cap_range(rec->point, cylinder, center_top, center_bottom))
 		return (false);
-	else if (t1 < 0)
-		t_intersection = t2;
-	else if (t2 < 0)
-		t_intersection = t1;
-	else if (t1 < t2)
-		t_intersection = t1;
-	else
-		t_intersection = t2;
-	if (!is_point_in_height_range(vec3,
-			vec3.ops->add(
-				ray->origin, vec3.ops->mul(ray->direction, t_intersection)),
-			cylinder))
-		return (false);
-	setup_hit_record_caps(rec, t_intersection, ray, cylinder);
-	return (true);
-}
-
-bool	is_point_in_height_range(t_vec3 vec3, t_vec3 p, t_obj *cylinder)
-{
-	double	pc_proj;
-	double	cy_proj_min;
-	double	cy_proj_max;
-
-	pc_proj = vec3.ops->dot(p, cylinder->norm);
-	cy_proj_min = vec3.ops->dot(
-			cylinder->position, cylinder->norm) - cylinder->d_param2 / 2;
-	cy_proj_max = vec3.ops->dot(
-			cylinder->position, cylinder->norm) + cylinder->d_param2 / 2;
-	if (pc_proj < cy_proj_min || \
-		pc_proj > cy_proj_max)
-		return (false);
+	setup_hit_record_caps(rec, rec->t, ray, cylinder);
 	return (true);
 }
 
@@ -145,8 +116,7 @@ static void	setup_hit_record_side(
 	oc = vec3.ops->sub(rec->point, cylinder->position);
 	projection = vec3.ops->mul(
 			cylinder->norm, vec3.ops->dot(oc, cylinder->norm));
-	rec->norm = vec3.ops->sub(oc, projection);
-	rec->norm = vec3.ops->div(rec->norm, cylinder->d_param1);
+	rec->norm = vec3.ops->normalize(vec3.ops->sub(oc, projection));
 	rec->color = cylinder->color;
 	rec->front_face = vec3.ops->dot(ray->direction, rec->norm) < 0;
 	if (!rec->front_face)
@@ -162,13 +132,16 @@ static void	setup_hit_record_caps(
 
 	rec->shoot_direction = ray->direction;
 	rec->point = vec3.ops->add(ray->origin, vec3.ops->mul(ray->direction, t));
-	rec->norm = cylinder->norm;
+	// if the ray is same direction as the normal of the cap, the dot product will be positive
+	// if the ray is opposite direction as the normal of the cap, the dot product will be negative
+	if (vec3.ops->dot(ray->direction, cylinder->norm) > 0)
+		rec->norm = vec3.ops->mul(cylinder->norm, -1);
+	else
+		rec->norm = cylinder->norm;
 	rec->front_face = vec3.ops->dot(ray->direction, rec->norm) < 0;
 	dot_product = vec3.ops->dot(ray->direction, cylinder->norm);
 	if (dot_product > 0)
 		rec->norm = vec3.ops->mul(rec->norm, -1);
 	rec->color = cylinder->color;
-	if (!rec->front_face)
-		rec->norm = vec3.ops->mul(rec->norm, -1);
 	rec->t = t;
 }

@@ -1,39 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   object.h                                           :+:      :+:    :+:   */
+/*   plane_utils.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lyeh <lyeh@student.42vienna.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/06/01 11:23:43 by lyeh              #+#    #+#             */
-/*   Updated: 2024/06/24 17:02:18 by lyeh             ###   ########.fr       */
+/*   Created: 2024/06/24 16:59:30 by lyeh              #+#    #+#             */
+/*   Updated: 2024/06/24 17:01:47 by lyeh             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef OBJECT_H
-# define OBJECT_H
+#include "object.h"
 
-# include "vec3.h"
-
-typedef enum e_object_type
+t_obj	init_plane(t_vec3 position, t_vec3 norm, t_vec3 color)
 {
-	SPHERE		= 0,
-	PLANE,
-	CYLINDER
-}	t_obj_type;
+	t_obj	plane;
 
-typedef struct s_object
-{
-	t_obj_type	type;
-	t_vec3		position;
-	t_vec3		color;
-	t_vec3		norm;
-	double		d_param1;
-	double		d_param2;
-	t_vec3		translation;
-	t_vec3		rotation;
-}	t_obj;
-
-t_obj	init_plane(t_vec3 position, t_vec3 norm, t_vec3 color);
-
-#endif
+	plane.position = position;
+	plane.norm = norm;
+	plane.color = color;
+	plane.type = PLANE;
+	plane.d_param1 = 0;
+	plane.d_param2 = 0;
+	return (plane);
+}

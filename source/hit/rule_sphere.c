@@ -6,7 +6,7 @@
 /*   By: lyeh <lyeh@student.42vienna.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/15 16:30:43 by lyeh              #+#    #+#             */
-/*   Updated: 2024/06/20 16:06:32 by lyeh             ###   ########.fr       */
+/*   Updated: 2024/06/24 22:56:09 by lyeh             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,20 +46,12 @@ double	calc_sphere_min_root(double a, double b, double c)
 	double	t2;
 
 	discriminant = b * b - 4 * a * c;
-	if (discriminant < 0 || a == 0)
+	if (discriminant < 0 || fabs(a) < 1e-6)
 		return (-1);
 	sqrt_discriminant = sqrt(discriminant);
 	t1 = (-b - sqrt_discriminant) / (2.0 * a);
 	t2 = (-b + sqrt_discriminant) / (2.0 * a);
-	if (t1 < 0 && t2 < 0)
-		return (-1);
-	else if (t1 < 0)
-		return (t2);
-	else if (t2 < 0)
-		return (t1);
-	else if (t1 < t2)
-		return (t1);
-	return (t2);
+	return (min_positive_t(t1, t2));
 }
 
 static void	setup_hit_record(

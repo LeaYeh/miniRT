@@ -26,7 +26,7 @@ bool	is_shadow(t_light light, t_list *object_list, t_hit_record rec)
 	while (object_list)
 	{
 		if (hit_object(&shadow_ray, object_list->content, &tmp_rec) && \
-			tmp_rec.t < vec3.ops->magnitude(point2light))
+			is_min_positive_t(tmp_rec.t, vec3.ops->magnitude(point2light)))
 			return (true);
 		object_list = object_list->next;
 	}
