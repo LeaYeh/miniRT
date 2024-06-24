@@ -10,6 +10,15 @@ env:
   home: /home/runner
 
 jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Build Docker image
+        run: docker build . --file .github/Dockerfile --tag minirt_env
+      - name: Run Docker image
+        run: docker run minirt_env
+  
   compilation_test:
     name: Compilation Test
     runs-on: ubuntu-latest
