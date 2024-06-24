@@ -6,7 +6,7 @@
 /*   By: lyeh <lyeh@student.42vienna.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/17 20:28:05 by lyeh              #+#    #+#             */
-/*   Updated: 2024/06/23 14:44:15 by lyeh             ###   ########.fr       */
+/*   Updated: 2024/06/24 14:34:42 by lyeh             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,12 +42,12 @@ void	render_pixel(t_scene *scene, t_ray *ray)
 	t_list			*cur_node;
 	t_hit_record	*hit_record;
 
-	cur_node = ray->hit_record_list;
-	while (cur_node)
+	hit_record = ray->hit_record_list;
+	while (hit_record)
 	{
-		hit_record = cur_node->content;
-		ray->cache_color = compute_color(scene, hit_record);
-		cur_node = cur_node->next;
+		// TODO: Need to handle front_face == false
+		ray->cache_color = compute_color(scene, hit_record->content);
+		hit_record = hit_record->next;
 	}
 }
 

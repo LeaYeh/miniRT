@@ -6,7 +6,7 @@
 /*   By: lyeh <lyeh@student.42vienna.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/13 17:19:11 by lyeh              #+#    #+#             */
-/*   Updated: 2024/06/21 15:18:36 by lyeh             ###   ########.fr       */
+/*   Updated: 2024/06/24 17:24:17 by lyeh             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,5 +40,6 @@ typedef struct s_vector_3d
 
 t_vec3_ops	*init_ops(void);
 t_vec3		vector(double x, double y, double z);
+t_vec3		unit_vector(double x, double y, double z);
 
 #endif

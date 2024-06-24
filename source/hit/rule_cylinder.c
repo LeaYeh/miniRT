@@ -6,7 +6,7 @@
 /*   By: lyeh <lyeh@student.42vienna.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/15 16:35:18 by lyeh              #+#    #+#             */
-/*   Updated: 2024/06/20 16:55:15 by lyeh             ###   ########.fr       */
+/*   Updated: 2024/06/23 20:28:00 by lyeh             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,15 +22,6 @@ static void	setup_hit_record_side(
 				t_hit_record *rec, double t, t_ray *ray, t_obj *cylinder);
 static void	setup_hit_record_caps(
 				t_hit_record *rec, double t, t_ray *ray, t_obj *cylinder);
-
-/*
-formula: (P−P0−(P−P0)⋅D⋅D)⋅(P−P0−(P−P0)⋅D⋅D)−r^2=0
-rec->point = P
-rec->norm = N
-ray->origin = P0
-ray->direction = D
-*/
-
 
 bool	hit_cylinder(t_vec3 vec3,
 			t_ray *ray, t_obj *cylinder, t_hit_record *rec)
@@ -66,12 +57,12 @@ bool	hit_cylinder_side(t_vec3 vec3,
 
 	a = vec3.ops->dot(ray->direction, ray->direction) - \
 			pow(vec3.ops->dot(ray->direction, cylinder->norm), 2);
-	b = 2 * (vec3.ops->dot(ray->direction, oc) - \
+	b = 2 * (vec3.ops->dot(oc, ray->direction) - \
 			vec3.ops->dot(ray->direction, cylinder->norm) * \
 			vec3.ops->dot(oc, cylinder->norm));
 	c = vec3.ops->dot(oc, oc) - \
 			pow(vec3.ops->dot(oc, cylinder->norm), 2) - \
-			pow(cylinder->d_param1, 2);
+			pow(cylinder->d_param1 / 2.0, 2);
 	t_intersection = calc_sphere_min_root(a, b, c);
 	if (t_intersection < 0)
 		return (false);
@@ -107,11 +98,6 @@ bool	hit_cylinder_caps(t_vec3 vec3,
 		t_intersection = t1;
 	else
 		t_intersection = t2;
-	if (!is_point_in_height_range(vec3,
-			vec3.ops->add(
-				ray->origin, vec3.ops->mul(ray->direction, t_intersection)),
-			cylinder))
-		return (false);
 	setup_hit_record_caps(rec, t_intersection, ray, cylinder);
 	return (true);
 }
@@ -146,7 +132,7 @@ static void	setup_hit_record_side(
 	projection = vec3.ops->mul(
 			cylinder->norm, vec3.ops->dot(oc, cylinder->norm));
 	rec->norm = vec3.ops->sub(oc, projection);
-	rec->norm = vec3.ops->div(rec->norm, cylinder->d_param1);
+	rec->norm = vec3.ops->normalize(rec->norm);
 	rec->color = cylinder->color;
 	rec->front_face = vec3.ops->dot(ray->direction, rec->norm) < 0;
 	if (!rec->front_face)
@@ -163,11 +149,11 @@ static void	setup_hit_record_caps(
 	rec->shoot_direction = ray->direction;
 	rec->point = vec3.ops->add(ray->origin, vec3.ops->mul(ray->direction, t));
 	rec->norm = cylinder->norm;
-	rec->front_face = vec3.ops->dot(ray->direction, rec->norm) < 0;
 	dot_product = vec3.ops->dot(ray->direction, cylinder->norm);
 	if (dot_product > 0)
 		rec->norm = vec3.ops->mul(rec->norm, -1);
 	rec->color = cylinder->color;
+	rec->front_face = vec3.ops->dot(ray->direction, rec->norm) < 0;
 	if (!rec->front_face)
 		rec->norm = vec3.ops->mul(rec->norm, -1);
 	rec->t = t;

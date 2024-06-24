@@ -6,7 +6,7 @@
 /*   By: lyeh <lyeh@student.42vienna.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/28 10:22:39 by lyeh              #+#    #+#             */
-/*   Updated: 2024/06/21 15:28:06 by lyeh             ###   ########.fr       */
+/*   Updated: 2024/06/24 17:24:48 by lyeh             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,7 @@ bool	parse_plane(t_scene *scene, char **tokens)
 		return (printf("parse_plane: %s", FAILED_ALLOC_MEM), false);
 	object->type = PLANE;
 	if (!parse_vector(&object->position, tokens[0]) || \
-		!parse_vector(&object->norm, tokens[1]) || \
+		!parse_unit_vector(&object->norm, tokens[1]) || \
 		!parse_color_vector(&object->color, tokens[2]))
 		return (printf("parse_plane: %s", FAILED_PARSE_VEC),
 			free(object), false);
@@ -103,7 +103,7 @@ bool	parse_cylinder(t_scene *scene, char **tokens)
 	object->translation = vector(0.0, 0.0, 0.0);
 	object->rotation = vector(0.0, 0.0, 0.0);
 	if (!parse_vector(&object->position, tokens[0]) || \
-		!parse_vector(&object->norm, tokens[1]) || \
+		!parse_unit_vector(&object->norm, tokens[1]) || \
 		!parse_color_vector(&object->color, tokens[4]))
 		return (printf("parse_cylinder: %s", FAILED_PARSE_VEC),
 			free(object), false);
