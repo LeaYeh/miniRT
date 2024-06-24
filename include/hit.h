@@ -6,7 +6,7 @@
 /*   By: lyeh <lyeh@student.42vienna.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/01 11:21:25 by lyeh              #+#    #+#             */
-/*   Updated: 2024/06/24 21:39:41 by lyeh             ###   ########.fr       */
+/*   Updated: 2024/06/24 23:03:59 by lyeh             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ typedef struct s_hit_record
 
 bool	shoot_ray(t_list *object_list, t_ray *ray);
 bool	hit_object(t_ray *ray, t_obj *obj, t_hit_record *rec);
-double	min_possitive_t(double t1, double t2);
+double	min_positive_t(double t1, double t2);
 bool	is_min_positive_t(double this, double other);
 
 #endif

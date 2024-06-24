@@ -6,7 +6,7 @@
 /*   By: lyeh <lyeh@student.42vienna.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/01 11:20:20 by lyeh              #+#    #+#             */
-/*   Updated: 2024/06/24 21:41:10 by lyeh             ###   ########.fr       */
+/*   Updated: 2024/06/24 23:02:49 by lyeh             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,25 +39,26 @@ bool	recursive_ray(t_list *object_list,
 			t_ray *root_ray, t_ray *cur_ray, const int expect_depth)
 {
 	t_hit_record	*tmp_rec;
-	t_list			*cur_node;
+	t_list			*obj_node;
 	t_ray			reflected_ray;
 
 	tmp_rec = (t_hit_record *)malloc(sizeof(t_hit_record));
 	if (!tmp_rec)
 		return (false);
-	cur_node = object_list;
-	while (cur_node)
+	obj_node = object_list;
+	while (obj_node)
 	{
-		if (hit_object(cur_ray, cur_node->content, tmp_rec))
+		if (hit_object(cur_ray, obj_node->content, tmp_rec))
 			if (!handle_hit_record(root_ray, tmp_rec, expect_depth))
 				return (free(tmp_rec), false);
-		cur_node = cur_node->next;
+		obj_node = obj_node->next;
 	}
 	if (ft_lstsize(root_ray->hit_record_list) == expect_depth && \
 		ft_lstsize(root_ray->hit_record_list) < MAX_DEPTH)
 	{
 		reflected_ray = get_reflected_ray(tmp_rec);
-		if (!recursive_ray(object_list, root_ray, &reflected_ray, expect_depth + 1))
+		if (!recursive_ray(object_list,
+				root_ray, &reflected_ray, expect_depth + 1))
 			return (free(tmp_rec), false);
 	}
 	return (true);
