@@ -39,7 +39,7 @@ bool	hit_cylinder(t_vec3 vec3,
 		*rec = rec_side;
 	else if (!hit_side && hit_caps)
 		*rec = rec_caps;
-	else if (rec_side.t < rec_caps.t)
+	else if (is_min_positive_t(rec_side.t, rec_caps.t))
 		*rec = rec_side;
 	else
 		*rec = rec_caps;

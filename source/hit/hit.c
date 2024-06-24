@@ -6,7 +6,7 @@
 /*   By: lyeh <lyeh@student.42vienna.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/01 11:20:20 by lyeh              #+#    #+#             */
-/*   Updated: 2024/06/21 13:41:24 by lyeh             ###   ########.fr       */
+/*   Updated: 2024/06/24 21:41:10 by lyeh             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +66,7 @@ bool	recursive_ray(t_list *object_list,
 bool	handle_hit_record(t_ray *ray, t_hit_record *new_rec, int expect_depth)
 {
 	t_list	*tmp_node;
+	double	old_t;
 
 	// init hit_record for first hit in this recursion
 	if (ft_lstsize(ray->hit_record_list) < expect_depth)
@@ -77,7 +78,8 @@ bool	handle_hit_record(t_ray *ray, t_hit_record *new_rec, int expect_depth)
 	else
 	{
 		tmp_node = ft_lstlast(ray->hit_record_list);
-		if (new_rec->t < ((t_hit_record *)tmp_node->content)->t)
+		old_t = ((t_hit_record *)tmp_node->content)->t;
+		if (is_min_positive_t(new_rec->t, old_t))
 		{
 			free(tmp_node->content);
 			tmp_node->content = new_rec;
@@ -114,50 +116,3 @@ bool	setup_infinite_record(t_ray *ray)
 		return (free(rec), false);
 	return (true);
 }
-
-// bool	is_closer_hit_point(
-// 			t_vec3 origin, t_hit_record *old_rec, t_hit_record *new_rec)
-// {
-// 	const t_vec3	vec3 = {.ops = init_ops()};
-// 	double			old_dist;
-// 	double			new_dist;
-
-// 	old_dist = vec3.ops->magnitude(
-// 			vec3.ops->sub(old_rec->point, origin));
-// 	new_dist = vec3.ops->magnitude(
-// 			vec3.ops->sub(new_rec->point, origin));
-// 	return (new_dist < old_dist);
-// }
-
-// bool	shoot_ray(t_scene *scene, t_ray *root_ray, t_ray *cur_ray)
-// {
-// 	t_obj			*obj;
-// 	t_hit_record	*tmp_rec;
-// 	t_list			*cur_node;
-// 	t_ray			reflected_ray;
-
-// 	tmp_rec = (t_hit_record *)malloc(sizeof(t_hit_record));
-// 	if (!tmp_rec)
-// 		return (false);
-// 	cur_node = scene->objects;
-// 	while (cur_node)
-// 	{
-// 		obj = cur_node->content;
-// 		if (hit_object(cur_ray, obj, tmp_rec))
-// 			if (!handle_hit_record(root_ray, tmp_rec))
-// 				return (free(tmp_rec), false);
-// 		cur_node = cur_node->next;
-// 	}
-// 	if (root_ray->hit_record_list == NULL)
-// 	{
-// 		if (!setup_infinite_record(root_ray, tmp_rec))
-// 			return (free(tmp_rec), false);
-// 	}
-// 	if (cur_ray->depth < MAX_DEPTH)
-// 	{
-// 		reflected_ray = get_reflected_ray(scene->light, cur_ray, tmp_rec);
-// 		if (!shoot_ray(scene, root_ray, &reflected_ray))
-// 			return (free(tmp_rec), false);
-// 	}
-// 	return (true);
-// }

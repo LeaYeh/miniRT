@@ -51,15 +51,7 @@ double	calc_sphere_min_root(double a, double b, double c)
 	sqrt_discriminant = sqrt(discriminant);
 	t1 = (-b - sqrt_discriminant) / (2.0 * a);
 	t2 = (-b + sqrt_discriminant) / (2.0 * a);
-	if (t1 < 0 && t2 < 0)
-		return (-1);
-	else if (t1 < 0)
-		return (t2);
-	else if (t2 < 0)
-		return (t1);
-	else if (t1 < t2)
-		return (t1);
-	return (t2);
+	return (min_possitive_t(t1, t2));
 }
 
 static void	setup_hit_record(
