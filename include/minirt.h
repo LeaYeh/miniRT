@@ -17,10 +17,16 @@
 # include "environment.h"
 # include "camera.h"
 # include "utils.h"
-# include "mlx_utils.h"
 # include <mlx.h>
 # include <X11/X.h>
 # include <X11/keysym.h>
+
+typedef enum e_modifier_key
+{
+	K_SHIFT	= 1 << 0,
+	K_CTRL	= 1 << 1,
+	K_ALT	= 1 << 2
+}	t_mod_key;
 
 typedef struct s_img
 {
