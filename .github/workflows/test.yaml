@@ -22,6 +22,7 @@ jobs:
   compilation_test:
     name: Compilation Test
     runs-on: ubuntu-latest
+    needs: [build]
     timeout-minutes: 2
     strategy:
       fail-fast: false
