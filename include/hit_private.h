@@ -25,5 +25,7 @@ double	calc_sphere_min_root(double a, double b, double c);
 bool	is_point_in_cap_range(t_vec3 p,
 			t_obj *cylinder, t_vec3 center_top, t_vec3 center_bottom);
 bool	is_point_in_height_range(t_vec3 p, t_obj *cylinder);
+bool	set_closest_hit(t_hit_record *rec,
+			t_ray *ray, t_obj top_plane, t_obj bottom_plane);
 
 #endif
