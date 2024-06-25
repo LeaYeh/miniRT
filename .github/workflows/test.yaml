@@ -51,7 +51,7 @@ jobs:
 
       - name: Build Docker image
         if: env.build == 'true'
-        uses: docker/build-push-action@v3
+        uses: docker/build-push-action@v6
         with:
           context: .
           file: .github/Dockerfile
