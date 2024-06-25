@@ -32,7 +32,7 @@ jobs:
 
       - name: Cache Docker layers
         id: cache-docker-layers
-        uses: actions/cache@v3
+        uses: actions/cache@v4
         with:
           path: /tmp/.buildx-cache
           key: ${{ runner.os }}-buildx-${{ steps.dockerfile_sha.outputs.sha }}
@@ -70,7 +70,7 @@ jobs:
 
       - name: Cache Docker image
         if: env.build == 'true'
-        uses: actions/cache@v3
+        uses: actions/cache@v4
         with:
           path: minirt_env.tar
           key: ${{ runner.os }}-docker-image-${{ steps.dockerfile_sha.outputs.sha }}
@@ -90,7 +90,7 @@ jobs:
       - name: Checkout source branch of pull request
         uses: actions/checkout@v4
       - name: Restore Docker image from cache
-        uses: actions/cache@v3
+        uses: actions/cache@v4
         with:
           path: minirt_env.tar
           key: ${{ runner.os }}-docker-image-${{ needs.build.outputs.docker_sha }}
