@@ -11,6 +11,7 @@ env:
 
 jobs:
   build:
+    name: Environment Build
     runs-on: ubuntu-latest
     outputs:
       docker_sha: ${{ steps.dockerfile_sha.outputs.sha }}
