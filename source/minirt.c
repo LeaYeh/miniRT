@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minirt.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lyeh <lyeh@student.42vienna.com>           +#+  +:+       +#+        */
+/*   By: ldulling <ldulling@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/30 19:36:14 by lyeh              #+#    #+#             */
-/*   Updated: 2024/06/23 09:49:05 by lyeh             ###   ########.fr       */
+/*   Updated: 2024/06/25 18:43:47 by ldulling         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,17 @@ bool	init_minirt(t_minirt *minirt, char *filename)
 
 void	free_minirt(t_minirt *minirt)
 {
+	int	i;
+	int	ray_amount;
+
+	ray_amount = minirt->scene->camera.pixel.row_size * \
+		minirt->scene->camera.pixel.col_size;
+	i = 0;
+	while (i < ray_amount)
+	{
+		ft_lstclear(&minirt->ray_pool[i].hit_record_list, free);
+		i++;
+	}
 	ft_free_and_null((void **)&minirt->ray_pool);
 	free_scene(&minirt->scene);
 }

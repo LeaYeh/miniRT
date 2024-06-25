@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   hit.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lyeh <lyeh@student.42vienna.com>           +#+  +:+       +#+        */
+/*   By: ldulling <ldulling@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/01 11:20:20 by lyeh              #+#    #+#             */
-/*   Updated: 2024/06/24 23:02:49 by lyeh             ###   ########.fr       */
+/*   Updated: 2024/06/25 18:18:01 by ldulling         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ static t_ray	get_reflected_ray(t_hit_record *rec);
 
 bool	shoot_ray(t_list *object_list, t_ray *ray)
 {
-	if (ft_lstsize(ray->hit_record_list) == 0)
+	if (ft_lstsize(object_list) != 0 && ft_lstsize(ray->hit_record_list) == 0)
 		if (!recursive_ray(object_list, ray, ray, 1))
 			return (false);
 	if (ray->hit_record_list == NULL)
@@ -61,6 +61,8 @@ bool	recursive_ray(t_list *object_list,
 				root_ray, &reflected_ray, expect_depth + 1))
 			return (free(tmp_rec), false);
 	}
+	else if (ft_lstsize(root_ray->hit_record_list) != expect_depth)
+		free(tmp_rec);
 	return (true);
 }
 
