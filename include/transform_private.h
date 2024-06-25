@@ -1,20 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   translate.c                                        :+:      :+:    :+:   */
+/*   transform_private.h                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lyeh <lyeh@student.42vienna.com>           +#+  +:+       +#+        */
+/*   By: ldulling <ldulling@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/06/24 22:25:03 by lyeh              #+#    #+#             */
-/*   Updated: 2024/06/24 22:51:11 by lyeh             ###   ########.fr       */
+/*   Created: 2024/06/25 14:54:35 by ldulling          #+#    #+#             */
+/*   Updated: 2024/06/25 14:54:37 by ldulling         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "transform_private.h"
+#ifndef TRANSFORM_PRIVATE_H
+# define TRANSFORM_PRIVATE_H
 
-void	translate(t_vec3 *v, t_vec3 translation)
-{
-	v->x = v->x + translation.x;
-	v->y = v->y + translation.y;
-	v->z = v->z + translation.z;
-}
+# include "vec3.h"
+
+void	rotate(t_vec3 *v, t_vec3 rotation);
+void	translate(t_vec3 *v, t_vec3 translation);
+
+#endif

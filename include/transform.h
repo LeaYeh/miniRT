@@ -1,20 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   transform.c                                        :+:      :+:    :+:   */
+/*   transform.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lyeh <lyeh@student.42vienna.com>           +#+  +:+       +#+        */
+/*   By: ldulling <ldulling@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/06/24 22:21:07 by lyeh              #+#    #+#             */
-/*   Updated: 2024/06/24 22:51:24 by lyeh             ###   ########.fr       */
+/*   Created: 2024/06/25 14:54:31 by ldulling          #+#    #+#             */
+/*   Updated: 2024/06/25 14:54:33 by ldulling         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "transform_private.h"
+#ifndef TRANSFORM_H
+# define TRANSFORM_H
+
+#include "vec3.h"
 
 void	transform(t_vec3 *position,
-			t_vec3 *norm, t_vec3 rotation, t_vec3 translation)
-{
-	rotate(norm, rotation);
-	translate(position, translation);
-}
+			t_vec3 *norm, t_vec3 rotation, t_vec3 translation);
+void	rotate(t_vec3 *v, t_vec3 rotation);
+void	translate(t_vec3 *v, t_vec3 translation);
+
+#endif
