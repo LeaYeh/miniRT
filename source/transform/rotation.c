@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "transform.h"
+#include "transform_private.h"
 
 static void	rotate_x(t_vec3 *v, double angle);
 static void	rotate_y(t_vec3 *v, double angle);
