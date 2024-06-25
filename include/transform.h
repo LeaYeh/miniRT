@@ -6,14 +6,14 @@
 /*   By: ldulling <ldulling@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/25 14:54:31 by ldulling          #+#    #+#             */
-/*   Updated: 2024/06/25 14:54:33 by ldulling         ###   ########.fr       */
+/*   Updated: 2024/06/25 20:07:57 by ldulling         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef TRANSFORM_H
 # define TRANSFORM_H
 
-#include "vec3.h"
+# include "vec3.h"
 
 void	transform(t_vec3 *position,
 			t_vec3 *norm, t_vec3 rotation, t_vec3 translation);

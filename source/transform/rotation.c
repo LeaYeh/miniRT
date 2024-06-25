@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   rotation.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lyeh <lyeh@student.42vienna.com>           +#+  +:+       +#+        */
+/*   By: ldulling <ldulling@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/24 22:17:52 by lyeh              #+#    #+#             */
-/*   Updated: 2024/06/24 22:52:54 by lyeh             ###   ########.fr       */
+/*   Updated: 2024/06/25 20:08:14 by ldulling         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "transform_private.h"
+#include "transform.h"
 
 static void	rotate_x(t_vec3 *v, double angle);
 static void	rotate_y(t_vec3 *v, double angle);
