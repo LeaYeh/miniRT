@@ -12,6 +12,8 @@ env:
 jobs:
   build:
     runs-on: ubuntu-latest
+    outputs:
+      image_sha: ${{ steps.build.outputs.image_sha }}
     steps:
       - uses: actions/checkout@v3
       - name: Set up Docker Buildx
@@ -31,12 +33,10 @@ jobs:
           context: .
           file: .github/Dockerfile
           push: false
-          tags: minirt_env
+          tags: minirt_env:latest
           load: true
           cache-from: type=local,src=/tmp/.buildx-cache
           cache-to: type=local,dest=/tmp/.buildx-cache
-      - name: Run Docker image
-        run: docker run minirt_env
   
   compilation_test:
     name: Compilation Test
@@ -50,7 +50,5 @@ jobs:
     steps:
       - name: Checkout source branch of pull request
         uses: actions/checkout@v4
-      - name: Set up test environment
-        uses: ./.github/actions/setup
       - name: 🔨 Compile with Makefile
-        run: make CC="${{ matrix.compiler }}"
+        run: docker run --rm -v ${{ github.workspace }}:/workspace -w /workspace minirt_env:latest make CC="${{ matrix.compiler }}"
