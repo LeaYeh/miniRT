@@ -42,7 +42,12 @@ jobs:
         run: |
           docker save -o minirt_env.tar minirt_env:latest
           echo "::set-output name=image_id::minirt_env.tar"
-  
+      - name: Upload Docker image
+        uses: actions/upload-artifact@v3
+        with:
+          name: minirt_env_image
+          path: minirt_env.tar
+
   compilation_test:
     name: Compilation Test
     runs-on: ubuntu-latest
@@ -55,7 +60,12 @@ jobs:
     steps:
       - name: Checkout source branch of pull request
         uses: actions/checkout@v4
+      - name: Download Docker image
+        uses: actions/download-artifact@v3
+        with:
+          name: minirt_env_image
+          path: .
       - name: Load Docker image from file
-        run: docker load -i ${{ needs.build.outputs.image_id }}
+        run: docker load -i minirt_env.tar
       - name: 🔨 Compile with Makefile
         run: docker run --rm -v ${{ github.workspace }}:/workspace -w /workspace minirt_env:latest make CC="${{ matrix.compiler }}"
