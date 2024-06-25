@@ -45,7 +45,7 @@ BUILDFILES		:=	Makefile \
 
 CC 				:=	cc
 CC_VERSION		:=	$(shell $(CC) --version | head -1)
-CFLAGS 			:=	-Wall -Wextra -Werror -ggdb3 -fsanitize=address,undefined,float-divide-by-zero,unsigned-integer-overflow,implicit-conversion,local-bounds,nullability
+CFLAGS 			:=	-Wall -Wextra -Werror -ggdb3 -fsanitize=address,undefined,bounds,float-divide-by-zero
 INCFLAGS 		:=	$(addprefix -I,$(INC_DIR) $(LIB_INCLUDES))
 LIBFLAGS		:=	$(addprefix -L,$(LIBS)) \
 					$(addprefix -l,$(patsubst lib%,%,$(notdir $(LIBS) $(LIBS_EXT))))
