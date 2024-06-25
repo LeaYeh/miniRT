@@ -13,7 +13,7 @@ jobs:
   build:
     runs-on: ubuntu-latest
     outputs:
-      image_sha: ${{ steps.build.outputs.image_sha }}
+      image_id: ${{ steps.save-image.outputs.image_id }}
     steps:
       - uses: actions/checkout@v3
       - name: Set up Docker Buildx
@@ -37,6 +37,11 @@ jobs:
           load: true
           cache-from: type=local,src=/tmp/.buildx-cache
           cache-to: type=local,dest=/tmp/.buildx-cache
+      - name: Save Docker image to file
+        id: save-image
+        run: |
+          docker save -o minirt_env.tar minirt_env:latest
+          echo "::set-output name=image_id::minirt_env.tar"
   
   compilation_test:
     name: Compilation Test
@@ -50,5 +55,7 @@ jobs:
     steps:
       - name: Checkout source branch of pull request
         uses: actions/checkout@v4
+      - name: Load Docker image from file
+        run: docker load -i ${{ needs.build.outputs.image_id }}
       - name: 🔨 Compile with Makefile
         run: docker run --rm -v ${{ github.workspace }}:/workspace -w /workspace minirt_env:latest make CC="${{ matrix.compiler }}"
