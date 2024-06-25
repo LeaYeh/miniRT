@@ -26,7 +26,6 @@ jobs:
       - name: Get Dockerfile SHA
         id: dockerfile_sha
         run: |
-          echo "sha=$(sha256sum .github/Dockerfile | cut -d ' ' -f 1)"
           echo "sha=$(sha256sum .github/Dockerfile | cut -d ' ' -f 1)" >> $GITHUB_OUTPUT
         shell: bash
         continue-on-error: true
