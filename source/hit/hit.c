@@ -20,8 +20,11 @@ static bool		handle_hit_record(
 static bool		setup_infinite_record(t_ray *ray);
 static t_ray	get_reflected_ray(t_hit_record rec);
 
-bool	shoot_ray(t_list *object_list, t_ray *ray)
+bool	shoot_ray(void *param, t_ray *ray)
 {
+	t_list	*object_list;
+
+	object_list = param;
 	if (ft_lstsize(object_list) != 0 && ft_lstsize(ray->hit_record_list) == 0)
 		if (!recursive_ray(object_list, ray, ray, 1))
 			return (false);

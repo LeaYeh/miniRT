@@ -24,6 +24,7 @@ bool	init_minirt(t_minirt *minirt, char *filename)
 	if (!init_camera(&minirt->scene->camera) || \
 		!init_ray_pool(&minirt->ray_pool, &minirt->scene->camera))
 		return (false);
+	minirt->stage = CAMERA_CHANGE;
 	minirt->mod_key = 0;
 	print_camera_detail(minirt->scene->camera);
 	return (true);
@@ -44,6 +45,27 @@ void	free_minirt(t_minirt *minirt)
 	}
 	ft_free_and_null((void **)&minirt->ray_pool);
 	free_scene(&minirt->scene);
+}
+
+void	reset_ray_pool(t_ray *ray_pool, t_camera *camera)
+{
+	int	i;
+	int	j;
+	int	index;
+
+	i = 0;
+	while (i < camera->pixel.row_size)
+	{
+		j = 0;
+		while (j < camera->pixel.col_size)
+		{
+			index = i * camera->pixel.col_size + j;
+			ft_lstclear(&ray_pool[index].hit_record_list, free);
+			ray_pool[index] = create_ray_from_pixel_grid(camera, i, j);
+			j++;
+		}
+		i++;
+	}
 }
 
 bool	init_ray_pool(t_ray **ray_pool, t_camera *camera)

@@ -1,5 +1,6 @@
 
 #include "mlx_utils.h"
+#include "transform.h"
 
 int	clean_and_exit(t_minirt *minirt)
 {
@@ -73,38 +74,86 @@ void	rotate_object(int key, t_minirt *minirt)
 
 void	transform_camera(int key, t_minirt *minirt)
 {
+	double	translation;
+	double	rotation;
+
+	translation = INTERVAL_TRANSLATE;
+	rotation = INTERVAL_ROTATE;
 	if (minirt->mod_key & K_SHIFT && key != XK_KP_Begin)
+	{
 		printf("Fast ");
+		translation *= FACTOR_FAST;
+		rotation *= FACTOR_FAST;
+	}
 	if (key == XK_KP_Up)
+	{
 		printf("Move camera forward\n");
+		translate(&minirt->scene->camera.position, vector(0, 0, -translation));
+	}
 	else if (key == XK_KP_Down)
+	{
 		printf("Move camera backward\n");
+		translate(&minirt->scene->camera.position, vector(0, 0, translation));
+	}
 	else if (key == XK_KP_Left)
+	{
 		printf("Move camera left\n");
+		translate(&minirt->scene->camera.position, vector(-translation, 0, 0));
+	}
 	else if (key == XK_KP_Right)
+	{
 		printf("Move camera right\n");
+		translate(&minirt->scene->camera.position, vector(translation, 0, 0));
+	}
 	else if (key == XK_KP_Delete)
+	{
 		printf("Move camera up\n");
+		translate(&minirt->scene->camera.position, vector(0, translation, 0));
+	}
 	else if (key == XK_KP_Insert)
+	{
 		printf("Move camera down\n");
-	else if (key == XK_KP_Divide)
-		printf("Pitch camera down\n");
-	else if (key == XK_KP_Multiply)
-		printf("Pitch camera up\n");
-	else if (key == XK_KP_End)
-		printf("Roll camera left\n");
-	else if (key == XK_KP_Page_Down)
-		printf("Roll camera right\n");
+		translate(&minirt->scene->camera.position, vector(0, -translation, 0));
+	}
 	else if (key == XK_KP_Home)
+	{
 		printf("Yaw camera left\n");
+		rotate(&minirt->scene->camera.norm, vector(0, -rotation, 0));
+	}
 	else if (key == XK_KP_Page_Up)
+	{
 		printf("Yaw camera right\n");
+		rotate(&minirt->scene->camera.norm, vector(0, rotation, 0));
+	}
+	else if (key == XK_KP_End)
+	{
+		printf("Pitch camera down\n");
+		rotate(&minirt->scene->camera.norm, vector(-rotation, 0, 0));
+	}
+	else if (key == XK_KP_Page_Down)
+	{
+		printf("Pitch camera up\n");
+		rotate(&minirt->scene->camera.norm, vector(rotation, 0, 0));
+	}
+	else if (key == XK_KP_Divide)
+	{
+		printf("Roll camera left\n");
+		rotate(&minirt->scene->camera.norm, vector(0, 0, -rotation));
+	}
+	else if (key == XK_KP_Multiply)
+	{
+		printf("Roll camera right\n");
+		rotate(&minirt->scene->camera.norm, vector(0, 0, rotation));
+	}
 	else if (key == XK_KP_Add)
 		printf("Zoom in\n");
 	else if (key == XK_KP_Subtract)
 		printf("Zoom out\n");
 	else if (key == XK_KP_Begin)
 		printf("Reset camera\n");
+	else
+		return ;
+	minirt->stage = CAMERA_CHANGE;
 }
 
 int	handle_keypress_event(int key, t_minirt *minirt)

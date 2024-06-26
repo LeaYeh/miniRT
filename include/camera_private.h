@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   camera_private.h                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lyeh <lyeh@student.42vienna.com>           +#+  +:+       +#+        */
+/*   By: ldulling <ldulling@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/02 20:38:42 by lyeh              #+#    #+#             */
-/*   Updated: 2024/06/18 12:51:20 by lyeh             ###   ########.fr       */
+/*   Updated: 2024/06/25 19:03:10 by ldulling         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,5 @@
 # include "camera.h"
 
 double	degree_to_radian(double degrees);
-void	setup_viewport(t_camera *camera);
-void	setup_pixel_grid(t_camera *camera);
 
 #endif
