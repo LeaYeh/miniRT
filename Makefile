@@ -45,7 +45,10 @@ BUILDFILES		:=	Makefile \
 
 CC 				:=	cc
 CC_VERSION		:=	$(shell $(CC) --version | head -1)
-CFLAGS 			:=	-Wall -Wextra -Werror -ggdb3 -fsanitize=address,undefined,bounds,float-divide-by-zero
+CFLAGS_STD		:=	-Wall -Wextra -Werror -ggdb3
+CFLAGS_FSAN		:=	-fsanitize=address,undefined,bounds,float-divide-by-zero
+CFLAGS_OPT		:=	-O3
+CFLAGS 			?=	$(CFLAGS_STD) $(CFLAGS_FSAN)
 INCFLAGS 		:=	$(addprefix -I,$(INC_DIR) $(LIB_INCLUDES))
 LIBFLAGS		:=	$(addprefix -L,$(LIBS)) \
 					$(addprefix -l,$(patsubst lib%,%,$(notdir $(LIBS) $(LIBS_EXT))))
@@ -103,7 +106,8 @@ DEP_SUBDIRS		:=	$(sort $(dir $(DEP)))
 
 # ***************************** BUILD PROCESS ******************************** #
 
-.PHONY			:	all run test val valfd build build_test lib waitforlib clean fclean re
+.PHONY			:	all fast run test val valfd build build_test lib waitforlib \
+					clean fclean re
 
 
 #	Compilation
@@ -113,6 +117,10 @@ all				:
 						|| (echo -n $(MSG_INFO)$(MSG_START) \
 							&& ($(MAKE) build && echo $(MSG_SUCCESS)) \
 							|| (echo $(MSG_FAILURE) && exit 42))
+
+fast			:	CFLAGS := $(CFLAGS_STD) $(CFLAGS_OPT)
+fast			:	re
+					$(MAKE) clean
 
 run				:	all
 					"./$(NAME)"
