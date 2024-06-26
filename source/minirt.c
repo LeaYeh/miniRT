@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minirt.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ldulling <ldulling@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lyeh <lyeh@student.42vienna.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/30 19:36:14 by lyeh              #+#    #+#             */
-/*   Updated: 2024/06/25 18:43:47 by ldulling         ###   ########.fr       */
+/*   Updated: 2024/06/26 18:28:35 by lyeh             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,14 +19,18 @@ static t_ray	create_ray_from_pixel_grid(t_camera *camera, int row, int col);
 bool	init_minirt(t_minirt *minirt, char *filename)
 {
 	minirt->scene = read_scene(filename);
-	if (!minirt->scene)
+	if (!minirt->scene)	//TODO: Check clean exit here
 		return (false);
-	if (!init_camera(&minirt->scene->camera) || \
-		!init_ray_pool(&minirt->ray_pool, &minirt->scene->camera))
+	printf("haha 0\n");
+	init_camera(&minirt->scene->camera);
+	printf("haha 1\n");
+	if (!init_ray_pool(&minirt->ray_pool, &minirt->scene->camera))
 		return (false);
+	printf("haha 2\n");
 	minirt->stage = CAMERA_CHANGE;
 	minirt->mod_key = 0;
 	print_camera_detail(minirt->scene->camera);
+	printf("haha 3\n");
 	return (true);
 }
 

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   defines.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ldulling <ldulling@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lyeh <lyeh@student.42vienna.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/26 15:41:00 by lyeh              #+#    #+#             */
-/*   Updated: 2024/06/25 19:40:06 by ldulling         ###   ########.fr       */
+/*   Updated: 2024/06/26 18:21:55 by lyeh             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@
 # define INVALID_NUM_ARG		"invalid number of argument.\n"
 # define INVALID_NUM_FMT		"invalid number format.\n"
 # define FAILED_PARSE_VEC		"parse vector failed.\n"
+# define FAILED_NORM_VEC		"Normalized vector failed.\n"
 # define INCORRECT_VIEWPORT		"incorrect viewport size.\n"
 
 # define WINDOW_WIDTH		1600

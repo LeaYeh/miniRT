@@ -6,7 +6,7 @@
 /*   By: lyeh <lyeh@student.42vienna.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/14 19:49:52 by lyeh              #+#    #+#             */
-/*   Updated: 2024/06/22 19:36:04 by lyeh             ###   ########.fr       */
+/*   Updated: 2024/06/26 17:57:47 by lyeh             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,12 @@
 void	print_camera_detail(t_camera camera)
 {
 	printf("Camera Detail:\n");
+	printf("\tOrg Position: ");
+	print_vector(camera.org_position);
 	printf("\tPosition: ");
 	print_vector(camera.position);
+	printf("\tOrg Norm: ");
+	print_vector(camera.org_norm);
 	printf("\tNorm: ");
 	print_vector(camera.norm);
 	printf("\tFOV: %f\n", camera.fov);

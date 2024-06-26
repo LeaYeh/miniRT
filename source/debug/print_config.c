@@ -6,7 +6,7 @@
 /*   By: lyeh <lyeh@student.42vienna.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/29 20:33:13 by lyeh              #+#    #+#             */
-/*   Updated: 2024/05/31 17:20:10 by lyeh             ###   ########.fr       */
+/*   Updated: 2024/06/26 17:58:38 by lyeh             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,12 @@
 void	print_object(t_obj *object)
 {
 	printf("Object: %d\n", object->type);
+	printf("\tOrg Position: ");
+	print_vector(object->org_position);
 	printf("\tPosition: ");
 	print_vector(object->position);
+	printf("\tOrg Norm: ");
+	print_vector(object->org_norm);
 	printf("\tNorm: ");
 	print_vector(object->norm);
 	printf("\tParam1: %f\n", object->d_param1);
@@ -28,8 +32,12 @@ void	print_object(t_obj *object)
 void	print_camera(t_camera camera)
 {
 	printf("Camera:\n");
+	printf("\tOrg Position: ");
+	print_vector(camera.org_position);
 	printf("\tPosition: ");
 	print_vector(camera.position);
+	printf("\tOrg Norm: ");
+	print_vector(camera.org_norm);
 	printf("\tNorm: ");
 	print_vector(camera.norm);
 	printf("\tFOV: %f\n", camera.fov);
@@ -38,6 +46,8 @@ void	print_camera(t_camera camera)
 void	print_light(t_light light)
 {
 	printf("Light:\n");
+	printf("\tOrg Position: ");
+	print_vector(light.org_position);
 	printf("\tPosition: ");
 	print_vector(light.position);
 	printf("\tRatio: %f\n", light.ratio);

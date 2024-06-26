@@ -6,7 +6,7 @@
 /*   By: lyeh <lyeh@student.42vienna.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/02 20:58:00 by lyeh              #+#    #+#             */
-/*   Updated: 2024/06/21 15:43:54 by lyeh             ###   ########.fr       */
+/*   Updated: 2024/06/26 17:53:35 by lyeh             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,8 +35,6 @@ Test(camera, camera_init)
 		.norm = vector(0, 0, 1),
 		.fov = 70};
 
-	if (!init_camera(&cam))
-		cr_assert_fail("Camera initialization failed");
 	cr_assert_float_eq(cam.theta, 1.221730, 0.001, "Theta is not correct");
 
 	cr_assert_float_eq(cam.viewport.width, 2.490066, 0.001, "Viewport width is not correct");

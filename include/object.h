@@ -6,7 +6,7 @@
 /*   By: lyeh <lyeh@student.42vienna.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/01 11:23:43 by lyeh              #+#    #+#             */
-/*   Updated: 2024/06/24 17:02:18 by lyeh             ###   ########.fr       */
+/*   Updated: 2024/06/26 16:25:50 by lyeh             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,9 +25,11 @@ typedef enum e_object_type
 typedef struct s_object
 {
 	t_obj_type	type;
+	t_vec3		org_position;
+	t_vec3		org_norm;
 	t_vec3		position;
-	t_vec3		color;
 	t_vec3		norm;
+	t_vec3		color;
 	double		d_param1;
 	double		d_param2;
 	t_vec3		translation;
