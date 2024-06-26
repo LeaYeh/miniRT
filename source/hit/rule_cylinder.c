@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   rule_cylinder.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lyeh <lyeh@student.42vienna.com>           +#+  +:+       +#+        */
+/*   By: ldulling <ldulling@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/15 16:35:18 by lyeh              #+#    #+#             */
-/*   Updated: 2024/06/24 22:55:43 by lyeh             ###   ########.fr       */
+/*   Updated: 2024/06/25 17:48:46 by ldulling         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,8 +81,6 @@ bool	hit_cylinder_caps(t_vec3 vec3,
 	t_obj	bottom_plane;
 	t_vec3	center_top;
 	t_vec3	center_bottom;
-	t_hit_record	top_rec;
-	t_hit_record	bottom_rec;
 
 	center_top = vec3.ops->add(cylinder->position,
 			vec3.ops->mul(cylinder->norm, cylinder->d_param2 / 2));
@@ -91,13 +89,8 @@ bool	hit_cylinder_caps(t_vec3 vec3,
 	top_plane = init_plane(center_top, cylinder->norm, cylinder->color);
 	bottom_plane = init_plane(center_bottom, vec3.ops->mul(cylinder->norm, -1),
 			cylinder->color);
-	if (hit_plane(vec3, ray, (t_obj *)&top_plane, &top_rec))
-		*rec = top_rec;
-	if (hit_plane(vec3, ray, (t_obj *)&bottom_plane, &bottom_rec))
-	{
-		if (is_min_positive_t(bottom_rec.t, rec->t))
-			*rec = bottom_rec;
-	}
+	if (!set_closest_hit(rec, ray, top_plane, bottom_plane))
+		return (false);
 	if (!is_point_in_cap_range(rec->point, cylinder, center_top, center_bottom))
 		return (false);
 	setup_hit_record_caps(rec, rec->t, ray, cylinder);

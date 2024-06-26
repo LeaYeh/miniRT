@@ -6,7 +6,7 @@
 #    By: ldulling <ldulling@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/12/23 03:22:46 by ldulling          #+#    #+#              #
-#    Updated: 2024/06/09 17:37:05 by ldulling         ###   ########.fr        #
+#    Updated: 2024/06/25 23:15:38 by ldulling         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -45,7 +45,7 @@ BUILDFILES		:=	Makefile \
 
 CC 				:=	cc
 CC_VERSION		:=	$(shell $(CC) --version | head -1)
-CFLAGS 			:=	-Wall -Wextra -Werror -ggdb3
+CFLAGS 			:=	-Wall -Wextra -Werror -ggdb3 -fsanitize=address,undefined,bounds,float-divide-by-zero
 INCFLAGS 		:=	$(addprefix -I,$(INC_DIR) $(LIB_INCLUDES))
 LIBFLAGS		:=	$(addprefix -L,$(LIBS)) \
 					$(addprefix -l,$(patsubst lib%,%,$(notdir $(LIBS) $(LIBS_EXT))))

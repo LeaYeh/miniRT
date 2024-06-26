@@ -48,3 +48,30 @@ bool	is_point_in_height_range(t_vec3 p, t_obj *cylinder)
 		return (false);
 	return (true);
 }
+
+bool	set_closest_hit(t_hit_record *rec,
+				t_ray *ray, t_obj top_plane, t_obj bottom_plane)
+{
+	const t_vec3	vec3 = (t_vec3){.ops = init_ops()};
+	t_hit_record	top_rec;
+	t_hit_record	bottom_rec;
+	bool			hit_top;
+	bool			hit_bottom;
+
+	hit_top = hit_plane(vec3, ray, (t_obj *)&top_plane, &top_rec);
+	hit_bottom = hit_plane(vec3, ray, (t_obj *)&bottom_plane, &bottom_rec);
+	if (hit_top && hit_bottom)
+	{
+		if (is_min_positive_t(bottom_rec.t, top_rec.t))
+			*rec = bottom_rec;
+		else
+			*rec = top_rec;
+	}
+	else if (hit_top)
+		*rec = top_rec;
+	else if (hit_bottom)
+		*rec = bottom_rec;
+	else
+		return (false);
+	return (true);
+}
