@@ -12,8 +12,9 @@
 
 #include "reader_private.h"
 
-static bool		parse_line(t_scene *scene, char *line);
 static t_scene	*parse_scene(int fd);
+static bool		parse_line(t_scene *scene, char *line);
+static bool		is_only_whitespace(char *line);
 
 t_scene	*read_scene(char *filename)
 {
@@ -83,10 +84,21 @@ bool	parse_line(t_scene *scene, char *line)
 		if (!parse_object(scene, id))
 			return (false);
 	}
-	else
+	else if (!is_only_whitespace(line))
 	{
 		print_error(INVALID_IDENTIFIER);
 		return (false);
+	}
+	return (true);
+}
+
+bool	is_only_whitespace(char *line)
+{
+	while (*line)
+	{
+		if (!ft_isspace(*line))
+			return (false);
+		line++;
 	}
 	return (true);
 }
