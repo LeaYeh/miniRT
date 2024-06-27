@@ -19,8 +19,9 @@ static t_ray	create_ray_from_pixel_grid(t_camera *camera, int row, int col);
 
 bool	init_minirt(t_minirt *minirt, char *filename)
 {
+	ft_bzero(minirt, sizeof(t_minirt));
 	minirt->scene = read_scene(filename);
-	if (!minirt->scene)	//TODO: Check clean exit here
+	if (!minirt->scene)
 		return (false);
 	printf("haha 0\n");
 	init_camera(&minirt->scene->camera);
