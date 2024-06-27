@@ -95,7 +95,7 @@ bool	init_ray_pool(t_ray **ray_pool, t_camera *camera)
 	*ray_pool = (t_ray *)malloc(
 			sizeof(t_ray) * camera->pixel.col_size * camera->pixel.row_size);
 	if (!*ray_pool)
-		return (false);
+		return (print_error(FAILED_ALLOC_MEM), false);
 	i = 0;
 	while (i < camera->pixel.row_size)
 	{
