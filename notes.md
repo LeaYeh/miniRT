@@ -8,3 +8,6 @@ object change:
 
 light change:
 										cache_color update
+
+# Parsing
+Need to allow tab bc in subject examples it also uses tab

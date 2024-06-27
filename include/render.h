@@ -21,5 +21,9 @@
 int		display(t_minirt *minirt);
 int		render(t_minirt *minirt);
 t_vec3	compute_color(t_scene *scene, t_hit_record *rec);
+bool	iter_pixels(void *param,
+			t_pixel_grid *pixel,
+			t_ray *ray_pool,
+			bool (*f)(void *, t_ray *));
 
 #endif

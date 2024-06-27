@@ -63,6 +63,7 @@ DIR		:=	get_next_line/
 SRC		+=	$(addprefix $(DIR), \
 			get_next_line.c \
 			get_next_line_utils.c \
+			free_get_next_line.c \
 )
 
 # Lists:

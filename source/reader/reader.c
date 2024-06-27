@@ -22,17 +22,21 @@ t_scene	*read_scene(char *filename)
 
 	if (!is_valid_filename(filename))
 	{
-		dprintf(2, "Error: Invalid file format\n");
+		print_error(INVALID_FILE_FMT);
 		return (NULL);
 	}
 	fd = open(filename, O_RDONLY);
 	if (fd < 0)
 	{
-		dprintf(2, "Error: Failed to open file\n");
+		print_error(FAILED_OPEN_FILE);
 		return (NULL);
 	}
 	scene = parse_scene(fd);
-	close(fd);
+	if (close(fd) == -1)
+	{
+		print_error(FAILED_CLOSE_FILE);
+		return (free_scene(&scene), NULL);
+	}
 	return (scene);
 }
 
@@ -44,17 +48,21 @@ t_scene	*parse_scene(int fd)
 	scene = (t_scene *)ft_calloc(1, sizeof(t_scene));
 	if (!scene)
 	{
-		dprintf(2, "Error: Failed to init scene.\n");
+		print_error(FAILED_ALLOC_MEM);
 		return (NULL);
 	}
-	line = NULL;
 	while (true)
 	{
 		line = get_next_line(fd);
+		if (errno != 0)
+		{
+			print_error(FAILED_READ_FILE);
+			return (free_get_next_line(), free_scene(&scene), NULL);
+		}
 		if (!line)
 			break ;
 		if (!parse_line(scene, line))
-			return (free(line), free_scene(&scene), NULL);
+			return (free(line), free_get_next_line(), free_scene(&scene), NULL);
 		free(line);
 	}
 	return (scene);
@@ -62,27 +70,23 @@ t_scene	*parse_scene(int fd)
 
 bool	parse_line(t_scene *scene, char *line)
 {
-	char	**tokens;
+	char	*id;
 
-	tokens = ft_split(line, ' ');
-	if (!tokens)
-		return (dprintf(2, "Error: Failed to split line\n"), false);
-	else if (ft_strcmp(tokens[0], "A") == 0 || \
-		ft_strcmp(tokens[0], "C") == 0 || \
-		ft_strcmp(tokens[0], "L") == 0)
+	id = ft_strtok(line, WHITESPACE);
+	if (ft_strmatches_any(id, 3, "A", "C", "L"))
 	{
-		if (!parse_environment(scene, tokens))
-			return (free_array(tokens), false);
+		if (!parse_environment(scene, id))
+			return (false);
 	}
-	else if (ft_strcmp(tokens[0], "sp") == 0 || \
-		ft_strcmp(tokens[0], "pl") == 0 || \
-		ft_strcmp(tokens[0], "cy") == 0)
+	else if (ft_strmatches_any(id, 3, "sp", "pl", "cy"))
 	{
-		if (!parse_object(scene, tokens))
-			return (free_array(tokens), false);
+		if (!parse_object(scene, id))
+			return (false);
 	}
 	else
-		return (dprintf(2, "Error: Invalid identifier\n"),
-			free_array(tokens), false);
-	return (free_array(tokens), true);
+	{
+		print_error(INVALID_IDENTIFIER);
+		return (false);
+	}
+	return (true);
 }

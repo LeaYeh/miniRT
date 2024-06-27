@@ -1,25 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utils.h                                            :+:      :+:    :+:   */
+/*   free_get_next_line.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lyeh <lyeh@student.42vienna.com>           +#+  +:+       +#+        */
+/*   By: ldulling <ldulling@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/05/28 14:46:03 by lyeh              #+#    #+#             */
-/*   Updated: 2024/06/18 16:56:59 by lyeh             ###   ########.fr       */
+/*   Created: 2024/06/27 09:07:32 by ldulling          #+#    #+#             */
+/*   Updated: 2024/06/27 09:08:22 by ldulling         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef UTILS_H
-# define UTILS_H
+#include "get_next_line.h"
 
-# include "ft_printf.h"
-# include <stdlib.h>
-# include <stdio.h>
-# include <unistd.h>
-
-void	free_array(char **array);
-int		get_array_size(char **array);
-void	print_error(char *reason);
-
-#endif
+void	free_get_next_line(void)
+{
+	(void) get_next_line(-1);
+}
