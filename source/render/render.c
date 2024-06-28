@@ -3,14 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   render.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ldulling <ldulling@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lyeh <lyeh@student.42vienna.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/17 20:28:05 by lyeh              #+#    #+#             */
-/*   Updated: 2024/06/25 19:02:49 by ldulling         ###   ########.fr       */
+/*   Updated: 2024/06/26 17:59:14 by lyeh             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "render_private.h"
+#include "transform.h"
 
 static bool		iter_pixels(void *param,
 					t_pixel_grid *pixel,
@@ -24,6 +25,7 @@ int	render(t_minirt *minirt)
 	t_pixel_grid	*pixel;
 
 	pixel = &minirt->scene->camera.pixel;
+	transform_scene(minirt->scene);
 	if (minirt->stage >= CAMERA_CHANGE)
 	{
 		setup_viewport(&minirt->scene->camera);

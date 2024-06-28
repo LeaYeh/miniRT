@@ -6,7 +6,7 @@
 /*   By: lyeh <lyeh@student.42vienna.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/26 17:57:56 by lyeh              #+#    #+#             */
-/*   Updated: 2024/06/24 17:25:51 by lyeh             ###   ########.fr       */
+/*   Updated: 2024/06/26 18:13:21 by lyeh             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,6 @@
 bool	is_valid_filename(char *filename);
 bool	is_valid_number(char *str);
 bool	is_valid_vector(char *str);
-
-t_scene	*init_scene(void);
 
 bool	parse_environment(t_scene *scene, char **tokens);
 bool	parse_object(t_scene *scene, char **tokens);

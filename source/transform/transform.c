@@ -3,18 +3,47 @@
 /*                                                        :::      ::::::::   */
 /*   transform.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ldulling <ldulling@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lyeh <lyeh@student.42vienna.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/06/24 22:21:07 by lyeh              #+#    #+#             */
-/*   Updated: 2024/06/25 20:08:14 by ldulling         ###   ########.fr       */
+/*   Created: 2024/06/26 17:38:40 by lyeh              #+#    #+#             */
+/*   Updated: 2024/06/26 18:38:03 by lyeh             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "transform.h"
+#include "camera.h"
+#include "object.h"
 
-void	transform(t_vec3 *position,
-			t_vec3 *norm, t_vec3 rotation, t_vec3 translation)
+static void	transform_light(t_light *light);
+static void	transform_objects(t_list *object_list);
+
+void	transform_scene(t_scene *scene)
 {
-	rotate(norm, rotation);
-	translate(position, translation);
+	transform_camera(&scene->camera);
+	transform_light(&scene->light);
+	transform_objects(scene->objects);
+}
+
+void	transform_camera(t_camera *camera)
+{
+	camera->position = translate(camera->org_position, camera->translation);
+	camera->norm = rotate(camera->org_norm, camera->rotation);
+}
+
+void	transform_light(t_light *light)
+{
+	light->position = translate(light->org_position, light->translation);
+}
+
+void	transform_objects(t_list *object_list)
+{
+	t_obj	*object;
+
+	while (object_list)
+	{
+		object = object_list->content;
+		object->position = translate(object->org_position, object->translation);
+		object->norm = rotate(object->org_norm, object->rotation);
+		object_list = object_list->next;
+	}
 }

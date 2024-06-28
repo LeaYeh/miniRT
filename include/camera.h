@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   camera.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ldulling <ldulling@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lyeh <lyeh@student.42vienna.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/01 11:49:22 by lyeh              #+#    #+#             */
-/*   Updated: 2024/06/25 19:03:18 by ldulling         ###   ########.fr       */
+/*   Updated: 2024/06/26 17:53:25 by lyeh             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,20 +24,22 @@ typedef struct s_ray		t_ray;
 
 typedef struct s_camera
 {
-	t_vec3					position;
-	t_vec3					norm;
-	double					fov;
-	double					theta;
-	double					focal_length;
-	double					aspect_ratio;
-	t_vec3					translation;
-	t_vec3					rotation;
-	t_viewport				viewport;
-	t_pixel_grid			pixel;
-	t_ray					*ray_pool;
+	t_vec3			org_position;
+	t_vec3			org_norm;
+	t_vec3			position;
+	t_vec3			norm;
+	double			fov;
+	double			theta;
+	double			focal_length;
+	double			aspect_ratio;
+	t_vec3			translation;
+	t_vec3			rotation;
+	t_viewport		viewport;
+	t_pixel_grid	pixel;
+	t_ray			*ray_pool;
 }	t_camera;
 
-bool	init_camera(t_camera *camera);
+void	init_camera(t_camera *camera);
 void	setup_viewport(t_camera *camera);
 void	setup_pixel_grid(t_camera *camera);
 
