@@ -65,7 +65,7 @@ bool	recursive_ray(t_list_d *object_list,
 bool	handle_hit_record(t_ray *ray, t_hit_record *rec, int expect_depth)
 {
 	t_hit_record	*new_rec;
-	t_list			*tmp_node;
+	t_list			*last_node;
 	double			old_t;
 
 	// init hit_record for first hit in this recursion
@@ -81,11 +81,11 @@ bool	handle_hit_record(t_ray *ray, t_hit_record *rec, int expect_depth)
 	// replace hit_record if new hit is closer in this recursion
 	else
 	{
-		tmp_node = ft_lstlast(ray->hit_record_list);
-		old_t = ((t_hit_record *)tmp_node->content)->t;
+		last_node = ft_lstlast(ray->hit_record_list);
+		old_t = ((t_hit_record *)last_node->content)->t;
 		if (is_min_positive_t(rec->t, old_t))
 		{
-			*((t_hit_record *)tmp_node->content) = *rec;
+			*((t_hit_record *)last_node->content) = *rec;
 		}
 	}
 	return (true);
