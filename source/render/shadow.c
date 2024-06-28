@@ -12,7 +12,7 @@
 
 #include "render_private.h"
 
-bool	is_shadow(t_light light, t_list *object_list, t_hit_record rec)
+bool	is_shadow(t_light light, t_list_d *object_list, t_hit_record rec)
 {
 	const t_vec3	vec3 = (t_vec3){.ops = init_ops()};
 	t_ray			shadow_ray;

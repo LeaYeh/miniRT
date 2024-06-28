@@ -16,6 +16,6 @@ void	free_scene(t_scene **scene)
 {
 	if (!*scene)
 		return ;
-	ft_lstclear(&(*scene)->objects, free);
+	ft_lstclear_d(&(*scene)->objects, free);
 	ft_free_and_null((void **)scene);
 }

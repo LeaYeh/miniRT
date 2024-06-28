@@ -38,7 +38,7 @@ typedef struct s_scene
 	t_amblight	amblight;
 	t_camera	camera;
 	t_light		light;
-	t_list		*objects;
+	t_list_d	*objects;
 }	t_scene;
 
 #endif
