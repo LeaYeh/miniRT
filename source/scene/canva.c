@@ -25,6 +25,11 @@ void	setup_viewport(t_camera *camera)
 	camera->viewport.height = 2 * tan(camera->theta / 2);
 	camera->viewport.width = camera->aspect_ratio * camera->viewport.height;
 	camera->viewport.w = vec3.ops->normalize(vec3.ops->mul(camera->norm, -1));
+	if (camera->norm.y == 1.0)
+		camera->viewport.u = vector(1.0, 0.0, 0.0);
+	else if (camera->norm.y == -1.0)
+		camera->viewport.u = vector(-1.0, 0.0, 0.0);
+	else
 	camera->viewport.u = vec3.ops->normalize(
 			vec3.ops->cross(world_up, camera->viewport.w));
 	camera->viewport.v = vec3.ops->cross(
