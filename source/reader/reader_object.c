@@ -12,103 +12,106 @@
 
 #include "reader_private.h"
 
-static bool	parse_sphere(t_scene *scene, char **tokens);
-static bool	parse_plane(t_scene *scene, char **tokens);
-static bool	parse_cylinder(t_scene *scene, char **tokens);
+static bool	parse_sphere(t_obj *object);
+static bool	parse_plane(t_obj *object);
+static bool	parse_cylinder(t_obj *object);
 
-bool	parse_object(t_scene *scene, char **tokens)
-{
-	if (ft_strcmp(tokens[0], "sp") == 0)
-	{
-		if (!parse_sphere(scene, tokens + 1))
-			return (false);
-	}
-	else if (ft_strcmp(tokens[0], "pl") == 0)
-	{
-		if (!parse_plane(scene, tokens + 1))
-			return (false);
-	}
-	else if (ft_strcmp(tokens[0], "cy") == 0)
-	{
-		if (!parse_cylinder(scene, tokens + 1))
-			return (false);
-	}
-	return (true);
-}
-
-bool	parse_sphere(t_scene *scene, char **tokens)
+bool	parse_object(t_scene *scene, char *id)
 {
 	t_obj	*object;
 
-	if (get_array_size(tokens) != SPHERE_ARG_NUM)
-		return (false);
-	if (!is_valid_vector(tokens[0]) || \
-		!is_valid_number(tokens[1]) || !is_valid_vector(tokens[2]))
-		return (printf("parse_sphere: %s", INVALID_CONTENT_FMT), false);
 	object = (t_obj *)ft_calloc(1, sizeof(t_obj));
 	if (!object)
+		return (print_error(FAILED_ALLOC_MEM), false);
+	if (ft_strcmp(id, "sp") == 0)
+	{
+		if (!parse_sphere(object))
+			return (print_error(INVALID_SPH_FMT), free(object), false);
+	}
+	else if (ft_strcmp(id, "pl") == 0)
+	{
+		if (!parse_plane(object))
+			return (print_error(INVALID_PLA_FMT), free(object), false);
+	}
+	else if (ft_strcmp(id, "cy") == 0)
+	{
+		if (!parse_cylinder(object))
+			return (print_error(INVALID_CYL_FMT), free(object), false);
+	}
+	if (!ft_lstnew_back(&scene->objects, object))
+		return (print_error(FAILED_ALLOC_MEM), free(object), false);
+	return (true);
+}
+
+bool	parse_sphere(t_obj *object)
+{
+	char	*position;
+	char	*diameter;
+	char	*color;
+
+	position = ft_strtok(NULL, WHITESPACE);
+	diameter = ft_strtok(NULL, WHITESPACE);
+	color = ft_strtok(NULL, WHITESPACE);
+	if (ft_strtok(NULL, WHITESPACE) != NULL)
+		return (false);
+	if (!is_valid_vector(position) || \
+		!is_valid_float(diameter) || !is_valid_vector(color))
 		return (false);
 	object->type = SPHERE;
-	object->d_param1 = ft_atof(tokens[1]);
-	if (!parse_vector(&object->org_position, tokens[0]) || \
-		!parse_color_vector(&object->color, tokens[2]))
-		return (printf("parse_sphere: %s",
-				FAILED_PARSE_VEC), free(object), false);
-	if (!ft_lstnew_back(&scene->objects, object))
-		return (printf("parse_sphere: %s", FAILED_ALLOC_MEM),
-			free(object), false);
+	object->d_param1 = ft_atof(diameter);
+	if (!parse_vector(&object->org_position, position) || \
+		!parse_color_vector(&object->color, color))
+		return (false);
 	return (true);
 }
 
-bool	parse_plane(t_scene *scene, char **tokens)
+bool	parse_plane(t_obj *object)
 {
-	t_obj	*object;
+	char	*position;
+	char	*norm;
+	char	*color;
 
-	if (get_array_size(tokens) != PLANE_ARG_NUM)
-		return (printf("parse_plane: %s", INVALID_NUM_ARG), false);
-	if (!is_valid_vector(tokens[0]) || \
-		!is_valid_vector(tokens[1]) || !is_valid_vector(tokens[2]))
-		return (printf("parse_plane: %s", INVALID_CONTENT_FMT), false);
-	object = (t_obj *)ft_calloc(1, sizeof(t_obj));
-	if (!object)
-		return (printf("parse_plane: %s", FAILED_ALLOC_MEM), false);
+	position = ft_strtok(NULL, WHITESPACE);
+	norm = ft_strtok(NULL, WHITESPACE);
+	color = ft_strtok(NULL, WHITESPACE);
+	if (ft_strtok(NULL, WHITESPACE) != NULL)
+		return (false);
+	if (!is_valid_vector(position) || \
+		!is_valid_vector(norm) || !is_valid_vector(color))
+		return (false);
 	object->type = PLANE;
-	if (!parse_vector(&object->org_position, tokens[0]) || \
-		!parse_unit_vector(&object->org_norm, tokens[1]) || \
-		!parse_color_vector(&object->color, tokens[2]))
-		return (printf("parse_plane: %s", FAILED_PARSE_VEC),
-			free(object), false);
-	if (!ft_lstnew_back(&scene->objects, object))
-		return (printf("parse_plane: %s", FAILED_ALLOC_MEM),
-			free(object), false);
+	if (!parse_vector(&object->org_position, position) || \
+		!parse_unit_vector(&object->org_norm, norm) || \
+		!parse_color_vector(&object->color, color))
+		return (false);
 	return (true);
 }
 
-bool	parse_cylinder(t_scene *scene, char **tokens)
+bool	parse_cylinder(t_obj *object)
 {
-	t_obj	*object;
+	char	*position;
+	char	*norm;
+	char	*diameter;
+	char	*height;
+	char	*color;
 
-	if (get_array_size(tokens) != CYLINDER_ARG_NUM)
-		return (printf("parse_cylinder: %s", INVALID_NUM_ARG), false);
-	if (!is_valid_vector(tokens[0]) || !is_valid_vector(tokens[1]) || \
-		!is_valid_number(tokens[2]) || !is_valid_number(tokens[3]) || \
-		!is_valid_vector(tokens[4]))
-		return (printf("parse_cylinder: %s", INVALID_CONTENT_FMT), false);
-	object = (t_obj *)ft_calloc(1, sizeof(t_obj));
-	if (!object)
-		return (printf("parse_cylinder: %s", FAILED_ALLOC_MEM), false);
+	position = ft_strtok(NULL, WHITESPACE);
+	norm = ft_strtok(NULL, WHITESPACE);
+	diameter = ft_strtok(NULL, WHITESPACE);
+	height = ft_strtok(NULL, WHITESPACE);
+	color = ft_strtok(NULL, WHITESPACE);
+	if (ft_strtok(NULL, WHITESPACE) != NULL)
+		return (false);
+	if (!is_valid_vector(position) || !is_valid_vector(norm) || \
+		!is_valid_float(diameter) || !is_valid_float(height) || \
+		!is_valid_vector(color))
+		return (false);
 	object->type = CYLINDER;
-	object->d_param1 = ft_atof(tokens[2]);
-	object->d_param2 = ft_atof(tokens[3]);
-	object->translation = vector(0.0, 0.0, 0.0);
-	object->rotation = vector(0.0, 0.0, 0.0);
-	if (!parse_vector(&object->org_position, tokens[0]) || \
-		!parse_unit_vector(&object->org_norm, tokens[1]) || \
-		!parse_color_vector(&object->color, tokens[4]))
-		return (printf("parse_cylinder: %s", FAILED_PARSE_VEC),
-			free(object), false);
-	if (!ft_lstnew_back(&scene->objects, object))
-		return (printf("parse_cylinder: %s", FAILED_ALLOC_MEM),
-			free(object), false);
+	object->d_param1 = ft_atof(diameter);
+	object->d_param2 = ft_atof(height);
+	if (!parse_vector(&object->org_position, position) || \
+		!parse_unit_vector(&object->org_norm, norm) || \
+		!parse_color_vector(&object->color, color))
+		return (false);
 	return (true);
 }

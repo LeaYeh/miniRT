@@ -12,9 +12,8 @@
 
 #include "utils.h"
 
-void	error_message(char *reason)
+void	print_error(char *reason)
 {
-	printf("Error\n");
-	printf("%s\n", reason);
-	exit(EXIT_FAILURE);
+	ft_dprintf(STDERR_FILENO, "Error\n");
+	ft_dprintf(STDERR_FILENO, "%s\n", reason);
 }

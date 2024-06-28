@@ -4,6 +4,10 @@
 
 int	clean_and_exit(t_minirt *minirt)
 {
+	mlx_destroy_window(minirt->mlx.mlx_ptr, minirt->mlx.win_ptr);
+	mlx_destroy_image(minirt->mlx.mlx_ptr, minirt->mlx.img.img_ptr);
+	mlx_destroy_display(minirt->mlx.mlx_ptr);
+	free(minirt->mlx.mlx_ptr);
 	free_minirt(minirt);
 	exit (0);
 }

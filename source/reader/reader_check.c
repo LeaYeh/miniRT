@@ -24,38 +24,52 @@ bool	is_valid_filename(char *filename)
 	return (true);
 }
 
-bool	is_valid_number(char *str)
+bool	is_valid_float(char *str)
 {
-	int	i;
+	bool	saw_digit;
+	int		i;
 
+	saw_digit = false;
 	i = 0;
-	while (str[i] && str[i] != '\n')
+	if (ft_issign(str[i]))
+		i++;
+	if (!ft_isdigit(str[i]) && str[i] != '.')
+		return (false);
+	while (ft_isdigit(str[i]))
 	{
-		if (!ft_isdigit(str[i]) && \
-			str[i] != '.' && str[i] != '-' && str[i] != '+')
-			return (false);
+		saw_digit = true;
 		i++;
 	}
+	if (str[i] == '.')
+		i++;
+	while (ft_isdigit(str[i]))
+	{
+		saw_digit = true;
+		i++;
+	}
+	if (!saw_digit || (str[i] && str[i] != '\n'))
+		return (false);
 	return (true);
 }
 
 bool	is_valid_vector(char *str)
 {
-	int	i;
-	int	comma;
+	char	*element;
+	int		i;
 
-	i = 0;
-	comma = 0;
-	while (str[i] && str[i] != '\n')
-	{
-		if (!ft_isdigit(str[i]) && \
-			str[i] != '.' && str[i] != '-' && str[i] != '+' && str[i] != ',')
-			return (false);
-		if (str[i] == ',')
-			comma++;
-		i++;
-	}
-	if (comma != 2)
+	if (str[ft_strlen(str) - 1] == ',')
 		return (false);
-	return (true);
+	i = 0;
+	element = ft_strtok(str, ",");
+	while (element)
+	{
+		if (!is_valid_float(element))
+			return (false);
+		i++;
+		element = ft_strtok(NULL, ",");
+		if (!element)
+			break ;
+		element[-1] = ',';
+	}
+	return (i == 3);
 }

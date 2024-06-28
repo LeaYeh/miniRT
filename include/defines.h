@@ -13,32 +13,33 @@
 #ifndef DEFINES_H
 # define DEFINES_H
 
+# include "libft.h"
 # include <stdio.h>
 # include <stdbool.h>
 # include <math.h>
-# include "libft.h"
 
 /* Error Codes */
 # define SUCCESS			0
 # define ERR_ARGC			1
 # define ERR_INIT			2
 
-# define SPHERE_ARG_NUM		3
-# define PLANE_ARG_NUM		3
-# define CYLINDER_ARG_NUM	5
+/* Error Messages */
+# define INVALID_FILE_FMT		"Invalid file format."
+# define INVALID_IDENTIFIER		"Invalid identifier."
+# define INVALID_NUM_ARG		"Invalid number of arguments."
+# define INVALID_AMB_FMT		"Invalid ambient light format."
+# define INVALID_CAM_FMT		"Invalid camera format."
+# define INVALID_LIG_FMT		"Invalid light format."
+# define INVALID_SPH_FMT		"Invalid sphere format."
+# define INVALID_PLA_FMT		"Invalid plane format."
+# define INVALID_CYL_FMT		"Invalid cylinder format."
+# define FAILED_OPEN_FILE		"Failed to open file."
+# define FAILED_READ_FILE		"Failed to read file."
+# define FAILED_CLOSE_FILE		"Failed to close file."
+# define FAILED_ALLOC_MEM		"Failed to allocate memory."
 
-# define INVALID_FILE			"invalid file format.\n"
-# define INVALID_CONTENT_FMT	"invalid content format.\n"
-# define FAILED_OPEN_FILE		"failed to open file.\n"
-# define FAILED_ALLOC_MEM		"failed to allocate memory.\n"
-# define INVALID_NUM_ARG		"invalid number of argument.\n"
-# define INVALID_NUM_FMT		"invalid number format.\n"
-# define FAILED_PARSE_VEC		"parse vector failed.\n"
-# define FAILED_NORM_VEC		"Normalized vector failed.\n"
-# define INCORRECT_VIEWPORT		"incorrect viewport size.\n"
-
-# define WINDOW_WIDTH		1600
-# define WINDOW_HEIGHT		900
+# define WINDOW_WIDTH		640
+# define WINDOW_HEIGHT		360
 # define HORIZONTAL_UNIT	1
 # define VERTICAL_UNIT		1
 

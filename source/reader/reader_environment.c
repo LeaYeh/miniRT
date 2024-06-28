@@ -12,68 +12,87 @@
 
 #include "reader_private.h"
 
-static bool	parse_ambient(t_scene *scene, char **tokens);
-static bool	parse_camera(t_scene *scene, char **tokens);
-static bool	parse_light(t_scene *scene, char **tokens);
+static bool	parse_ambient(t_scene *scene);
+static bool	parse_camera(t_scene *scene);
+static bool	parse_light(t_scene *scene);
 
-bool	parse_environment(t_scene *scene, char **tokens)
+bool	parse_environment(t_scene *scene, char *id)
 {
-	if (ft_strcmp(tokens[0], "A") == 0)
+	if (ft_strcmp(id, "A") == 0)
 	{
-		if (!parse_ambient(scene, tokens + 1))
-			return (false);
+		if (!parse_ambient(scene))
+			return (print_error(INVALID_AMB_FMT), false);
 	}
-	else if (ft_strcmp(tokens[0], "C") == 0)
+	else if (ft_strcmp(id, "C") == 0)
 	{
-		if (!parse_camera(scene, tokens + 1))
-			return (false);
+		if (!parse_camera(scene))
+			return (print_error(INVALID_CAM_FMT), false);
 	}
-	else if (ft_strcmp(tokens[0], "L") == 0)
+	else if (ft_strcmp(id, "L") == 0)
 	{
-		if (!parse_light(scene, tokens + 1))
-			return (false);
+		if (!parse_light(scene))
+			return (print_error(INVALID_LIG_FMT), false);
 	}
 	return (true);
 }
 
-bool	parse_ambient(t_scene *scene, char **tokens)
+bool	parse_ambient(t_scene *scene)
 {
-	if (get_array_size(tokens) != 2)
-		return (printf("parse_ambient: %s", INVALID_NUM_ARG), false);
-	if (!is_valid_number(tokens[0]) || !is_valid_vector(tokens[1]))
-		return (printf("parse_ambient: %s", INVALID_CONTENT_FMT), false);
-	scene->amblight.ratio = ft_atof(tokens[0]);
-	if (!parse_color_vector(&scene->amblight.color, tokens[1]))
-		return (printf("parse_ambient: %s", FAILED_PARSE_VEC), false);
+	char	*ratio;
+	char	*color;
+
+	ratio = ft_strtok(NULL, WHITESPACE);
+	color = ft_strtok(NULL, WHITESPACE);
+	if (ft_strtok(NULL, WHITESPACE) != NULL)
+		return (false);
+	if (!is_valid_float(ratio) || !is_valid_vector(color))
+		return (false);
+	scene->amblight.ratio = ft_atof(ratio);
+	if (!parse_color_vector(&scene->amblight.color, color))
+		return (false);
 	return (true);
 }
 
-bool	parse_camera(t_scene *scene, char **tokens)
+bool	parse_camera(t_scene *scene)
 {
-	if (get_array_size(tokens) != 3)
-		return (printf("parse_camera: %s", INVALID_NUM_ARG), false);
-	if (!is_valid_vector(tokens[0]) || \
-		!is_valid_vector(tokens[1]) || !is_valid_number(tokens[2]))
-		return (printf("parse_camera: %s", INVALID_CONTENT_FMT), false);
-	if (!parse_vector(&scene->camera.org_position, tokens[0]))
-		return (printf("parse_camera: %s", FAILED_PARSE_VEC), false);
-	if (!parse_unit_vector(&scene->camera.org_norm, tokens[1]))
-		return (printf("parse_camera: %s", FAILED_PARSE_VEC), false);
-	scene->camera.fov = ft_atof(tokens[2]);
+	char	*position;
+	char	*norm;
+	char	*fov;
+
+	position = ft_strtok(NULL, WHITESPACE);
+	norm = ft_strtok(NULL, WHITESPACE);
+	fov = ft_strtok(NULL, WHITESPACE);
+	if (ft_strtok(NULL, WHITESPACE) != NULL)
+		return (false);
+	if (!is_valid_vector(position) || \
+		!is_valid_vector(norm) || !is_valid_float(fov))
+		return (false);
+	if (!parse_vector(&scene->camera.org_position, position))
+		return (false);
+	if (!parse_unit_vector(&scene->camera.org_norm, norm))
+		return (false);
+	scene->camera.fov = ft_atof(fov);
 	return (true);
 }
 
-bool	parse_light(t_scene *scene, char **tokens)
+bool	parse_light(t_scene *scene)
 {
-	if (get_array_size(tokens) != 3)
-		return (printf("parse_light: %s", INVALID_NUM_ARG), false);
-	if (!is_valid_vector(tokens[0]) || \
-		!is_valid_number(tokens[1]) || !is_valid_vector(tokens[2]))
-		return (printf("parse_light: %s", INVALID_CONTENT_FMT), false);
-	if (!parse_vector(&scene->light.org_position, tokens[0]))
-		return (printf("parse_light: %s", FAILED_PARSE_VEC), false);
-	scene->light.ratio = ft_atof(tokens[1]);
-	if (!parse_color_vector(&scene->light.color, tokens[2]))
-		return (printf("parse_light: %s", FAILED_PARSE_VEC), false);
+	char	*position;
+	char	*ratio;
+	char	*color;
+
+	position = ft_strtok(NULL, WHITESPACE);
+	ratio = ft_strtok(NULL, WHITESPACE);
+	color = ft_strtok(NULL, WHITESPACE);
+	if (ft_strtok(NULL, WHITESPACE) != NULL)
+		return (false);
+	if (!is_valid_vector(position) || \
+		!is_valid_float(ratio) || !is_valid_vector(color))
+		return (false);
+	if (!parse_vector(&scene->light.org_position, position))
+		return (false);
+	scene->light.ratio = ft_atof(ratio);
+	if (!parse_color_vector(&scene->light.color, color))
+		return (false);
 	return (true);
 }

@@ -13,10 +13,6 @@
 #include "render_private.h"
 #include "transform.h"
 
-static bool		iter_pixels(void *param,
-					t_pixel_grid *pixel,
-					t_ray *ray_pool,
-					bool (*f)(void *, t_ray *));
 static bool		render_pixel(void *param, t_ray *ray_pool);
 static t_vec3	clamp_color(t_vec3 color);
 

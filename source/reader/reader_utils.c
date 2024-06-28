@@ -14,15 +14,19 @@
 
 bool	parse_vector(t_vec3 *v, char *str)
 {
-	char	**tokens;
+	char	*x;
+	char	*y;
+	char	*z;
 
 	if (v == NULL || str == NULL)
 		return (false);
-	tokens = ft_split(str, ',');
-	if (!tokens || get_array_size(tokens) != 3)
+	x = ft_strtok(str, ",");
+	y = ft_strtok(NULL, ",");
+	z = ft_strtok(NULL, WHITESPACE);
+	if (ft_strtok(NULL, WHITESPACE) != NULL)
 		return (false);
-	*v = vector(ft_atof(tokens[0]), ft_atof(tokens[1]), ft_atof(tokens[2]));
-	return (free_array(tokens), true);
+	*v = vector(ft_atof(x), ft_atof(y), ft_atof(z));
+	return (true);
 }
 
 bool	parse_unit_vector(t_vec3 *v, char *str)
@@ -31,10 +35,10 @@ bool	parse_unit_vector(t_vec3 *v, char *str)
 
 	if (!parse_vector(v, str))
 		return (false);
+	if (vec3.ops->magnitude(*v) == 0)
+		return (false);
 	if (vec3.ops->magnitude(*v) == 1)
 		return (true);
-	if (vec3.ops->magnitude(*v) == 0)
-		return (error_message(FAILED_NORM_VEC), false);
 	*v = vec3.ops->normalize(*v);
 	return (true);
 }
