@@ -63,15 +63,15 @@ void	print_amblight(t_amblight amblight)
 	printf("\tRatio: %f\n", amblight.ratio);
 }
 
-void	print_scene(t_scene *sence)
+void	print_scene(t_scene *scene)
 {
 	t_list_d	*obj_list;
 
 	printf("\n==================== [Scene] ====================\n");
-	print_amblight(sence->amblight);
-	print_camera(sence->camera);
-	print_light(sence->light);
-	obj_list = sence->objects;
+	print_amblight(scene->amblight);
+	print_camera(scene->camera);
+	print_light(scene->light);
+	obj_list = scene->objects;
 	while (obj_list)
 	{
 		print_object((t_obj *)obj_list->content);
