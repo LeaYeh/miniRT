@@ -6,7 +6,7 @@
 /*   By: ldulling <ldulling@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/28 12:18:37 by lyeh              #+#    #+#             */
-/*   Updated: 2024/06/25 19:45:16 by ldulling         ###   ########.fr       */
+/*   Updated: 2024/06/28 19:58:43 by ldulling         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,10 +23,10 @@
 
 typedef enum e_stage
 {
-	NO_CHANGE,
-	LIGHT_CHANGE,
-	OBJECT_CHANGE,
-	CAMERA_CHANGE
+	NO_CHANGE		= 0,
+	LIGHT_CHANGE	= 1 << 0,
+	OBJECT_CHANGE	= 1 << 1 | LIGHT_CHANGE,
+	CAMERA_CHANGE	= 1 << 2 | OBJECT_CHANGE
 }	t_stage;
 
 typedef enum e_modifier_key

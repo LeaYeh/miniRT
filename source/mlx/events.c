@@ -1,3 +1,14 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   events.c                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ldulling <ldulling@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/06/28 21:00:37 by ldulling          #+#    #+#             */
+/*   Updated: 2024/06/28 21:00:39 by ldulling         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "mlx_utils.h"
 #include "transform.h"
@@ -12,68 +23,205 @@ int	clean_and_exit(t_minirt *minirt)
 	exit (0);
 }
 
+t_list_d	**get_selected_object_node(t_minirt *minirt)
+{
+	static t_list_d	*selected_obj;
+
+	if (!selected_obj)
+		selected_obj = minirt->scene->objects;
+	return (&selected_obj);
+}
+
+t_obj	*get_selected_object(t_minirt *minirt)
+{
+	return ((*get_selected_object_node(minirt))->content);
+}
+
+void	select_next_object(t_minirt *minirt)
+{
+	t_list_d	*next_obj;
+
+	next_obj = (*get_selected_object_node(minirt))->next;
+	if (!next_obj)
+		next_obj = minirt->scene->objects;
+	*get_selected_object_node(minirt) = next_obj;
+}
+
+void	select_previous_object(t_minirt *minirt)
+{
+	t_list_d	*prev_obj;
+
+	prev_obj = (*get_selected_object_node(minirt))->prev;
+	if (!prev_obj)
+		prev_obj = ft_lstlast_d(minirt->scene->objects);
+	*get_selected_object_node(minirt) = prev_obj;
+}
+
+void	select_n_object(int n, t_minirt *minirt)
+{
+	int	i;
+
+	if (n > ft_lstsize_d(minirt->scene->objects))
+		return ;
+	i = 1;
+	*get_selected_object_node(minirt) = minirt->scene->objects;
+	while (i < n)
+	{
+		select_next_object(minirt);
+		i++;
+	}
+}
+
 void	select_object(int key, t_minirt *minirt)
 {
 	if (key == XK_Tab)
 	{
 		if (minirt->mod_key & K_SHIFT)
+		{
 			printf("Previous object\n");
+			select_previous_object(minirt);
+		}
 		else
+		{
 			printf("Next object\n");
+			select_next_object(minirt);
+		}
 	}
 	else if (key == XK_1)
+	{
 		printf("Select object 1\n");
+		select_n_object(1, minirt);
+	}
 	else if (key == XK_2)
+	{
 		printf("Select object 2\n");
+		select_n_object(2, minirt);
+	}
 	else if (key == XK_3)
+	{
 		printf("Select object 3\n");
+		select_n_object(3, minirt);
+	}
 	else if (key == XK_4)
+	{
 		printf("Select object 4\n");
+		select_n_object(4, minirt);
+	}
 	else if (key == XK_5)
+	{
 		printf("Select object 5\n");
+		select_n_object(5, minirt);
+	}
 	else if (key == XK_6)
+	{
 		printf("Select object 6\n");
+		select_n_object(6, minirt);
+	}
 	else if (key == XK_7)
+	{
 		printf("Select object 7\n");
+		select_n_object(7, minirt);
+	}
 	else if (key == XK_8)
+	{
 		printf("Select object 8\n");
+		select_n_object(8, minirt);
+	}
 	else if (key == XK_9)
+	{
 		printf("Select object 9\n");
+		select_n_object(9, minirt);
+	}
 }
 
 void	translate_object(int key, t_minirt *minirt)
 {
-	(void)minirt;
+	double	translation;
+
+	translation = INTERVAL_TRANSLATE;
+	if (minirt->mod_key & K_SHIFT)
+	{
+		printf("Fast ");
+		translation *= FACTOR_FAST;
+	}
 	if (key == XK_w)
+	{
 		printf("Move object forward\n");
+		get_selected_object(minirt)->translation.z -= translation;
+	}
 	else if (key == XK_s)
+	{
 		printf("Move object backward\n");
+		get_selected_object(minirt)->translation.z += translation;
+	}
 	else if (key == XK_a)
+	{
 		printf("Move object left\n");
+		get_selected_object(minirt)->translation.x -= translation;
+	}
 	else if (key == XK_d)
+	{
 		printf("Move object right\n");
+		get_selected_object(minirt)->translation.x += translation;
+	}
 	else if (key == XK_x)
+	{
 		printf("Move object up\n");
+		get_selected_object(minirt)->translation.y += translation;
+	}
 	else if (key == XK_z)
+	{
 		printf("Move object down\n");
+		get_selected_object(minirt)->translation.y -= translation;
+	}
+	else
+		return ;
+	minirt->stage |= OBJECT_CHANGE;
 }
 
 void	rotate_object(int key, t_minirt *minirt)
 {
+	double	rotation;
+
+	rotation = INTERVAL_ROTATE;
+	if (minirt->mod_key & K_SHIFT)
+	{
+		printf("Fast ");
+		rotation *= FACTOR_FAST;
+	}
 	if (key == XK_w)
+	{
 		printf("Pitch object down\n");
+		get_selected_object(minirt)->rotation.x -= rotation;
+	}
 	else if (key == XK_s)
+	{
 		printf("Pitch object up\n");
+		get_selected_object(minirt)->rotation.x += rotation;
+	}
 	else if (key == XK_a)
+	{
 		printf("Roll object left\n");
+		get_selected_object(minirt)->rotation.z -= rotation;
+	}
 	else if (key == XK_d)
+	{
 		printf("Roll object right\n");
+		get_selected_object(minirt)->rotation.z += rotation;
+	}
 	else if (key == XK_q)
+	{
 		printf("Yaw object left\n");
+		get_selected_object(minirt)->rotation.y -= rotation;
+	}
 	else if (key == XK_e)
+	{
 		printf("Yaw object right\n");
+		get_selected_object(minirt)->rotation.y += rotation;
+	}
 	else
-		translate_object(key, minirt);
+		return ;
+	minirt->stage |= OBJECT_CHANGE;
 }
 
 void	update_camera(int key, t_minirt *minirt)
@@ -157,7 +305,7 @@ void	update_camera(int key, t_minirt *minirt)
 		printf("Reset camera\n");
 	else
 		return ;
-	minirt->stage = CAMERA_CHANGE;
+	minirt->stage |= CAMERA_CHANGE;
 }
 
 int	handle_keypress_event(int key, t_minirt *minirt)
@@ -188,8 +336,6 @@ int	handle_keypress_event(int key, t_minirt *minirt)
 		key == XK_d || key == XK_z || key == XK_x || \
 		key == XK_q || key == XK_e)
 	{
-		if (minirt->mod_key & K_SHIFT)
-			printf("Fast ");
 		if (minirt->mod_key & K_ALT || key == XK_q || key == XK_e)
 			rotate_object(key, minirt);
 		else
