@@ -6,7 +6,7 @@
 /*   By: ldulling <ldulling@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/28 21:00:37 by ldulling          #+#    #+#             */
-/*   Updated: 2024/06/28 21:00:39 by ldulling         ###   ########.fr       */
+/*   Updated: 2024/06/28 21:50:14 by ldulling         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -224,6 +224,28 @@ void	rotate_object(int key, t_minirt *minirt)
 	minirt->stage |= OBJECT_CHANGE;
 }
 
+void	reset_object(int key, t_minirt *minirt)
+{
+	t_obj	*obj;
+
+	obj = get_selected_object(minirt);
+	if (key == XK_space)
+	{
+		printf("Reset object orientation\n");
+		obj->rotation = vector(0.0, 0.0, 0.0);
+	}
+	else if (key == XK_r)
+	{
+		printf("Reset object\n");
+		obj->translation = vector(0.0, 0.0, 0.0);
+		obj->rotation = vector(0.0, 0.0, 0.0);
+	}
+	else
+		return ;
+	minirt->stage |= OBJECT_CHANGE;
+}
+
+
 void	update_camera(int key, t_minirt *minirt)
 {
 	double	translation;
@@ -302,7 +324,16 @@ void	update_camera(int key, t_minirt *minirt)
 	else if (key == XK_KP_Subtract)
 		printf("Zoom out\n");
 	else if (key == XK_KP_Begin)
+	{
+		printf("Reset camera orientation\n");
+		minirt->scene->camera.rotation = vector(0.0, 0.0, 0.0);
+	}
+	else if (key == XK_KP_Enter)
+	{
 		printf("Reset camera\n");
+		minirt->scene->camera.translation = vector(0.0, 0.0, 0.0);
+		minirt->scene->camera.rotation = vector(0.0, 0.0, 0.0);
+	}
 	else
 		return ;
 	minirt->stage |= CAMERA_CHANGE;
@@ -325,7 +356,7 @@ int	handle_keypress_event(int key, t_minirt *minirt)
 		key == XK_KP_End || key == XK_KP_Page_Down || \
 		key == XK_KP_Add || key == XK_KP_Subtract || \
 		key == XK_KP_Divide || key == XK_KP_Multiply || \
-		key == XK_KP_Begin)
+		key == XK_KP_Begin || key == XK_KP_Enter)
 		update_camera(key, minirt);
 	else if (key == XK_Tab || key == XK_1 || key == XK_2 || \
 		key == XK_3 || key == XK_4 || key == XK_5 || \
@@ -334,9 +365,11 @@ int	handle_keypress_event(int key, t_minirt *minirt)
 		select_object(key, minirt);
 	else if (key == XK_w || key == XK_a || key == XK_s || \
 		key == XK_d || key == XK_z || key == XK_x || \
-		key == XK_q || key == XK_e)
+		key == XK_q || key == XK_e || key == XK_space || key == XK_r)
 	{
-		if (minirt->mod_key & K_ALT || key == XK_q || key == XK_e)
+		if (key == XK_space || key == XK_r)
+			reset_object(key, minirt);
+		else if (minirt->mod_key & K_ALT || key == XK_q || key == XK_e)
 			rotate_object(key, minirt);
 		else
 			translate_object(key, minirt);
