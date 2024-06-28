@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   object.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lyeh <lyeh@student.42vienna.com>           +#+  +:+       +#+        */
+/*   By: ldulling <ldulling@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/01 11:23:43 by lyeh              #+#    #+#             */
-/*   Updated: 2024/06/26 16:25:50 by lyeh             ###   ########.fr       */
+/*   Updated: 2024/06/28 21:59:18 by ldulling         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 
 typedef enum e_object_type
 {
-	SPHERE		= 0,
+	SPHERE,
 	PLANE,
 	CYLINDER
 }	t_obj_type;
