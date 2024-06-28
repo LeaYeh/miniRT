@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minirt.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lyeh <lyeh@student.42vienna.com>           +#+  +:+       +#+        */
+/*   By: ldulling <ldulling@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/28 12:18:37 by lyeh              #+#    #+#             */
-/*   Updated: 2024/06/19 19:29:02 by lyeh             ###   ########.fr       */
+/*   Updated: 2024/06/25 19:45:16 by ldulling         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,21 @@
 # include <mlx.h>
 # include <X11/X.h>
 # include <X11/keysym.h>
+
+typedef enum e_stage
+{
+	NO_CHANGE,
+	LIGHT_CHANGE,
+	OBJECT_CHANGE,
+	CAMERA_CHANGE
+}	t_stage;
+
+typedef enum e_modifier_key
+{
+	K_SHIFT	= 1 << 0,
+	K_CTRL	= 1 << 1,
+	K_ALT	= 1 << 2
+}	t_mod_key;
 
 typedef struct s_img
 {
@@ -39,12 +54,15 @@ typedef struct s_mlx
 
 typedef struct s_minirt
 {
-	t_mlx	mlx;
-	t_scene	*scene;
-	t_ray	*ray_pool;
+	t_mlx		mlx;
+	t_scene		*scene;
+	t_ray		*ray_pool;
+	t_stage		stage;
+	t_mod_key	mod_key;
 }	t_minirt;
 
 bool	init_minirt(t_minirt *minirt, char *filename);
 void	free_minirt(t_minirt *minirt);
+void	reset_ray_pool(t_ray *ray_pool, t_camera *camera);
 
 #endif

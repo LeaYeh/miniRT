@@ -6,4 +6,6 @@
 bool	init_mlx(t_mlx *mlx);
 void	img_pixel_put(t_img *img, int x, int y, int color);
 
+void	setup_event_hooks(t_minirt *minirt);
+
 #endif

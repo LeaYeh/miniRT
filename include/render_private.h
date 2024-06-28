@@ -3,17 +3,18 @@
 /*                                                        :::      ::::::::   */
 /*   render_private.h                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lyeh <lyeh@student.42vienna.com>           +#+  +:+       +#+        */
+/*   By: ldulling <ldulling@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/18 17:10:23 by lyeh              #+#    #+#             */
-/*   Updated: 2024/06/23 01:42:19 by lyeh             ###   ########.fr       */
+/*   Updated: 2024/06/25 19:03:35 by ldulling         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef RENDERER_PRIVATE_H
-# define RENDERER_PRIVATE_H
+#ifndef RENDER_PRIVATE_H
+# define RENDER_PRIVATE_H
 
 # include "render.h"
+# include "camera.h"
 # include "hit.h"
 # include "vec3.h"
 

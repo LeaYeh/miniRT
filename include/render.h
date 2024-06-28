@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   renderer.h                                         :+:      :+:    :+:   */
+/*   render.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lyeh <lyeh@student.42vienna.com>           +#+  +:+       +#+        */
+/*   By: ldulling <ldulling@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/17 20:28:36 by lyeh              #+#    #+#             */
-/*   Updated: 2024/06/18 19:45:07 by lyeh             ###   ########.fr       */
+/*   Updated: 2024/06/25 23:23:33 by ldulling         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,8 @@
 # include "canva.h"
 # include "hit.h"
 
-int		display(void *arg);
-void	render(t_scene *scene, t_pixel_grid *pixel, t_ray *ray_pool);
+int		display(t_minirt *minirt);
+int		render(t_minirt *minirt);
 t_vec3	compute_color(t_scene *scene, t_hit_record *rec);
 
 #endif

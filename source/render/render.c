@@ -3,19 +3,50 @@
 /*                                                        :::      ::::::::   */
 /*   render.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lyeh <lyeh@student.42vienna.com>           +#+  +:+       +#+        */
+/*   By: ldulling <ldulling@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/17 20:28:05 by lyeh              #+#    #+#             */
-/*   Updated: 2024/06/24 23:03:45 by lyeh             ###   ########.fr       */
+/*   Updated: 2024/06/25 19:02:49 by ldulling         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "render_private.h"
 
-static void		render_pixel(t_scene *scene, t_ray *ray_pool);
+static bool		iter_pixels(void *param,
+					t_pixel_grid *pixel,
+					t_ray *ray_pool,
+					bool (*f)(void *, t_ray *));
+static bool		render_pixel(void *param, t_ray *ray_pool);
 static t_vec3	clamp_color(t_vec3 color);
 
-void	render(t_scene *scene, t_pixel_grid *pixel, t_ray *ray_pool)
+int	render(t_minirt *minirt)
+{
+	t_pixel_grid	*pixel;
+
+	pixel = &minirt->scene->camera.pixel;
+	if (minirt->stage >= CAMERA_CHANGE)
+	{
+		setup_viewport(&minirt->scene->camera);
+		setup_pixel_grid(&minirt->scene->camera);
+		reset_ray_pool(minirt->ray_pool, &minirt->scene->camera);
+	}
+	if (minirt->stage >= OBJECT_CHANGE)
+		if (!iter_pixels(
+				minirt->scene->objects, pixel, minirt->ray_pool, shoot_ray))
+			return (1);
+	if (minirt->stage >= LIGHT_CHANGE)
+		if (!iter_pixels(minirt->scene, pixel, minirt->ray_pool, render_pixel))
+			return (1);
+	if (minirt->stage > NO_CHANGE)
+	{
+		display(minirt);
+		minirt->stage = NO_CHANGE;
+	}
+	return (0);
+}
+
+bool	iter_pixels(void *param,
+			t_pixel_grid *pixel, t_ray *ray_pool, bool (*f)(void *, t_ray *))
 {
 	int	i;
 	int	j;
@@ -26,27 +57,28 @@ void	render(t_scene *scene, t_pixel_grid *pixel, t_ray *ray_pool)
 		j = 0;
 		while (j < pixel->col_size)
 		{
-			// printf("current: %d %d\n", i, j);
-			// if (i == pixel->row_size / 2 && j == pixel->col_size / 2)
-			// 	printf("center\n");
-			shoot_ray(scene->objects, &(ray_pool[i * pixel->col_size + j]));
-			render_pixel(scene, &(ray_pool[i * pixel->col_size + j]));
+			if (!f(param, &ray_pool[i * pixel->col_size + j]))
+				return (false);
 			j++;
 		}
 		i++;
 	}
+	return (true);
 }
 
-void	render_pixel(t_scene *scene, t_ray *ray)
+bool	render_pixel(void *param, t_ray *ray)
 {
+	t_scene	*scene;
 	t_list	*hit_rec_node;
 
+	scene = param;
 	hit_rec_node = ray->hit_record_list;
 	while (hit_rec_node)
 	{
 		ray->cache_color = compute_color(scene, hit_rec_node->content);
 		hit_rec_node = hit_rec_node->next;
 	}
+	return (true);
 }
 
 t_vec3	compute_color(t_scene *scene, t_hit_record *rec)

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   camera.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lyeh <lyeh@student.42vienna.com>           +#+  +:+       +#+        */
+/*   By: ldulling <ldulling@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/01 11:49:22 by lyeh              #+#    #+#             */
-/*   Updated: 2024/06/18 12:59:00 by lyeh             ###   ########.fr       */
+/*   Updated: 2024/06/25 19:03:18 by ldulling         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,5 +38,7 @@ typedef struct s_camera
 }	t_camera;
 
 bool	init_camera(t_camera *camera);
+void	setup_viewport(t_camera *camera);
+void	setup_pixel_grid(t_camera *camera);
 
 #endif

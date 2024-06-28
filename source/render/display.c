@@ -5,15 +5,13 @@
 
 static int	get_pixel_color(t_ray *ray);
 
-int	display(void *arg)
+int	display(t_minirt *minirt)
 {
-	t_minirt		*minirt;
 	t_mlx			*mlx;
 	t_pixel_grid	*pixel;
 	int				x;
 	int				y;
 
-	minirt = (t_minirt *)arg;
 	mlx = &minirt->mlx;
 	pixel = &minirt->scene->camera.pixel;
 	y = 0;
