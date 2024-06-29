@@ -6,7 +6,7 @@
 /*   By: ldulling <ldulling@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/29 01:01:52 by ldulling          #+#    #+#             */
-/*   Updated: 2024/06/29 21:16:25 by ldulling         ###   ########.fr       */
+/*   Updated: 2024/06/29 23:54:40 by ldulling         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,14 +51,16 @@ bool	reset_object(t_obj *obj, int key)
 	else if (key == XK_r)
 	{
 		printf("Reset object\n");
-		if (vec3.ops->magnitude(obj->translation) == 0 && \
-			vec3.ops->magnitude(obj->rotation) == 0)
+		if (vec3.ops->magnitude(obj->translation) == 0)
 		{
-			obj->diameter = obj->org_diameter;
-			obj->height = obj->org_height;
+			if (vec3.ops->magnitude(obj->rotation) == 0)
+			{
+				obj->diameter = obj->org_diameter;
+				obj->height = obj->org_height;
+			}
+			obj->rotation = vector(0.0, 0.0, 0.0);
 		}
 		obj->translation = vector(0.0, 0.0, 0.0);
-		obj->rotation = vector(0.0, 0.0, 0.0);
 	}
 	else
 		return (false);
