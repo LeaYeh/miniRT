@@ -6,7 +6,7 @@
 /*   By: ldulling <ldulling@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/29 01:02:48 by ldulling          #+#    #+#             */
-/*   Updated: 2024/06/29 15:39:49 by ldulling         ###   ########.fr       */
+/*   Updated: 2024/06/29 23:09:49 by ldulling         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,9 +18,8 @@
 # include "transform.h"
 
 bool	init_mlx(t_mlx *mlx);
-int		clean_and_exit(t_minirt *minirt);
+void	free_mlx(t_mlx *mlx);
 void	img_pixel_put(t_img *img, int x, int y, int color);
-
 void	setup_event_hooks(t_minirt *minirt);
 
 #endif

@@ -6,13 +6,14 @@
 /*   By: ldulling <ldulling@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/30 19:36:14 by lyeh              #+#    #+#             */
-/*   Updated: 2024/06/29 00:54:16 by ldulling         ###   ########.fr       */
+/*   Updated: 2024/06/29 23:08:24 by ldulling         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
 #include "debug.h"
 #include "render.h"
+#include "mlx_utils.h"
 
 static bool		init_ray_pool(t_ray **ray_pool, t_camera *camera);
 static t_ray	create_ray_from_pixel_grid(t_camera *camera, int row, int col);
@@ -59,10 +60,12 @@ void	free_ray_pool(t_ray **ray_pool, t_pixel_grid *pixel)
 
 void	free_minirt(t_minirt *minirt)
 {
-	if (!minirt->scene)
-		return ;
-	free_ray_pool(&minirt->ray_pool, &minirt->scene->camera.pixel);
-	free_scene(&minirt->scene);
+	free_mlx(&minirt->mlx);
+	if (minirt->scene)
+	{
+		free_ray_pool(&minirt->ray_pool, &minirt->scene->camera.pixel);
+		free_scene(&minirt->scene);
+	}
 }
 
 void	reset_ray_pool(t_ray *ray_pool, t_camera *camera)
