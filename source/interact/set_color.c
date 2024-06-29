@@ -1,26 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   mlx_utils.h                                        :+:      :+:    :+:   */
+/*   set_color.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ldulling <ldulling@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/06/29 01:02:48 by ldulling          #+#    #+#             */
-/*   Updated: 2024/06/29 15:39:49 by ldulling         ###   ########.fr       */
+/*   Created: 2024/06/29 15:25:47 by ldulling          #+#    #+#             */
+/*   Updated: 2024/06/29 15:37:43 by ldulling         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MLX_UTILS_H
-# define MLX_UTILS_H
+#include "interact_private.h"
 
-# include "minirt.h"
-# include "interact.h"
-# include "transform.h"
-
-bool	init_mlx(t_mlx *mlx);
-int		clean_and_exit(t_minirt *minirt);
-void	img_pixel_put(t_img *img, int x, int y, int color);
-
-void	setup_event_hooks(t_minirt *minirt);
-
-#endif
+bool	set_color(t_vec3 *color, int key)
+{
+	(void)color;
+	(void)key;
+	return (false);
+}

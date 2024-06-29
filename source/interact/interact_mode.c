@@ -1,26 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   mlx_utils.h                                        :+:      :+:    :+:   */
+/*   interact_mode.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ldulling <ldulling@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/06/29 01:02:48 by ldulling          #+#    #+#             */
-/*   Updated: 2024/06/29 15:39:49 by ldulling         ###   ########.fr       */
+/*   Created: 2024/06/29 01:16:13 by ldulling          #+#    #+#             */
+/*   Updated: 2024/06/29 16:55:17 by ldulling         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MLX_UTILS_H
-# define MLX_UTILS_H
+#include "interact_private.h"
 
-# include "minirt.h"
-# include "interact.h"
-# include "transform.h"
-
-bool	init_mlx(t_mlx *mlx);
-int		clean_and_exit(t_minirt *minirt);
-void	img_pixel_put(t_img *img, int x, int y, int color);
-
-void	setup_event_hooks(t_minirt *minirt);
-
-#endif
+bool	switch_interact_mode(t_interact_mode *mode, int key)
+{
+	if (key == XK_c && *mode != CAMERA)
+	{
+		printf("Switch to camera mode\n");
+		*mode = CAMERA;
+	}
+	else if (key == XK_o && *mode != OBJECT)
+	{
+		printf("Switch to object mode\n");
+		*mode = OBJECT;
+	}
+	else
+		return (false);
+	return (true);
+}

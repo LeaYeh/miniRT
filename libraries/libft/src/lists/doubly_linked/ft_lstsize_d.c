@@ -1,26 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   mlx_utils.h                                        :+:      :+:    :+:   */
+/*   ft_lstsize_d.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ldulling <ldulling@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/06/29 01:02:48 by ldulling          #+#    #+#             */
-/*   Updated: 2024/06/29 15:39:49 by ldulling         ###   ########.fr       */
+/*   Created: 2023/09/24 16:08:06 by ldulling          #+#    #+#             */
+/*   Updated: 2024/06/28 19:30:32 by ldulling         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MLX_UTILS_H
-# define MLX_UTILS_H
+#include "libft.h"
 
-# include "minirt.h"
-# include "interact.h"
-# include "transform.h"
+int	ft_lstsize_d(t_list_d *lst)
+{
+	int			n;
+	t_list_d	*cur;
 
-bool	init_mlx(t_mlx *mlx);
-int		clean_and_exit(t_minirt *minirt);
-void	img_pixel_put(t_img *img, int x, int y, int color);
-
-void	setup_event_hooks(t_minirt *minirt);
-
-#endif
+	n = 0;
+	cur = lst;
+	while (cur != NULL)
+	{
+		n++;
+		cur = cur->next;
+	}
+	return (n);
+}

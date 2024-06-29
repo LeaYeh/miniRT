@@ -3,17 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   hit.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lyeh <lyeh@student.42vienna.com>           +#+  +:+       +#+        */
+/*   By: ldulling <ldulling@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/01 11:20:20 by lyeh              #+#    #+#             */
-/*   Updated: 2024/06/26 16:07:56 by lyeh             ###   ########.fr       */
+/*   Updated: 2024/06/28 20:26:01 by ldulling         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "hit_private.h"
 #include "debug.h"
 
-static bool		recursive_ray(t_list *object_list,
+static bool		recursive_ray(t_list_d *object_list,
 					t_ray *root_ray, t_ray *cur_ray, int expect_depth);
 static bool		handle_hit_record(
 					t_ray *ray, t_hit_record *rec, const int expect_depth);
@@ -22,10 +22,10 @@ static t_ray	get_reflected_ray(t_hit_record rec);
 
 bool	shoot_ray(void *param, t_ray *ray)
 {
-	t_list	*object_list;
+	t_list_d	*object_list;
 
 	object_list = param;
-	if (ft_lstsize(object_list) != 0 && ft_lstsize(ray->hit_record_list) == 0)
+	if (ft_lstsize_d(object_list) != 0 && ft_lstsize(ray->hit_record_list) == 0)
 		if (!recursive_ray(object_list, ray, ray, 1))
 			return (false);
 	if (ray->hit_record_list == NULL)
@@ -36,11 +36,11 @@ bool	shoot_ray(void *param, t_ray *ray)
 	return (true);
 }
 
-bool	recursive_ray(t_list *object_list,
+bool	recursive_ray(t_list_d *object_list,
 			t_ray *root_ray, t_ray *cur_ray, const int expect_depth)
 {
 	t_hit_record	tmp_rec;
-	t_list			*obj_node;
+	t_list_d		*obj_node;
 	t_ray			reflected_ray;
 
 	obj_node = object_list;
@@ -65,7 +65,7 @@ bool	recursive_ray(t_list *object_list,
 bool	handle_hit_record(t_ray *ray, t_hit_record *rec, int expect_depth)
 {
 	t_hit_record	*new_rec;
-	t_list			*tmp_node;
+	t_list			*last_node;
 	double			old_t;
 
 	// init hit_record for first hit in this recursion
@@ -81,11 +81,11 @@ bool	handle_hit_record(t_ray *ray, t_hit_record *rec, int expect_depth)
 	// replace hit_record if new hit is closer in this recursion
 	else
 	{
-		tmp_node = ft_lstlast(ray->hit_record_list);
-		old_t = ((t_hit_record *)tmp_node->content)->t;
+		last_node = ft_lstlast(ray->hit_record_list);
+		old_t = ((t_hit_record *)last_node->content)->t;
 		if (is_min_positive_t(rec->t, old_t))
 		{
-			*((t_hit_record *)tmp_node->content) = *rec;
+			*((t_hit_record *)last_node->content) = *rec;
 		}
 	}
 	return (true);

@@ -15,7 +15,7 @@
 #include "object.h"
 
 static void	transform_light(t_light *light);
-static void	transform_objects(t_list *object_list);
+static void	transform_objects(t_list_d *object_list);
 
 void	transform_scene(t_scene *scene)
 {
@@ -35,7 +35,7 @@ void	transform_light(t_light *light)
 	light->position = translate(light->org_position, light->translation);
 }
 
-void	transform_objects(t_list *object_list)
+void	transform_objects(t_list_d *object_list)
 {
 	t_obj	*object;
 

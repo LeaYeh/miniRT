@@ -21,6 +21,6 @@
 t_vec3	ambient(t_hit_record *rec, t_amblight *ambient_light);
 t_vec3	diffuse(t_hit_record *rec, t_light *light);
 t_vec3	specular(t_hit_record *rec, t_light *light);
-bool	is_shadow(t_light light, t_list *object_list, t_hit_record rec);
+bool	is_shadow(t_light light, t_list_d *object_list, t_hit_record rec);
 
 #endif

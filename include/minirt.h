@@ -6,7 +6,7 @@
 /*   By: ldulling <ldulling@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/28 12:18:37 by lyeh              #+#    #+#             */
-/*   Updated: 2024/06/25 19:45:16 by ldulling         ###   ########.fr       */
+/*   Updated: 2024/06/29 01:17:08 by ldulling         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,18 +23,11 @@
 
 typedef enum e_stage
 {
-	NO_CHANGE,
-	LIGHT_CHANGE,
-	OBJECT_CHANGE,
-	CAMERA_CHANGE
+	NO_CHANGE		= 0,
+	LIGHT_CHANGE	= 1 << 0,
+	OBJECT_CHANGE	= 1 << 1 | LIGHT_CHANGE,
+	CAMERA_CHANGE	= 1 << 2 | OBJECT_CHANGE
 }	t_stage;
-
-typedef enum e_modifier_key
-{
-	K_SHIFT	= 1 << 0,
-	K_CTRL	= 1 << 1,
-	K_ALT	= 1 << 2
-}	t_mod_key;
 
 typedef struct s_img
 {
@@ -58,7 +51,6 @@ typedef struct s_minirt
 	t_scene		*scene;
 	t_ray		*ray_pool;
 	t_stage		stage;
-	t_mod_key	mod_key;
 }	t_minirt;
 
 bool	init_minirt(t_minirt *minirt, char *filename);

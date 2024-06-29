@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   defines.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lyeh <lyeh@student.42vienna.com>           +#+  +:+       +#+        */
+/*   By: ldulling <ldulling@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/26 15:41:00 by lyeh              #+#    #+#             */
-/*   Updated: 2024/06/26 18:21:55 by lyeh             ###   ########.fr       */
+/*   Updated: 2024/06/28 21:13:10 by ldulling         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,8 @@
 # define MAX_DEPTH			1
 
 # define INTERVAL_TRANSLATE	0.5
-# define INTERVAL_ROTATE	0.1
+# define INTERVAL_ROTATE	0.5
+# define INTERVAL_FOV		1
 # define FACTOR_FAST		10
 
 #endif

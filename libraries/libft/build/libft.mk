@@ -6,7 +6,7 @@
 #    By: ldulling <ldulling@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/11/16 13:33:38 by ldulling          #+#    #+#              #
-#    Updated: 2024/06/07 18:59:48 by ldulling         ###   ########.fr        #
+#    Updated: 2024/06/28 19:31:23 by ldulling         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -79,6 +79,7 @@ SRC		+=	$(addprefix $(DIR), \
 			ft_lstlast_d.c \
 			ft_lstnew_back_d.c \
 			ft_lstnew_d.c \
+			ft_lstsize_d.c \
 )
 
 #  Singly-linked:

@@ -38,7 +38,7 @@ bool	parse_object(t_scene *scene, char *id)
 		if (!parse_cylinder(object))
 			return (print_error(INVALID_CYL_FMT), free(object), false);
 	}
-	if (!ft_lstnew_back(&scene->objects, object))
+	if (!ft_lstnew_back_d(&scene->objects, object))
 		return (print_error(FAILED_ALLOC_MEM), free(object), false);
 	return (true);
 }

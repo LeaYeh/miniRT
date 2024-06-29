@@ -1,41 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   object.h                                           :+:      :+:    :+:   */
+/*   interact.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ldulling <ldulling@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/06/01 11:23:43 by lyeh              #+#    #+#             */
-/*   Updated: 2024/06/28 21:59:18 by ldulling         ###   ########.fr       */
+/*   Created: 2024/06/29 01:02:26 by ldulling          #+#    #+#             */
+/*   Updated: 2024/06/29 17:39:27 by ldulling         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef OBJECT_H
-# define OBJECT_H
+#ifndef INTERACT_H
+# define INTERACT_H
 
-# include "vec3.h"
+# include "minirt.h"
+# include "libft.h"
 
-typedef enum e_object_type
+typedef enum e_interact_mode
 {
-	SPHERE,
-	PLANE,
-	CYLINDER
-}	t_obj_type;
+	CAMERA,
+	OBJECT
+}	t_interact_mode;
 
-typedef struct s_object
-{
-	t_obj_type	type;
-	t_vec3		org_position;
-	t_vec3		org_norm;
-	t_vec3		position;
-	t_vec3		norm;
-	t_vec3		color;
-	double		d_param1;
-	double		d_param2;
-	t_vec3		translation;
-	t_vec3		rotation;
-}	t_obj;
-
-t_obj	init_plane(t_vec3 position, t_vec3 norm, t_vec3 color);
+void	interact_camera(int key, t_minirt *minirt);
+void	interact_object(int key, t_minirt *minirt);
+bool	switch_interact_mode(t_interact_mode *mode, int key);
+bool	set_mod_key(int key);
+bool	release_mod_key(int key);
 
 #endif
