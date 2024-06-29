@@ -1,26 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   mlx_utils.h                                        :+:      :+:    :+:   */
+/*   interact.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ldulling <ldulling@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/06/29 01:02:48 by ldulling          #+#    #+#             */
-/*   Updated: 2024/06/29 15:39:49 by ldulling         ###   ########.fr       */
+/*   Created: 2024/06/29 01:02:26 by ldulling          #+#    #+#             */
+/*   Updated: 2024/06/29 15:36:51 by ldulling         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MLX_UTILS_H
-# define MLX_UTILS_H
+#ifndef INTERACT_H
+# define INTERACT_H
 
 # include "minirt.h"
-# include "interact.h"
-# include "transform.h"
+# include "libft.h"
 
-bool	init_mlx(t_mlx *mlx);
-int		clean_and_exit(t_minirt *minirt);
-void	img_pixel_put(t_img *img, int x, int y, int color);
+typedef enum e_interact_mode
+{
+	CAMERA,
+	OBJECT
+}	t_interact_mode;
 
-void	setup_event_hooks(t_minirt *minirt);
+void	interact_camera(int key, t_minirt *minirt);
+void	interact_object(int key, t_minirt *minirt);
+bool	set_interact_mode(t_interact_mode *mode, int key);
+bool	set_mod_key(int key);
 
 #endif
