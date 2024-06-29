@@ -6,7 +6,7 @@
 /*   By: ldulling <ldulling@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/29 15:34:09 by ldulling          #+#    #+#             */
-/*   Updated: 2024/06/29 19:07:50 by ldulling         ###   ########.fr       */
+/*   Updated: 2024/06/29 21:49:58 by ldulling         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,14 @@ typedef enum e_modifier_key
 	K_CTRL	= 1 << 1,
 	K_ALT	= 1 << 2
 }	t_mod_key;
+
+typedef enum e_scale_mode
+{
+	DIAMETER,
+	HEIGHT,
+	BOTH,
+	SCALE_MODE_COUNT
+}	t_scale_mode;
 
 t_mod_key	*get_mod_key(void);
 
