@@ -18,7 +18,7 @@ void	interact_object(int key, t_minirt *minirt)
 {
 	t_obj	*obj;
 
-	obj = get_selected_object(minirt->scene->objects);
+	obj = get_selected_node_content(minirt->scene->objects);
 	if (select_object(key, minirt->scene->objects))
 		return ;
 	else if (set_rotation(&obj->rotation, key) || \
