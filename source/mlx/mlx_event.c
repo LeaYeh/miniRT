@@ -13,6 +13,7 @@
 #include "mlx_utils.h"
 
 static int	handle_keypress_event(int key, t_minirt *minirt);
+static int	handle_keyrelease_event(int key, t_minirt *minirt);
 
 void	setup_event_hooks(t_minirt *minirt)
 {
@@ -20,6 +21,8 @@ void	setup_event_hooks(t_minirt *minirt)
 		DestroyNotify, NoEventMask, clean_and_exit, minirt);
 	mlx_hook(minirt->mlx.win_ptr,
 		KeyPress, KeyPressMask, handle_keypress_event, minirt);
+	mlx_hook(minirt->mlx.win_ptr,
+		KeyRelease, KeyReleaseMask, handle_keyrelease_event, minirt);
 }
 
 int	handle_keypress_event(int key, t_minirt *minirt)
@@ -35,5 +38,12 @@ int	handle_keypress_event(int key, t_minirt *minirt)
 		else if (mode == OBJECT)
 			interact_object(key, minirt);
 	}
+	return (0);
+}
+
+int	handle_keyrelease_event(int key, t_minirt *minirt)
+{
+	(void)minirt;
+	reset_mod_key(key);
 	return (0);
 }

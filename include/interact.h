@@ -6,7 +6,7 @@
 /*   By: ldulling <ldulling@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/29 01:02:26 by ldulling          #+#    #+#             */
-/*   Updated: 2024/06/29 17:38:42 by ldulling         ###   ########.fr       */
+/*   Updated: 2024/06/29 17:39:05 by ldulling         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,5 +26,7 @@ void	interact_camera(int key, t_minirt *minirt);
 void	interact_object(int key, t_minirt *minirt);
 bool	switch_interact_mode(t_interact_mode *mode, int key);
 bool	set_mod_key(int key);
+bool	reset_mod_key(int key);
+bool	toggle_mod_key(int key);
 
 #endif

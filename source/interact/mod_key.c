@@ -6,7 +6,7 @@
 /*   By: ldulling <ldulling@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/29 01:16:00 by ldulling          #+#    #+#             */
-/*   Updated: 2024/06/29 15:37:43 by ldulling         ###   ########.fr       */
+/*   Updated: 2024/06/29 17:23:16 by ldulling         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,11 +21,31 @@ t_mod_key	*get_mod_key(void)
 
 bool	set_mod_key(int key)
 {
-	if (key == XK_Shift_L || key == XK_Shift_R)
-		*get_mod_key() ^= K_SHIFT;
+	if (toggle_mod_key(key))
+		return (true);
+	else if (key == XK_Shift_L || key == XK_Shift_R)
+		*get_mod_key() |= K_SHIFT;
 	else if (key == XK_Control_L || key == XK_Control_R)
-		*get_mod_key() ^= K_CTRL;
-	else if (key == XK_Alt_L || key == XK_Alt_R)
+		*get_mod_key() |= K_CTRL;
+	else
+		return (false);
+	return (true);
+}
+
+bool	reset_mod_key(int key)
+{
+	if (key == XK_Shift_L || key == XK_Shift_R)
+		*get_mod_key() &= ~K_SHIFT;
+	else if (key == XK_Control_L || key == XK_Control_R)
+		*get_mod_key() &= ~K_CTRL;
+	else
+		return (false);
+	return (true);
+}
+
+bool	toggle_mod_key(int key)
+{
+	if (key == XK_Alt_L || key == XK_Alt_R)
 		*get_mod_key() ^= K_ALT;
 	else
 		return (false);
