@@ -13,12 +13,14 @@
 #include "interact_private.h"
 
 static bool	set_brightness(double *brightness, int key);
+static bool	reset_light(t_light *light, int key);
 
 void	interact_light(int key, t_minirt *minirt)
 {
 	if (set_translation(&minirt->scene->light.translation, key) || \
 		set_color(&minirt->scene->light.color, key) || \
-		set_brightness(&minirt->scene->light.brightness, key))
+		set_brightness(&minirt->scene->light.brightness, key) || \
+		reset_light(&minirt->scene->light, key))
 	{
 		minirt->stage |= LIGHT_CHANGE;
 	}
@@ -42,4 +44,16 @@ bool	set_brightness(double *brightness, int key)
 	(void)brightness;
 	(void)key;
 	return (false);
+}
+
+bool	reset_light(t_light *light, int key)
+{
+	if (key == XK_r)
+	{
+		printf("Reset light\n");
+		light->translation = vector(0.0, 0.0, 0.0);
+	}
+	else
+		return (false);
+	return (true);
 }
