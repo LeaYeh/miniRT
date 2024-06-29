@@ -46,7 +46,7 @@
 # define MAX_DEPTH			1
 
 # define INTERVAL_TRANSLATE	0.5
-# define INTERVAL_ROTATE	0.1
+# define INTERVAL_ROTATE	0.5
 # define INTERVAL_FOV		1
 # define FACTOR_FAST		10
 
