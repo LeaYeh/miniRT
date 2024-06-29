@@ -25,8 +25,7 @@ typedef enum e_interact_mode
 void	interact_camera(int key, t_minirt *minirt);
 void	interact_object(int key, t_minirt *minirt);
 bool	switch_interact_mode(t_interact_mode *mode, int key);
-bool	hold_mod_key(int key);
+bool	set_mod_key(int key);
 bool	release_mod_key(int key);
-bool	toggle_mod_key(int key);
 
 #endif
