@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   reader_object.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lyeh <lyeh@student.42vienna.com>           +#+  +:+       +#+        */
+/*   By: ldulling <ldulling@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/28 10:22:39 by lyeh              #+#    #+#             */
-/*   Updated: 2024/06/26 17:34:17 by lyeh             ###   ########.fr       */
+/*   Updated: 2024/06/29 19:59:19 by ldulling         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,11 +58,10 @@ bool	parse_sphere(t_obj *object)
 		!is_valid_float(diameter) || !is_valid_vector(color))
 		return (false);
 	object->type = SPHERE;
-	object->d_param1 = ft_atof(diameter);
-	if (!parse_vector(&object->org_position, position) || \
-		!parse_color_vector(&object->color, color))
-		return (false);
-	return (true);
+	object->org_d_param1 = ft_atof(diameter);
+	object->d_param1 = object->org_d_param1;
+	return (parse_vector(&object->org_position, position) && \
+		parse_color_vector(&object->color, color));
 }
 
 bool	parse_plane(t_obj *object)
@@ -80,11 +79,9 @@ bool	parse_plane(t_obj *object)
 		!is_valid_vector(norm) || !is_valid_vector(color))
 		return (false);
 	object->type = PLANE;
-	if (!parse_vector(&object->org_position, position) || \
-		!parse_unit_vector(&object->org_norm, norm) || \
-		!parse_color_vector(&object->color, color))
-		return (false);
-	return (true);
+	return (parse_vector(&object->org_position, position) && \
+		parse_unit_vector(&object->org_norm, norm) && \
+		parse_color_vector(&object->color, color));
 }
 
 bool	parse_cylinder(t_obj *object)
@@ -107,11 +104,11 @@ bool	parse_cylinder(t_obj *object)
 		!is_valid_vector(color))
 		return (false);
 	object->type = CYLINDER;
-	object->d_param1 = ft_atof(diameter);
-	object->d_param2 = ft_atof(height);
-	if (!parse_vector(&object->org_position, position) || \
-		!parse_unit_vector(&object->org_norm, norm) || \
-		!parse_color_vector(&object->color, color))
-		return (false);
-	return (true);
+	object->org_d_param1 = ft_atof(diameter);
+	object->d_param1 = object->org_d_param1;
+	object->org_d_param2 = ft_atof(height);
+	object->d_param2 = object->org_d_param2;
+	return (parse_vector(&object->org_position, position) && \
+		parse_unit_vector(&object->org_norm, norm) && \
+		parse_color_vector(&object->color, color));
 }

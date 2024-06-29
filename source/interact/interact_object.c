@@ -6,7 +6,7 @@
 /*   By: ldulling <ldulling@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/29 01:01:52 by ldulling          #+#    #+#             */
-/*   Updated: 2024/06/29 15:37:43 by ldulling         ###   ########.fr       */
+/*   Updated: 2024/06/29 19:45:28 by ldulling         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ void	interact_object(int key, t_minirt *minirt)
 		return ;
 	else if (set_rotation(&obj->rotation, key) || \
 		set_translation(&obj->translation, key) || \
+		set_scale(obj, key) || \
 		set_color(&obj->color, key) || \
 		reset_object(obj, key))
 	{

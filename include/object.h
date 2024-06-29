@@ -6,7 +6,7 @@
 /*   By: ldulling <ldulling@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/01 11:23:43 by lyeh              #+#    #+#             */
-/*   Updated: 2024/06/28 21:59:18 by ldulling         ###   ########.fr       */
+/*   Updated: 2024/06/29 19:24:43 by ldulling         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,8 @@ typedef struct s_object
 	t_vec3		position;
 	t_vec3		norm;
 	t_vec3		color;
+	double		org_d_param1;
+	double		org_d_param2;
 	double		d_param1;
 	double		d_param2;
 	t_vec3		translation;
