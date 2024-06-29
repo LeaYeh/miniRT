@@ -6,20 +6,20 @@
 /*   By: ldulling <ldulling@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/29 01:16:13 by ldulling          #+#    #+#             */
-/*   Updated: 2024/06/29 15:38:27 by ldulling         ###   ########.fr       */
+/*   Updated: 2024/06/29 16:55:17 by ldulling         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "interact_private.h"
 
-bool	set_interact_mode(t_interact_mode *mode, int key)
+bool	switch_interact_mode(t_interact_mode *mode, int key)
 {
-	if (key == XK_c)
+	if (key == XK_c && *mode != CAMERA)
 	{
 		printf("Switch to camera mode\n");
 		*mode = CAMERA;
 	}
-	else if (key == XK_o)
+	else if (key == XK_o && *mode != OBJECT)
 	{
 		printf("Switch to object mode\n");
 		*mode = OBJECT;

@@ -6,7 +6,7 @@
 /*   By: ldulling <ldulling@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/29 01:30:53 by ldulling          #+#    #+#             */
-/*   Updated: 2024/06/29 15:37:47 by ldulling         ###   ########.fr       */
+/*   Updated: 2024/06/29 16:43:01 by ldulling         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 bool	select_object(int key, t_list_d *objects)
 {
-	if (key == XK_Tab)
+	if (key == XK_Tab || key == XK_o)
 	{
 		if (*get_mod_key() & K_SHIFT)
 		{

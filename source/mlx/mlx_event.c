@@ -6,7 +6,7 @@
 /*   By: ldulling <ldulling@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/28 21:00:37 by ldulling          #+#    #+#             */
-/*   Updated: 2024/06/29 15:39:44 by ldulling         ###   ########.fr       */
+/*   Updated: 2024/06/29 17:38:20 by ldulling         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,11 +28,12 @@ int	handle_keypress_event(int key, t_minirt *minirt)
 
 	if (key == XK_Escape)
 		clean_and_exit(minirt);
-	set_mod_key(key);
-	set_interact_mode(&mode, key);
-	if (mode == CAMERA)
-		interact_camera(key, minirt);
-	else if (mode == OBJECT)
-		interact_object(key, minirt);
+	else if (!set_mod_key(key) && !switch_interact_mode(&mode, key))
+	{
+		if (mode == CAMERA)
+			interact_camera(key, minirt);
+		else if (mode == OBJECT)
+			interact_object(key, minirt);
+	}
 	return (0);
 }
