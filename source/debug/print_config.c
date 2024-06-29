@@ -6,7 +6,7 @@
 /*   By: ldulling <ldulling@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/29 20:33:13 by lyeh              #+#    #+#             */
-/*   Updated: 2024/06/29 22:04:39 by ldulling         ###   ########.fr       */
+/*   Updated: 2024/06/29 23:47:11 by ldulling         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ void	print_light(t_light light)
 	print_vector(light.org_position);
 	printf("\tPosition: ");
 	print_vector(light.position);
-	printf("\tRatio: %f\n", light.ratio);
+	printf("\tBrightness: %f\n", light.brightness);
 	printf("\tColor: ");
 	print_vector(light.color);
 }
@@ -62,7 +62,7 @@ void	print_amblight(t_amblight amblight)
 	printf("Ambient Light:\n");
 	printf("\tColor: ");
 	print_vector(amblight.color);
-	printf("\tRatio: %f\n", amblight.ratio);
+	printf("\tBrightness: %f\n", amblight.brightness);
 }
 
 void	print_scene(t_scene *scene)

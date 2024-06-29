@@ -22,3 +22,4 @@ Need to allow tab bc in subject examples it also uses tab
 
 # Todo
 - [ ] Rename objects to object_list.
+- [ ] We don't do anything with ratio/brightness atm.
