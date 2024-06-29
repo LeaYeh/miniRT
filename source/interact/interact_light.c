@@ -41,9 +41,27 @@ void	interact_amblight(int key, t_minirt *minirt)
 
 bool	set_brightness(double *brightness, int key)
 {
-	(void)brightness;
-	(void)key;
-	return (false);
+	double	interval;
+
+	interval = INTERVAL_BRIGHTNESS;
+	if (*get_mod_key() & K_SHIFT)
+	{
+		printf("Fast ");
+		interval *= FACTOR_FAST;
+	}
+	if (key == Button4)
+	{
+		printf("Increase brightness\n");
+		*brightness = fmin(*brightness + interval, 1.0);
+	}
+	else if (key == Button5)
+	{
+		printf("Decrease brightness\n");
+		*brightness = fmax(0, *brightness - interval);
+	}
+	else
+		return (false);
+	return (true);
 }
 
 bool	reset_light(t_light *light, int key)

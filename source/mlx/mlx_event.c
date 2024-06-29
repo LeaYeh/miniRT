@@ -60,9 +60,19 @@ int	handle_keyrelease_event(int key, t_minirt *minirt)
 
 int	handle_buttonpress_event(int button, int x, int y, t_minirt *minirt)
 {
+	t_interact_mode	*mode;
+
 	(void)x;
 	(void)y;
-	interact_object(button, minirt);
+	mode = get_interact_mode();
+	if (*mode == CAMERA)
+		interact_camera(button, minirt);
+	else if (*mode == OBJECT)
+		interact_object(button, minirt);
+	else if (*mode == LIGHT)
+		interact_light(button, minirt);
+	else if (*mode == AMBLIGHT)
+		interact_amblight(button, minirt);
 	return (0);
 }
 
