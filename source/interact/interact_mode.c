@@ -12,8 +12,18 @@
 
 #include "interact_private.h"
 
-bool	switch_interact_mode(t_interact_mode *mode, int key)
+t_interact_mode	*get_interact_mode(void)
 {
+	static t_interact_mode	mode = CAMERA;
+
+	return (&mode);
+}
+
+bool	switch_interact_mode(int key)
+{
+	t_interact_mode	*mode;
+
+	mode = get_interact_mode();
 	if (key == XK_c && *mode != CAMERA)
 	{
 		printf("Switch to camera mode\n");
