@@ -19,7 +19,7 @@ t_mod_key	*get_mod_key(void)
 	return (&mod_key);
 }
 
-bool	set_mod_key(int key)
+bool	hold_mod_key(int key)
 {
 	if (toggle_mod_key(key))
 		return (true);
@@ -32,7 +32,7 @@ bool	set_mod_key(int key)
 	return (true);
 }
 
-bool	reset_mod_key(int key)
+bool	release_mod_key(int key)
 {
 	if (key == XK_Shift_L || key == XK_Shift_R)
 		*get_mod_key() &= ~K_SHIFT;
