@@ -6,7 +6,7 @@
 /*   By: ldulling <ldulling@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/29 01:01:52 by ldulling          #+#    #+#             */
-/*   Updated: 2024/06/29 19:45:28 by ldulling         ###   ########.fr       */
+/*   Updated: 2024/06/29 21:16:25 by ldulling         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,8 +45,8 @@ bool	reset_object(t_obj *obj, int key)
 	else if (key == Button2)
 	{
 		printf("Reset scale\n");
-		obj->d_param1 = obj->org_d_param1;
-		obj->d_param2 = obj->org_d_param2;
+		obj->diameter = obj->org_diameter;
+		obj->height = obj->org_height;
 	}
 	else if (key == XK_r)
 	{
@@ -54,8 +54,8 @@ bool	reset_object(t_obj *obj, int key)
 		if (vec3.ops->magnitude(obj->translation) == 0 && \
 			vec3.ops->magnitude(obj->rotation) == 0)
 		{
-			obj->d_param1 = obj->org_d_param1;
-			obj->d_param2 = obj->org_d_param2;
+			obj->diameter = obj->org_diameter;
+			obj->height = obj->org_height;
 		}
 		obj->translation = vector(0.0, 0.0, 0.0);
 		obj->rotation = vector(0.0, 0.0, 0.0);

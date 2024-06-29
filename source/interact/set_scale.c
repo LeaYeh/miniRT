@@ -25,14 +25,14 @@ bool	set_scale(t_obj *obj, int key)
 	if (key == Button4)
 	{
 		printf("Scale up\n");
-		obj->d_param1 += interval;
-		obj->d_param2 += interval;
+		obj->diameter += interval;
+		obj->height += interval;
 	}
 	else if (key == Button5)
 	{
 		printf("Scale down\n");
-		obj->d_param1 -= interval;
-		obj->d_param2 -= interval;
+		obj->diameter -= interval;
+		obj->height -= interval;
 	}
 	else
 		return (false);
