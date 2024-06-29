@@ -35,14 +35,28 @@ void	interact_object(int key, t_minirt *minirt)
 
 bool	reset_object(t_obj *obj, int key)
 {
+	const t_vec3	vec3 = (t_vec3){.ops = init_ops()};
+
 	if (key == XK_space)
 	{
 		printf("Reset object orientation\n");
 		obj->rotation = vector(0.0, 0.0, 0.0);
 	}
+	else if (key == Button2)
+	{
+		printf("Reset scale\n");
+		obj->d_param1 = obj->org_d_param1;
+		obj->d_param2 = obj->org_d_param2;
+	}
 	else if (key == XK_r)
 	{
 		printf("Reset object\n");
+		if (vec3.ops->magnitude(obj->translation) == 0 && \
+			vec3.ops->magnitude(obj->rotation) == 0)
+		{
+			obj->d_param1 = obj->org_d_param1;
+			obj->d_param2 = obj->org_d_param2;
+		}
 		obj->translation = vector(0.0, 0.0, 0.0);
 		obj->rotation = vector(0.0, 0.0, 0.0);
 	}
