@@ -42,6 +42,10 @@ int	handle_keypress_event(int key, t_minirt *minirt)
 			interact_camera(key, minirt);
 		else if (mode == OBJECT)
 			interact_object(key, minirt);
+		else if (mode == LIGHT)
+			interact_light(key, minirt);
+		else if (mode == AMBLIGHT)
+			interact_amblight(key, minirt);
 	}
 	return (0);
 }

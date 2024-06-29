@@ -13,7 +13,7 @@ light change:
 Need to allow tab bc in subject examples it also uses tab
 
 # Events
-- [ ] Make light interactive.
+- [X] Make light interactive.
 - [X] Add support for scaling.
 - [ ] Add support for color change.
 - [ ] Pass rotation in full degrees so 90° can be easily counted.
