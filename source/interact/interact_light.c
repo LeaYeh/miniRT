@@ -55,13 +55,11 @@ bool	set_brightness(double *brightness, int key)
 
 bool	reset_light(t_light *light, int key)
 {
-	const t_vec3	vec3 = (t_vec3){.ops = init_ops()};
-
 	if (key == Button2)
 		light->brightness = light->org_brightness;
 	else if (key == XK_r)
 	{
-		if (vec3.ops->magnitude(light->translation) == 0)
+		if (vec3_magnitude(light->translation) == 0)
 			light->brightness = light->org_brightness;
 		light->translation = vector(0.0, 0.0, 0.0);
 	}

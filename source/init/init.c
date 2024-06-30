@@ -75,11 +75,9 @@ bool	init_ray_pool(t_ray **ray_pool, t_camera *camera)
 
 t_ray	create_ray_from_pixel_grid(t_camera *camera, int row, int col)
 {
-	const t_vec3	vec3 = (t_vec3){.ops = init_ops()};
-	t_vec3			pixel_positon;
+	t_vec3	pixel_positon;
 
 	pixel_positon = get_pixel_position(camera->pixel, row, col);
 	return (init_ray(camera->position,
-			vec3.ops->normalize(
-				vec3.ops->sub(pixel_positon, camera->position))));
+			vec3_normalize(vec3_sub(pixel_positon, camera->position))));
 }

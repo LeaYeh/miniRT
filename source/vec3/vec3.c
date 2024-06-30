@@ -10,39 +10,14 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "vec3_private.h"
-
-t_vec3_ops	*init_ops(void)
-{
-	static t_vec3_ops	ops = {
-		.add = vec3_add,
-		.sub = vec3_sub,
-		.mul = vec3_mul,
-		.div = vec3_div,
-		.cross = vec3_cross,
-		.normalize = vec3_normalize,
-		.mul_components = vec3_mul_components,
-		.dot = vec3_dot,
-		.magnitude = vec3_magnitude
-	};
-
-	return (&ops);
-}
+#include "vec3.h"
 
 t_vec3	vector(double x, double y, double z)
 {
-	t_vec3	vec;
-
-	vec.x = x;
-	vec.y = y;
-	vec.z = z;
-	vec.ops = NULL;
-	return (vec);
+	return ((t_vec3){x, y, z});
 }
 
 t_vec3	unit_vector(double x, double y, double z)
 {
-	const t_vec3	vec3 = (t_vec3){.ops = init_ops()};
-
-	return (vec3.ops->normalize(vector(x, y, z)));
+	return (vec3_normalize(vector(x, y, z)));
 }
