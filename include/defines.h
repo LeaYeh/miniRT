@@ -18,11 +18,6 @@
 # include <stdbool.h>
 # include <math.h>
 
-/* Error Codes */
-# define SUCCESS				0
-# define ERR_ARGC				1
-# define ERR_INIT				2
-
 /* Error Messages */
 # define INVALID_FILE_FMT		"Invalid file format."
 # define INVALID_IDENTIFIER		"Invalid identifier."

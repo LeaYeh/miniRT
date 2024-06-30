@@ -21,6 +21,13 @@
 # include <X11/X.h>
 # include <X11/keysym.h>
 
+enum e_error_code
+{
+	SUCCESS,
+	ERR_ARGC,
+	ERR_INIT
+};
+
 typedef enum e_stage
 {
 	NO_CHANGE		= 0,
