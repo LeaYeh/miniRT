@@ -16,7 +16,7 @@
 # include "defines.h"
 # include "ray.h"
 # include "object.h"
-# include "environment.h"
+# include "scene.h"
 
 typedef struct s_hit_record
 {
