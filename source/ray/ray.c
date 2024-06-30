@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   ray.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lyeh <lyeh@student.42vienna.com>           +#+  +:+       +#+        */
+/*   By: ldulling <ldulling@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/26 14:57:25 by lyeh              #+#    #+#             */
-/*   Updated: 2024/06/22 19:07:19 by lyeh             ###   ########.fr       */
+/*   Updated: 2024/06/30 20:18:59 by ldulling         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ray_private.h"
+#include "ray.h"
 
 t_ray	init_ray(t_vec3 origin, t_vec3 direction)
 {
