@@ -106,7 +106,7 @@ bool	is_only_whitespace(char *line)
 
 t_scene	*validate_scene(t_scene **scene)
 {
-	if (ft_memcmp(*scene, &(t_scene){0}, sizeof(t_scene)) == 0)
+	if (*scene && ft_memcmp(*scene, &(t_scene){0}, sizeof(t_scene)) == 0)
 	{
 		print_error(EMPTY_SCENE);
 		return (free_scene(scene), NULL);
