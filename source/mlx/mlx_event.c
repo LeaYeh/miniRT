@@ -6,7 +6,7 @@
 /*   By: ldulling <ldulling@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/28 21:00:37 by ldulling          #+#    #+#             */
-/*   Updated: 2024/06/29 20:06:39 by ldulling         ###   ########.fr       */
+/*   Updated: 2024/06/29 23:10:05 by ldulling         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@ static int	handle_keypress_event(int key, t_minirt *minirt);
 static int	handle_keyrelease_event(int key, t_minirt *minirt);
 static int	handle_buttonpress_event(
 				int button, int x, int y, t_minirt *minirt);
+static int	clean_and_exit(t_minirt *minirt);
 
 void	setup_event_hooks(t_minirt *minirt)
 {
@@ -58,4 +59,10 @@ int	handle_buttonpress_event(int button, int x, int y, t_minirt *minirt)
 	(void)y;
 	interact_object(button, minirt);
 	return (0);
+}
+
+int	clean_and_exit(t_minirt *minirt)
+{
+	free_minirt(minirt);
+	exit (0);
 }

@@ -6,7 +6,7 @@
 /*   By: ldulling <ldulling@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/29 15:40:04 by ldulling          #+#    #+#             */
-/*   Updated: 2024/06/29 15:40:15 by ldulling         ###   ########.fr       */
+/*   Updated: 2024/06/29 23:09:21 by ldulling         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,12 +31,14 @@ bool	init_mlx(t_mlx *mlx)
 	return (true);
 }
 
-int	clean_and_exit(t_minirt *minirt)
+void	free_mlx(t_mlx *mlx)
 {
-	mlx_destroy_window(minirt->mlx.mlx_ptr, minirt->mlx.win_ptr);
-	mlx_destroy_image(minirt->mlx.mlx_ptr, minirt->mlx.img.img_ptr);
-	mlx_destroy_display(minirt->mlx.mlx_ptr);
-	free(minirt->mlx.mlx_ptr);
-	free_minirt(minirt);
-	exit (0);
+	if (mlx->win_ptr)
+		mlx_destroy_window(mlx->mlx_ptr, mlx->win_ptr);
+	if (mlx->img.img_ptr)
+		mlx_destroy_image(mlx->mlx_ptr, mlx->img.img_ptr);
+	if (mlx->mlx_ptr)
+		mlx_destroy_display(mlx->mlx_ptr);
+	free(mlx->mlx_ptr);
+	ft_bzero(mlx, sizeof(t_mlx));
 }
