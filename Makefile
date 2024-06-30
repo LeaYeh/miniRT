@@ -28,6 +28,7 @@ BUILD_DIR		:=	build
 OBJ_DIR			:=	$(BUILD_DIR)/_obj
 DEP_DIR			:=	$(BUILD_DIR)/_dep
 LIB_DIR			:=	libraries
+ASSET_DIR		:=	assets
 
 
 #	Dependencies
@@ -46,14 +47,16 @@ BUILDFILES		:=	Makefile \
 CC 				:=	cc
 CC_VERSION		:=	$(shell $(CC) --version | head -1)
 CFLAGS_STD		:=	-Wall -Wextra -Werror -ggdb3
-CFLAGS_FSAN		:=	-fsanitize=address,undefined,bounds,float-divide-by-zero
+CFLAGS_SAN		:=	-fsanitize=address,undefined,bounds,float-divide-by-zero
 CFLAGS_OPT		:=	-O3
-CFLAGS 			?=	$(CFLAGS_STD) $(CFLAGS_FSAN)
+CFLAGS 			?=	$(CFLAGS_STD)
 INCFLAGS 		:=	$(addprefix -I,$(INC_DIR) $(LIB_INCLUDES))
 LIBFLAGS		:=	$(addprefix -L,$(LIBS)) \
 					$(addprefix -l,$(patsubst lib%,%,$(notdir $(LIBS) $(LIBS_EXT))))
 LIBFLAGS_TEST	:=	$(addprefix -l,$(LIBS_EXT_TEST))
 MAKEFLAGS		:=	-j -s
+
+ARGS				?=	$(ASSET_DIR)/$(shell ls -1 $(ASSET_DIR) | head -n 1)
 
 
 #	Valgrind
@@ -106,7 +109,7 @@ DEP_SUBDIRS		:=	$(sort $(dir $(DEP)))
 
 # ***************************** BUILD PROCESS ******************************** #
 
-.PHONY			:	all fast run test val valfd build build_test lib waitforlib \
+.PHONY			:	all fast run test san val valfd build build_test lib waitforlib \
 					clean fclean re
 
 
@@ -123,7 +126,7 @@ fast			:	re
 					$(MAKE) clean
 
 run				:	all
-					"./$(NAME)"
+					"./$(NAME)" $(ARGS)
 
 test			:
 					($(MAKE) --question build_test && echo $(MSG_NO_CHNG)) \
@@ -132,17 +135,22 @@ test			:
 							|| (echo $(MSG_FAILURE) && exit 42))
 					"./$(NAME_TEST)"
 
+san				:	CFLAGS := $(CFLAGS_STD) $(CFLAGS_SAN)
+san				:	re
+					$(MAKE) clean
+					"./$(NAME)" $(ARGS)
+
 val				:	all
-					$(VALGRIND) $(VALGRINDFLAGS) "./$(NAME)"
+					$(VALGRIND) $(VALGRINDFLAGS) "./$(NAME)" $(ARGS)
 
 valfd			:	all
 ifneq ($(TERMINAL),)
 					$(TERMINAL) $(TERMINALFLAGS) \
 					"bash -c 'trap \"\" SIGINT ; \
-					$(VALGRIND) $(VALGRINDFLAGS) $(VALGRINDFDFLAGS) ./$(NAME) ; \
+					$(VALGRIND) $(VALGRINDFLAGS) $(VALGRINDFDFLAGS) ./$(NAME) $(ARGS) ; \
 					exec bash'"
 else
-					$(VALGRIND) $(VALGRINDFLAGS) $(VALGRINDFDFLAGS) "./$(NAME)"
+					$(VALGRIND) $(VALGRINDFLAGS) $(VALGRINDFDFLAGS) "./$(NAME)" $(ARGS)
 endif
 
 
