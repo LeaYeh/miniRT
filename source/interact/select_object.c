@@ -6,11 +6,13 @@
 /*   By: ldulling <ldulling@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/29 01:30:53 by ldulling          #+#    #+#             */
-/*   Updated: 2024/06/29 16:43:01 by ldulling         ###   ########.fr       */
+/*   Updated: 2024/06/30 19:01:24 by ldulling         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "interact_private.h"
+
+static bool	select_n_object(int key, t_list_d *objects);
 
 bool	select_object(int key, t_list_d *objects)
 {
@@ -21,7 +23,14 @@ bool	select_object(int key, t_list_d *objects)
 		else
 			select_next_node(objects);
 	}
-	else if (key == XK_1)
+	else
+		return (select_n_object(key, objects));
+	return (true);
+}
+
+bool	select_n_object(int key, t_list_d *objects)
+{
+	if (key == XK_1)
 		select_n_node(1, objects);
 	else if (key == XK_2)
 		select_n_node(2, objects);

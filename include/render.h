@@ -6,12 +6,12 @@
 /*   By: ldulling <ldulling@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/17 20:28:36 by lyeh              #+#    #+#             */
-/*   Updated: 2024/06/25 23:23:33 by ldulling         ###   ########.fr       */
+/*   Updated: 2024/06/30 19:18:02 by ldulling         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef RENDERER_H
-# define RENDERER_H
+#ifndef RENDER_H
+# define RENDER_H
 
 # include "minirt.h"
 # include "ray.h"
