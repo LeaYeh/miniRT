@@ -11,7 +11,6 @@
 /* ************************************************************************** */
 
 #include "hit_private.h"
-#include "debug.h"
 
 static bool	hit_cylinder_side(t_vec3 vec3,
 				t_ray *ray, t_obj *cylinder, t_hit_record *rec);
@@ -125,8 +124,6 @@ static void	setup_hit_record_caps(
 
 	rec->shoot_direction = ray->direction;
 	rec->point = vec3.ops->add(ray->origin, vec3.ops->mul(ray->direction, t));
-	// if the ray is same direction as the normal of the cap, the dot product will be positive
-	// if the ray is opposite direction as the normal of the cap, the dot product will be negative
 	if (vec3.ops->dot(ray->direction, cylinder->norm) > 0)
 		rec->norm = vec3.ops->mul(cylinder->norm, -1);
 	else

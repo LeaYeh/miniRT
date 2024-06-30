@@ -12,7 +12,6 @@
 
 #include "canva.h"
 #include "camera.h"
-#include "debug.h"
 
 static void	setup_viewport_origin_corner(t_camera *camera);
 
@@ -21,7 +20,6 @@ void	setup_viewport(t_camera *camera)
 	const t_vec3	world_up = vector(0.0, 1.0, 0.0);
 	const t_vec3	vec3 = (t_vec3){.ops = init_ops()};
 
-	print_camera_detail(*camera);
 	camera->viewport.height = 2 * tan(camera->theta / 2);
 	camera->viewport.width = camera->aspect_ratio * camera->viewport.height;
 	camera->viewport.w = vec3.ops->normalize(vec3.ops->mul(camera->norm, -1));

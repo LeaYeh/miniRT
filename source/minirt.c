@@ -11,7 +11,6 @@
 /* ************************************************************************** */
 
 #include "minirt.h"
-#include "debug.h"
 #include "render.h"
 #include "mlx_utils.h"
 
@@ -28,7 +27,6 @@ bool	init_minirt(t_minirt *minirt, char *filename)
 	if (!init_ray_pool(&minirt->ray_pool, &minirt->scene->camera))
 		return (false);
 	minirt->stage = CAMERA_CHANGE;
-	print_camera_detail(minirt->scene->camera);
 	return (true);
 }
 
