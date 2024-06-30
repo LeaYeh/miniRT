@@ -37,7 +37,7 @@ bool	parse_norm_vector(t_vec3 *v, char *str)
 		return (false);
 	if (!is_in_range_vec3(v, -1.0, 1.0))
 		return (false);
-	if (vec3.ops->magnitude(*v) == 0)
+	if (fabs(vec3.ops->magnitude(*v)) < 1e-6)
 		return (false);
 	if (vec3.ops->magnitude(*v) == 1)
 		return (true);
