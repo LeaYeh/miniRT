@@ -56,9 +56,7 @@ bool	parse_ambient(t_scene *scene)
 		return (false);
 	scene->amblight.org_brightness = ft_atof(brightness);
 	scene->amblight.brightness = scene->amblight.org_brightness;
-	if (!parse_color_vector(&scene->amblight.color, color))
-		return (false);
-	return (true);
+	return (parse_color_vector(&scene->amblight.color, color));
 }
 
 bool	parse_camera(t_scene *scene)
@@ -101,7 +99,5 @@ bool	parse_light(t_scene *scene)
 		return (false);
 	scene->light.org_brightness = ft_atof(brightness);
 	scene->light.brightness = scene->light.org_brightness;
-	if (!parse_color_vector(&scene->light.color, color))
-		return (false);
-	return (true);
+	return (parse_color_vector(&scene->light.color, color));
 }
