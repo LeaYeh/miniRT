@@ -82,12 +82,12 @@ bool	set_rotation(t_vec3 *rotation, int key)
 	else if (key == XK_a)
 	{
 		printf("Yaw left\n");
-		rotation->y -= interval;
+		rotation->y += interval;
 	}
 	else if (key == XK_d)
 	{
 		printf("Yaw right\n");
-		rotation->y += interval;
+		rotation->y -= interval;
 	}
 	else if (key == XK_q)
 	{
