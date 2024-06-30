@@ -32,16 +32,21 @@ void	setup_event_hooks(t_minirt *minirt)
 
 int	handle_keypress_event(int key, t_minirt *minirt)
 {
-	static t_interact_mode	mode = CAMERA;
+	t_interact_mode	*mode;
 
 	if (key == XK_Escape)
 		clean_and_exit(minirt);
-	else if (!set_mod_key(key) && !switch_interact_mode(&mode, key))
+	else if (!set_mod_key(key) && !switch_interact_mode(key))
 	{
-		if (mode == CAMERA)
+		mode = get_interact_mode();
+		if (*mode == CAMERA)
 			interact_camera(key, minirt);
-		else if (mode == OBJECT)
+		else if (*mode == OBJECT)
 			interact_object(key, minirt);
+		else if (*mode == LIGHT)
+			interact_light(key, minirt);
+		else if (*mode == AMBLIGHT)
+			interact_amblight(key, minirt);
 	}
 	return (0);
 }
@@ -55,9 +60,19 @@ int	handle_keyrelease_event(int key, t_minirt *minirt)
 
 int	handle_buttonpress_event(int button, int x, int y, t_minirt *minirt)
 {
+	t_interact_mode	*mode;
+
 	(void)x;
 	(void)y;
-	interact_object(button, minirt);
+	mode = get_interact_mode();
+	if (*mode == CAMERA)
+		interact_camera(button, minirt);
+	else if (*mode == OBJECT)
+		interact_object(button, minirt);
+	else if (*mode == LIGHT)
+		interact_light(button, minirt);
+	else if (*mode == AMBLIGHT)
+		interact_amblight(button, minirt);
 	return (0);
 }
 

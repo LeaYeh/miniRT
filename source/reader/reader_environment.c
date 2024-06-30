@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   reader_environment.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lyeh <lyeh@student.42vienna.com>           +#+  +:+       +#+        */
+/*   By: ldulling <ldulling@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/28 10:24:15 by lyeh              #+#    #+#             */
-/*   Updated: 2024/06/26 17:35:36 by lyeh             ###   ########.fr       */
+/*   Updated: 2024/06/29 23:46:22 by ldulling         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,16 +38,17 @@ bool	parse_environment(t_scene *scene, char *id)
 
 bool	parse_ambient(t_scene *scene)
 {
-	char	*ratio;
+	char	*brightness;
 	char	*color;
 
-	ratio = ft_strtok(NULL, WHITESPACE);
+	brightness = ft_strtok(NULL, WHITESPACE);
 	color = ft_strtok(NULL, WHITESPACE);
 	if (ft_strtok(NULL, WHITESPACE) != NULL)
 		return (false);
-	if (!is_valid_float(ratio) || !is_valid_vector(color))
+	if (!is_valid_float(brightness) || !is_valid_vector(color))
 		return (false);
-	scene->amblight.ratio = ft_atof(ratio);
+	scene->amblight.org_brightness = ft_atof(brightness);
+	scene->amblight.brightness = scene->amblight.org_brightness;
 	if (!parse_color_vector(&scene->amblight.color, color))
 		return (false);
 	return (true);
@@ -78,20 +79,21 @@ bool	parse_camera(t_scene *scene)
 bool	parse_light(t_scene *scene)
 {
 	char	*position;
-	char	*ratio;
+	char	*brightness;
 	char	*color;
 
 	position = ft_strtok(NULL, WHITESPACE);
-	ratio = ft_strtok(NULL, WHITESPACE);
+	brightness = ft_strtok(NULL, WHITESPACE);
 	color = ft_strtok(NULL, WHITESPACE);
 	if (ft_strtok(NULL, WHITESPACE) != NULL)
 		return (false);
 	if (!is_valid_vector(position) || \
-		!is_valid_float(ratio) || !is_valid_vector(color))
+		!is_valid_float(brightness) || !is_valid_vector(color))
 		return (false);
 	if (!parse_vector(&scene->light.org_position, position))
 		return (false);
-	scene->light.ratio = ft_atof(ratio);
+	scene->light.org_brightness = ft_atof(brightness);
+	scene->light.brightness = scene->light.org_brightness;
 	if (!parse_color_vector(&scene->light.color, color))
 		return (false);
 	return (true);
