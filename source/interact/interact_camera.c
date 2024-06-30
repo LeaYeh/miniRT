@@ -6,7 +6,7 @@
 /*   By: ldulling <ldulling@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/29 01:01:57 by ldulling          #+#    #+#             */
-/*   Updated: 2024/06/30 19:31:51 by ldulling         ###   ########.fr       */
+/*   Updated: 2024/06/30 19:49:55 by ldulling         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,10 +48,16 @@ bool	reset_camera(t_camera *camera, int key)
 
 	if (key == XK_space)
 		camera->rotation = vector(0.0, 0.0, 0.0);
+	else if (key == Button2)
+		camera->fov = camera->org_fov;
 	else if (key == XK_r)
 	{
 		if (vec3.ops->magnitude(camera->translation) == 0)
+		{
+			if (vec3.ops->magnitude(camera->rotation) == 0)
+				camera->fov = camera->org_fov;
 			camera->rotation = vector(0.0, 0.0, 0.0);
+		}
 		camera->translation = vector(0.0, 0.0, 0.0);
 	}
 	else

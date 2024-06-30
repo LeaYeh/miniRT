@@ -6,7 +6,7 @@
 /*   By: ldulling <ldulling@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/01 11:49:22 by lyeh              #+#    #+#             */
-/*   Updated: 2024/06/30 19:27:47 by ldulling         ###   ########.fr       */
+/*   Updated: 2024/06/30 19:36:41 by ldulling         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@ typedef struct s_camera
 	t_vec3			org_norm;
 	t_vec3			position;
 	t_vec3			norm;
+	double			org_fov;
 	double			fov;
 	double			theta;
 	double			focal_length;
