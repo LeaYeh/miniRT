@@ -53,8 +53,8 @@ static t_vec3	rotate_y(t_vec3 v, double angle)
 static t_vec3	rotate_z(t_vec3 v, double angle)
 {
 	const double	rad = angle * M_PI / 180.0;
-	double	x;
-	double	y;
+	double			x;
+	double			y;
 
 	x = v.x * cos(rad) - v.y * sin(rad);
 	y = v.x * sin(rad) + v.y * cos(rad);

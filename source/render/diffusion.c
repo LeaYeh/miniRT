@@ -30,7 +30,6 @@ t_vec3	diffuse(t_hit_record *rec, t_light *light)
 			vec3.ops->sub(light->position, rec->point));
 	diffuse_factor = vec3.ops->dot(light_direction, rec->norm);
 	diffuse_factor = fmaxf(diffuse_factor, 0);
-	// TODO: All color vectors should be normalized.
 	diffuse_color = vec3.ops->mul(
 			vec3.ops->mul_components(light->color, rec->color), diffuse_factor);
 	return (vec3.ops->mul(diffuse_color, light->brightness));

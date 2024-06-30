@@ -28,8 +28,8 @@ void	setup_viewport(t_camera *camera)
 	else if (camera->norm.y == -1.0)
 		camera->viewport.u = vector(-1.0, 0.0, 0.0);
 	else
-	camera->viewport.u = vec3.ops->normalize(
-			vec3.ops->cross(world_up, camera->viewport.w));
+		camera->viewport.u = vec3.ops->normalize(
+				vec3.ops->cross(world_up, camera->viewport.w));
 	camera->viewport.v = vec3.ops->cross(
 			camera->viewport.u, camera->viewport.w);
 	setup_viewport_origin_corner(camera);
