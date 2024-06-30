@@ -54,6 +54,7 @@ t_scene	*parse_scene(int fd)
 		print_error(FAILED_ALLOC_MEM);
 		return (NULL);
 	}
+	scene->bg_color = vector(0, 0, 0);
 	while (true)
 	{
 		line = get_next_line(fd);
