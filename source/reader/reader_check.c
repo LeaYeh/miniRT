@@ -29,6 +29,8 @@ bool	is_valid_float(char *str)
 	bool	saw_digit;
 	int		i;
 
+	if (!str)
+		return (false);
 	saw_digit = false;
 	i = 0;
 	if (ft_issign(str[i]))
@@ -57,6 +59,8 @@ bool	is_valid_vector(char *str)
 	char	*element;
 	int		i;
 
+	if (!str)
+		return (false);
 	if (str[ft_strlen(str) - 1] == ',')
 		return (false);
 	i = 0;
