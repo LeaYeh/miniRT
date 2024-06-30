@@ -15,6 +15,7 @@
 static t_scene	*parse_scene(int fd);
 static bool		parse_line(t_scene *scene, char *line);
 static bool		is_only_whitespace(char *line);
+static t_scene	*validate_scene(t_scene **scene);
 
 t_scene	*read_scene(char *filename)
 {
@@ -38,7 +39,7 @@ t_scene	*read_scene(char *filename)
 		print_error(FAILED_CLOSE_FILE);
 		return (free_scene(&scene), NULL);
 	}
-	return (scene);
+	return (validate_scene(&scene));
 }
 
 t_scene	*parse_scene(int fd)
@@ -101,4 +102,14 @@ bool	is_only_whitespace(char *line)
 		line++;
 	}
 	return (true);
+}
+
+t_scene	*validate_scene(t_scene **scene)
+{
+	if (ft_memcmp(*scene, &(t_scene){0}, sizeof(t_scene)) == 0)
+	{
+		print_error(EMPTY_SCENE);
+		return (free_scene(scene), NULL);
+	}
+	return (*scene);
 }

@@ -33,6 +33,7 @@
 # define INVALID_SPH_FMT		"Invalid sphere format."
 # define INVALID_PLA_FMT		"Invalid plane format."
 # define INVALID_CYL_FMT		"Invalid cylinder format."
+# define EMPTY_SCENE			"Empty scene."
 # define FAILED_OPEN_FILE		"Failed to open file."
 # define FAILED_READ_FILE		"Failed to read file."
 # define FAILED_CLOSE_FILE		"Failed to close file."
