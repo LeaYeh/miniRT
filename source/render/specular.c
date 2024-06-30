@@ -28,10 +28,9 @@ t_vec3	specular(t_hit_record *rec, t_light *light)
 	specular_factor = vec3.ops->dot(
 			reflect_direction(light_direction, rec->norm), view_direction);
 	specular_factor = fmaxf(0.0, fminf(specular_factor, 1.0));
-	// TODO: All objects should have a shininess factor. Or hard code it.
-	specular_factor = pow(specular_factor, 10);
+	specular_factor = pow(specular_factor, SHINYNESS);
 	specular_color = vec3.ops->mul(
 			light->color,
 			specular_factor);
-	return (specular_color);
+	return (vec3.ops->mul(specular_color, light->brightness));
 }

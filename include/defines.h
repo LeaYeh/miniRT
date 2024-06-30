@@ -18,11 +18,6 @@
 # include <stdbool.h>
 # include <math.h>
 
-/* Error Codes */
-# define SUCCESS				0
-# define ERR_ARGC				1
-# define ERR_INIT				2
-
 /* Error Messages */
 # define INVALID_FILE_FMT		"Invalid file format."
 # define INVALID_IDENTIFIER		"Invalid identifier."
@@ -46,6 +41,7 @@
 # define HORIZONTAL_UNIT		1
 # define VERTICAL_UNIT			1
 
+# define SHINYNESS				100
 # define MAX_DEPTH				1
 
 # define INTERVAL_TRANSLATE		0.5
