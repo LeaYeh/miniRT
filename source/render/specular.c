@@ -33,5 +33,5 @@ t_vec3	specular(t_hit_record *rec, t_light *light)
 	specular_color = vec3.ops->mul(
 			light->color,
 			specular_factor);
-	return (specular_color);
+	return (vec3.ops->mul(specular_color, light->brightness));
 }

@@ -22,7 +22,7 @@ Need to allow tab bc in subject examples it also uses tab
 
 # Todo
 - [ ] Rename objects to object_list.
-- [ ] We don't do anything with ratio/brightness atm.
+- [X] We don't do anything with ratio/brightness atm.
 - [ ] Reset zoom.
 - [X] Check if max values of subject should be checked in parsing.
 
