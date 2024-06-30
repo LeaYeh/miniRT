@@ -47,9 +47,9 @@ BUILDFILES		:=	Makefile \
 CC 				:=	cc
 CC_VERSION		:=	$(shell $(CC) --version | head -1)
 CFLAGS_STD		:=	-Wall -Wextra -Werror -ggdb3
-CFLAGS_FSAN		:=	-fsanitize=address,undefined,bounds,float-divide-by-zero
+CFLAGS_SAN		:=	-fsanitize=address,undefined,bounds,float-divide-by-zero
 CFLAGS_OPT		:=	-O3
-CFLAGS 			?=	$(CFLAGS_STD) $(CFLAGS_FSAN)
+CFLAGS 			?=	$(CFLAGS_STD)
 INCFLAGS 		:=	$(addprefix -I,$(INC_DIR) $(LIB_INCLUDES))
 LIBFLAGS		:=	$(addprefix -L,$(LIBS)) \
 					$(addprefix -l,$(patsubst lib%,%,$(notdir $(LIBS) $(LIBS_EXT))))
@@ -107,7 +107,7 @@ DEP_SUBDIRS		:=	$(sort $(dir $(DEP)))
 
 # ***************************** BUILD PROCESS ******************************** #
 
-.PHONY			:	all fast run test val valfd build build_test lib waitforlib \
+.PHONY			:	all fast run test san val valfd build build_test lib waitforlib \
 					clean fclean re
 
 
@@ -133,11 +133,16 @@ test			:
 							|| (echo $(MSG_FAILURE) && exit 42))
 					"./$(NAME_TEST)"
 
-val				:	fast
+san				:	CFLAGS := $(CFLAGS_STD) $(CFLAGS_SAN)
+san				:	re
+					$(MAKE) clean
+					"./$(NAME)" "$(ASSET_DIR)/$(shell ls -1 $(ASSET_DIR) | head -n 1)"
+
+val				:	all
 					$(VALGRIND) $(VALGRINDFLAGS) \
 					"./$(NAME)" "$(ASSET_DIR)/$(shell ls -1 $(ASSET_DIR) | head -n 1)"
 
-valfd			:	fast
+valfd			:	all
 ifneq ($(TERMINAL),)
 					$(TERMINAL) $(TERMINALFLAGS) \
 					"bash -c 'trap \"\" SIGINT ; \
