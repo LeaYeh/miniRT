@@ -6,7 +6,7 @@
 /*   By: ldulling <ldulling@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/29 01:01:57 by ldulling          #+#    #+#             */
-/*   Updated: 2024/06/29 23:38:41 by ldulling         ###   ########.fr       */
+/*   Updated: 2024/06/30 19:31:51 by ldulling         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,10 +33,10 @@ bool	set_zoom(t_camera *camera, int key)
 	interval = INTERVAL_FOV;
 	if (*get_mod_key() & K_SHIFT)
 		interval *= FACTOR_FAST;
-	if (key == XK_KP_Add)
-		camera->fov -= interval;
-	else if (key == XK_KP_Subtract)
-		camera->fov += interval;
+	if (key == Button4)
+		camera->fov = fmax(0, camera->fov - interval);
+	else if (key == Button5)
+		camera->fov = fmin(camera->fov + interval, 180.0);
 	else
 		return (false);
 	return (true);

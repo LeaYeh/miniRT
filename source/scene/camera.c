@@ -3,14 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   camera.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lyeh <lyeh@student.42vienna.com>           +#+  +:+       +#+        */
+/*   By: ldulling <ldulling@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/01 12:13:23 by lyeh              #+#    #+#             */
-/*   Updated: 2024/06/26 18:34:30 by lyeh             ###   ########.fr       */
+/*   Updated: 2024/06/30 19:28:04 by ldulling         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "camera_private.h"
+#include "camera.h"
+#include "transform.h"
 
 void	init_camera(t_camera *camera)
 {
