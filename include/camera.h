@@ -24,6 +24,7 @@ typedef struct s_ray		t_ray;
 
 typedef struct s_camera
 {
+	bool			is_init;
 	t_vec3			org_position;
 	t_vec3			org_norm;
 	t_vec3			position;

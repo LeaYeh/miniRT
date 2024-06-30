@@ -18,25 +18,23 @@ static bool	parse_light(t_scene *scene);
 
 bool	parse_environment(t_scene *scene, char *id)
 {
-	static bool	is_parsed[3];
-
-	if (ft_strcmp(id, "A") == 0 && !is_parsed[0])
+	if (!scene->amblight.is_init && ft_strcmp(id, "A") == 0)
 	{
 		if (!parse_ambient(scene))
 			return (print_error(INVALID_AMB_FMT), false);
-		is_parsed[0] = true;
+		scene->amblight.is_init = true;
 	}
-	else if (ft_strcmp(id, "C") == 0 && !is_parsed[1])
+	else if (!scene->camera.is_init && ft_strcmp(id, "C") == 0)
 	{
 		if (!parse_camera(scene))
 			return (print_error(INVALID_CAM_FMT), false);
-		is_parsed[1] = true;
+		scene->camera.is_init = true;
 	}
-	else if (ft_strcmp(id, "L") == 0 && !is_parsed[2])
+	else if (!scene->light.is_init && ft_strcmp(id, "L") == 0)
 	{
 		if (!parse_light(scene))
 			return (print_error(INVALID_LIG_FMT), false);
-		is_parsed[2] = true;
+		scene->light.is_init = true;
 	}
 	else
 		return (print_error(MULTIPLE_UNIQ_ID), false);

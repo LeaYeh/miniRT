@@ -35,6 +35,7 @@
 # define INVALID_CYL_FMT		"Invalid cylinder format."
 # define MULTIPLE_UNIQ_ID		"Multiple unique identifiers."
 # define EMPTY_SCENE			"Empty scene."
+# define NO_CAMERA				"No camera."
 # define FAILED_OPEN_FILE		"Failed to open file."
 # define FAILED_READ_FILE		"Failed to read file."
 # define FAILED_CLOSE_FILE		"Failed to close file."
