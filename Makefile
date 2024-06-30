@@ -28,6 +28,7 @@ BUILD_DIR		:=	build
 OBJ_DIR			:=	$(BUILD_DIR)/_obj
 DEP_DIR			:=	$(BUILD_DIR)/_dep
 LIB_DIR			:=	libraries
+ASSET_DIR		:=	assets
 
 
 #	Dependencies
@@ -132,17 +133,20 @@ test			:
 							|| (echo $(MSG_FAILURE) && exit 42))
 					"./$(NAME_TEST)"
 
-val				:	all
-					$(VALGRIND) $(VALGRINDFLAGS) "./$(NAME)"
+val				:	fast
+					$(VALGRIND) $(VALGRINDFLAGS) \
+					"./$(NAME)" "$(ASSET_DIR)/$(shell ls -1 $(ASSET_DIR) | head -n 1)"
 
-valfd			:	all
+valfd			:	fast
 ifneq ($(TERMINAL),)
 					$(TERMINAL) $(TERMINALFLAGS) \
 					"bash -c 'trap \"\" SIGINT ; \
-					$(VALGRIND) $(VALGRINDFLAGS) $(VALGRINDFDFLAGS) ./$(NAME) ; \
+					$(VALGRIND) $(VALGRINDFLAGS) $(VALGRINDFDFLAGS) \
+					./$(NAME) $(ASSET_DIR)/$(shell ls -1 $(ASSET_DIR) | head -n 1); \
 					exec bash'"
 else
-					$(VALGRIND) $(VALGRINDFLAGS) $(VALGRINDFDFLAGS) "./$(NAME)"
+					$(VALGRIND) $(VALGRINDFLAGS) $(VALGRINDFDFLAGS) \
+					"./$(NAME)" "$(ASSET_DIR)/$(shell ls -1 $(ASSET_DIR) | head -n 1)"
 endif
 
 
