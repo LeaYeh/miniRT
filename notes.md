@@ -24,7 +24,7 @@ Need to allow tab bc in subject examples it also uses tab
 - [ ] Rename objects to object_list.
 - [ ] We don't do anything with ratio/brightness atm.
 - [ ] Reset zoom.
-- [ ] Check if max values of subject should be checked in parsing.
+- [X] Check if max values of subject should be checked in parsing.
 
 # MLX functions
 mlx_get_screen_size()

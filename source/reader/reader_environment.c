@@ -56,7 +56,8 @@ bool	parse_ambient(t_scene *scene)
 		return (false);
 	scene->amblight.org_brightness = ft_atof(brightness);
 	scene->amblight.brightness = scene->amblight.org_brightness;
-	return (parse_color_vector(&scene->amblight.color, color));
+	return (is_in_range_double(scene->amblight.org_brightness, 0.0, 1.0) && \
+		parse_color_vector(&scene->amblight.color, color));
 }
 
 bool	parse_camera(t_scene *scene)
@@ -73,12 +74,11 @@ bool	parse_camera(t_scene *scene)
 	if (!is_valid_vector(position) || \
 		!is_valid_vector(norm) || !is_valid_float(fov))
 		return (false);
-	if (!parse_vector(&scene->camera.org_position, position))
-		return (false);
-	if (!parse_unit_vector(&scene->camera.org_norm, norm))
+	if (!parse_vector(&scene->camera.org_position, position) || \
+		!parse_norm_vector(&scene->camera.org_norm, norm))
 		return (false);
 	scene->camera.fov = ft_atof(fov);
-	return (true);
+	return (is_in_range_double(scene->camera.fov, 0.0, 180.0));
 }
 
 bool	parse_light(t_scene *scene)
@@ -99,5 +99,6 @@ bool	parse_light(t_scene *scene)
 		return (false);
 	scene->light.org_brightness = ft_atof(brightness);
 	scene->light.brightness = scene->light.org_brightness;
-	return (parse_color_vector(&scene->light.color, color));
+	return (is_in_range_double(scene->light.org_brightness, 0.0, 1.0) && \
+		parse_color_vector(&scene->light.color, color));
 }

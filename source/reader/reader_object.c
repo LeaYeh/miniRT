@@ -80,7 +80,7 @@ bool	parse_plane(t_obj *object)
 		return (false);
 	object->type = PLANE;
 	return (parse_vector(&object->org_position, position) && \
-		parse_unit_vector(&object->org_norm, norm) && \
+		parse_norm_vector(&object->org_norm, norm) && \
 		parse_color_vector(&object->color, color));
 }
 
@@ -109,6 +109,6 @@ bool	parse_cylinder(t_obj *object)
 	object->org_height = ft_atof(height);
 	object->height = object->org_height;
 	return (parse_vector(&object->org_position, position) && \
-		parse_unit_vector(&object->org_norm, norm) && \
+		parse_norm_vector(&object->org_norm, norm) && \
 		parse_color_vector(&object->color, color));
 }

@@ -73,3 +73,15 @@ bool	is_valid_vector(char *str)
 	}
 	return (i == 3);
 }
+
+bool	is_in_range_double(double num, double min, double max)
+{
+	return (num >= min && num <= max);
+}
+
+bool	is_in_range_vec3(t_vec3 *v, double min, double max)
+{
+	return (is_in_range_double(v->x, min, max) && \
+			is_in_range_double(v->y, min, max) && \
+			is_in_range_double(v->z, min, max));
+}
