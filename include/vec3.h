@@ -15,31 +15,23 @@
 
 # include "defines.h"
 
-typedef struct s_vector_3d	t_vec3;
-
-typedef struct s_vector_3d_ops
-{
-	t_vec3	(*add)(t_vec3, t_vec3);
-	t_vec3	(*sub)(t_vec3, t_vec3);
-	t_vec3	(*mul)(t_vec3, double);
-	t_vec3	(*div)(t_vec3, double);
-	t_vec3	(*cross)(t_vec3, t_vec3);
-	t_vec3	(*normalize)(t_vec3);
-	t_vec3	(*mul_components)(t_vec3, t_vec3);
-	double	(*dot)(t_vec3, t_vec3);
-	double	(*magnitude)(t_vec3);
-}	t_vec3_ops;
-
 typedef struct s_vector_3d
 {
 	double				x;
 	double				y;
 	double				z;
-	const t_vec3_ops	*ops;
 }	t_vec3;
 
-t_vec3_ops	*init_ops(void);
 t_vec3		vector(double x, double y, double z);
 t_vec3		unit_vector(double x, double y, double z);
+t_vec3		vec3_add(t_vec3 v1, t_vec3 v2);
+t_vec3		vec3_sub(t_vec3 v1, t_vec3 v2);
+t_vec3		vec3_mul(t_vec3 v, double scalar);
+t_vec3		vec3_div(t_vec3 v, double scalar);
+double		vec3_dot(t_vec3 v1, t_vec3 v2);
+t_vec3		vec3_cross(t_vec3 v1, t_vec3 v2);
+t_vec3		vec3_mul_components(t_vec3 v1, t_vec3 v2);
+double		vec3_magnitude(t_vec3 v);
+t_vec3		vec3_normalize(t_vec3 v);
 
 #endif

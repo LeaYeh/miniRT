@@ -81,11 +81,10 @@ bool	render_pixel(void *param, t_ray *ray)
 
 t_vec3	compute_color(t_scene *scene, t_hit_record *rec)
 {
-	const t_vec3	vec3 = (t_vec3){.ops = init_ops()};
-	t_vec3			color;
-	t_vec3			ambient_color;
-	t_vec3			diffuse_color;
-	t_vec3			specular_color;
+	t_vec3	color;
+	t_vec3	ambient_color;
+	t_vec3	diffuse_color;
+	t_vec3	specular_color;
 
 	if (rec->t == INFINITY)
 		return (scene->bg_color);
@@ -96,8 +95,8 @@ t_vec3	compute_color(t_scene *scene, t_hit_record *rec)
 		return (ambient_color);
 	diffuse_color = diffuse(rec, &scene->light);
 	specular_color = specular(rec, &scene->light);
-	color = vec3.ops->add(ambient_color, diffuse_color);
-	color = vec3.ops->add(color, specular_color);
+	color = vec3_add(ambient_color, diffuse_color);
+	color = vec3_add(color, specular_color);
 	return (clamp_color(color));
 }
 

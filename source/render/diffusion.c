@@ -21,16 +21,14 @@ Notes:
 */
 t_vec3	diffuse(t_hit_record *rec, t_light *light)
 {
-	const t_vec3	vec3 = (t_vec3){.ops = init_ops()};
-	t_vec3			light_direction;
-	double			diffuse_factor;
-	t_vec3			diffuse_color;
+	t_vec3	light_direction;
+	double	diffuse_factor;
+	t_vec3	diffuse_color;
 
-	light_direction = vec3.ops->normalize(
-			vec3.ops->sub(light->position, rec->point));
-	diffuse_factor = vec3.ops->dot(light_direction, rec->norm);
+	light_direction = vec3_normalize(vec3_sub(light->position, rec->point));
+	diffuse_factor = vec3_dot(light_direction, rec->norm);
 	diffuse_factor = fmaxf(diffuse_factor, 0);
-	diffuse_color = vec3.ops->mul(
-			vec3.ops->mul_components(light->color, rec->color), diffuse_factor);
-	return (vec3.ops->mul(diffuse_color, light->brightness));
+	diffuse_color = vec3_mul(
+			vec3_mul_components(light->color, rec->color), diffuse_factor);
+	return (vec3_mul(diffuse_color, light->brightness));
 }
