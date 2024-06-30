@@ -6,7 +6,7 @@
 /*   By: ldulling <ldulling@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/28 10:24:15 by lyeh              #+#    #+#             */
-/*   Updated: 2024/06/29 23:46:22 by ldulling         ###   ########.fr       */
+/*   Updated: 2024/06/30 19:36:35 by ldulling         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,8 @@ bool	parse_camera(t_scene *scene)
 	if (!parse_vector(&scene->camera.org_position, position) || \
 		!parse_norm_vector(&scene->camera.org_norm, norm))
 		return (false);
-	scene->camera.fov = ft_atof(fov);
+	scene->camera.org_fov = ft_atof(fov);
+	scene->camera.fov = scene->camera.org_fov;
 	return (is_in_range_double(scene->camera.fov, 0.0, 180.0));
 }
 

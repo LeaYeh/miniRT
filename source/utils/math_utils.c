@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   camera_utils.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lyeh <lyeh@student.42vienna.com>           +#+  +:+       +#+        */
+/*   By: ldulling <ldulling@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/02 20:38:16 by lyeh              #+#    #+#             */
-/*   Updated: 2024/06/02 20:40:48 by lyeh             ###   ########.fr       */
+/*   Updated: 2024/06/30 19:24:22 by ldulling         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "camera_private.h"
+#include "utils.h"
 
 double	degree_to_radian(double degrees)
 {

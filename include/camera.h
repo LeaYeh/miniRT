@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   camera.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lyeh <lyeh@student.42vienna.com>           +#+  +:+       +#+        */
+/*   By: ldulling <ldulling@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/01 11:49:22 by lyeh              #+#    #+#             */
-/*   Updated: 2024/06/26 17:53:25 by lyeh             ###   ########.fr       */
+/*   Updated: 2024/06/30 19:36:41 by ldulling         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 # include "vec3.h"
 # include "ray.h"
 # include "canva.h"
+# include "utils.h"
 
 typedef struct s_viewport	t_viewport;
 typedef struct s_pixel_grid	t_pixel_grid;
@@ -29,6 +30,7 @@ typedef struct s_camera
 	t_vec3			org_norm;
 	t_vec3			position;
 	t_vec3			norm;
+	double			org_fov;
 	double			fov;
 	double			theta;
 	double			focal_length;

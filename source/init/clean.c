@@ -6,7 +6,7 @@
 /*   By: ldulling <ldulling@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/30 19:04:15 by ldulling          #+#    #+#             */
-/*   Updated: 2024/06/30 19:20:28 by ldulling         ###   ########.fr       */
+/*   Updated: 2024/06/30 19:40:38 by ldulling         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ void	free_ray_pool(t_ray **ray_pool, t_pixel_grid *pixel)
 	int	i;
 	int	j;
 
-	if (!pixel)
+	if (!*ray_pool)
 		return ;
 	i = 0;
 	while (i < pixel->row_size)

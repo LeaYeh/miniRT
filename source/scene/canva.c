@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   canva.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lyeh <lyeh@student.42vienna.com>           +#+  +:+       +#+        */
+/*   By: ldulling <ldulling@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/18 10:26:09 by lyeh              #+#    #+#             */
-/*   Updated: 2024/06/26 18:31:22 by lyeh             ###   ########.fr       */
+/*   Updated: 2024/06/30 19:23:26 by ldulling         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@ void	setup_viewport(t_camera *camera)
 	const t_vec3	world_up = vector(0.0, 1.0, 0.0);
 	const t_vec3	vec3 = (t_vec3){.ops = init_ops()};
 
+	camera->theta = degree_to_radian(camera->fov);
 	camera->viewport.height = 2 * tan(camera->theta / 2);
 	camera->viewport.width = camera->aspect_ratio * camera->viewport.height;
 	camera->viewport.w = vec3.ops->normalize(vec3.ops->mul(camera->norm, -1));
