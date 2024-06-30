@@ -15,6 +15,7 @@
 static t_scene	*parse_scene(int fd);
 static bool		parse_line(t_scene *scene, char *line);
 static bool		is_only_whitespace(char *line);
+static void		validate_scene(t_scene **scene);
 
 t_scene	*read_scene(char *filename)
 {
@@ -38,6 +39,7 @@ t_scene	*read_scene(char *filename)
 		print_error(FAILED_CLOSE_FILE);
 		return (free_scene(&scene), NULL);
 	}
+	validate_scene(&scene);
 	return (scene);
 }
 
@@ -101,4 +103,17 @@ bool	is_only_whitespace(char *line)
 		line++;
 	}
 	return (true);
+}
+
+void	validate_scene(t_scene **scene)
+{
+	if (!*scene)
+		return ;
+	if (ft_memcmp(*scene, &(t_scene){0}, sizeof(t_scene)) == 0)
+		print_error(EMPTY_SCENE);
+	else if (!(*scene)->camera.is_init)
+		print_error(NO_CAMERA);
+	else
+		return ;
+	free_scene(scene);
 }

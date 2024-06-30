@@ -18,21 +18,26 @@ static bool	parse_light(t_scene *scene);
 
 bool	parse_environment(t_scene *scene, char *id)
 {
-	if (ft_strcmp(id, "A") == 0)
+	if (!scene->amblight.is_init && ft_strcmp(id, "A") == 0)
 	{
 		if (!parse_ambient(scene))
 			return (print_error(INVALID_AMB_FMT), false);
+		scene->amblight.is_init = true;
 	}
-	else if (ft_strcmp(id, "C") == 0)
+	else if (!scene->camera.is_init && ft_strcmp(id, "C") == 0)
 	{
 		if (!parse_camera(scene))
 			return (print_error(INVALID_CAM_FMT), false);
+		scene->camera.is_init = true;
 	}
-	else if (ft_strcmp(id, "L") == 0)
+	else if (!scene->light.is_init && ft_strcmp(id, "L") == 0)
 	{
 		if (!parse_light(scene))
 			return (print_error(INVALID_LIG_FMT), false);
+		scene->light.is_init = true;
 	}
+	else
+		return (print_error(MULTIPLE_UNIQ_ID), false);
 	return (true);
 }
 
@@ -49,9 +54,8 @@ bool	parse_ambient(t_scene *scene)
 		return (false);
 	scene->amblight.org_brightness = ft_atof(brightness);
 	scene->amblight.brightness = scene->amblight.org_brightness;
-	if (!parse_color_vector(&scene->amblight.color, color))
-		return (false);
-	return (true);
+	return (is_in_range_double(scene->amblight.org_brightness, 0.0, 1.0) && \
+		parse_color_vector(&scene->amblight.color, color));
 }
 
 bool	parse_camera(t_scene *scene)
@@ -68,12 +72,11 @@ bool	parse_camera(t_scene *scene)
 	if (!is_valid_vector(position) || \
 		!is_valid_vector(norm) || !is_valid_float(fov))
 		return (false);
-	if (!parse_vector(&scene->camera.org_position, position))
-		return (false);
-	if (!parse_unit_vector(&scene->camera.org_norm, norm))
+	if (!parse_vector(&scene->camera.org_position, position) || \
+		!parse_norm_vector(&scene->camera.org_norm, norm))
 		return (false);
 	scene->camera.fov = ft_atof(fov);
-	return (true);
+	return (is_in_range_double(scene->camera.fov, 0.0, 180.0));
 }
 
 bool	parse_light(t_scene *scene)
@@ -94,7 +97,6 @@ bool	parse_light(t_scene *scene)
 		return (false);
 	scene->light.org_brightness = ft_atof(brightness);
 	scene->light.brightness = scene->light.org_brightness;
-	if (!parse_color_vector(&scene->light.color, color))
-		return (false);
-	return (true);
+	return (is_in_range_double(scene->light.org_brightness, 0.0, 1.0) && \
+		parse_color_vector(&scene->light.color, color));
 }

@@ -24,11 +24,13 @@
 bool	is_valid_filename(char *filename);
 bool	is_valid_float(char *str);
 bool	is_valid_vector(char *str);
+bool	is_in_range_double(double num, double min, double max);
+bool	is_in_range_vec3(t_vec3 *v, double min, double max);
 
 bool	parse_environment(t_scene *scene, char *id);
 bool	parse_object(t_scene *scene, char *id);
 bool	parse_vector(t_vec3 *v, char *str);
-bool	parse_unit_vector(t_vec3 *v, char *str);
+bool	parse_norm_vector(t_vec3 *v, char *str);
 bool	parse_color_vector(t_vec3 *v, char *str);
 
 #endif

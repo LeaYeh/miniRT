@@ -29,11 +29,13 @@ bool	parse_vector(t_vec3 *v, char *str)
 	return (true);
 }
 
-bool	parse_unit_vector(t_vec3 *v, char *str)
+bool	parse_norm_vector(t_vec3 *v, char *str)
 {
 	const t_vec3	vec3 = (t_vec3){.ops = init_ops()};
 
 	if (!parse_vector(v, str))
+		return (false);
+	if (!is_in_range_vec3(v, -1.0, 1.0))
 		return (false);
 	if (vec3.ops->magnitude(*v) == 0)
 		return (false);
@@ -49,8 +51,7 @@ bool	parse_color_vector(t_vec3 *v, char *str)
 
 	if (!parse_vector(v, str))
 		return (false);
-	if (v->x < 0 || v->y < 0 || v->z < 0 || \
-		v->x > 255 || v->y > 255 || v->z > 255)
+	if (!is_in_range_vec3(v, 0.0, 255.0))
 		return (false);
 	*v = vec3.ops->div(*v, 255);
 	return (true);

@@ -29,6 +29,8 @@ bool	is_valid_float(char *str)
 	bool	saw_digit;
 	int		i;
 
+	if (!str)
+		return (false);
 	saw_digit = false;
 	i = 0;
 	if (ft_issign(str[i]))
@@ -57,6 +59,8 @@ bool	is_valid_vector(char *str)
 	char	*element;
 	int		i;
 
+	if (!str)
+		return (false);
 	if (str[ft_strlen(str) - 1] == ',')
 		return (false);
 	i = 0;
@@ -72,4 +76,16 @@ bool	is_valid_vector(char *str)
 		element[-1] = ',';
 	}
 	return (i == 3);
+}
+
+bool	is_in_range_double(double num, double min, double max)
+{
+	return (num >= min && num <= max);
+}
+
+bool	is_in_range_vec3(t_vec3 *v, double min, double max)
+{
+	return (is_in_range_double(v->x, min, max) && \
+			is_in_range_double(v->y, min, max) && \
+			is_in_range_double(v->z, min, max));
 }

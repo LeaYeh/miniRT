@@ -19,6 +19,7 @@
 
 typedef struct s_amblight
 {
+	bool	is_init;
 	t_vec3	color;
 	double	org_brightness;
 	double	brightness;
@@ -26,6 +27,7 @@ typedef struct s_amblight
 
 typedef struct s_light
 {
+	bool	is_init;
 	t_vec3	org_position;
 	t_vec3	position;
 	t_vec3	translation;
