@@ -11,7 +11,6 @@
 /* ************************************************************************** */
 
 #include "hit_private.h"
-#include "debug.h"
 
 static bool		recursive_ray(t_list_d *object_list,
 					t_ray *root_ray, t_ray *cur_ray, int expect_depth);
@@ -68,7 +67,6 @@ bool	handle_hit_record(t_ray *ray, t_hit_record *rec, int expect_depth)
 	t_list			*last_node;
 	double			old_t;
 
-	// init hit_record for first hit in this recursion
 	if (ft_lstsize(ray->hit_record_list) < expect_depth)
 	{
 		new_rec = (t_hit_record *)malloc(sizeof(t_hit_record));
@@ -78,7 +76,6 @@ bool	handle_hit_record(t_ray *ray, t_hit_record *rec, int expect_depth)
 		if (!ft_lstnew_back(&(ray->hit_record_list), new_rec))
 			return (free(new_rec), false);
 	}
-	// replace hit_record if new hit is closer in this recursion
 	else
 	{
 		last_node = ft_lstlast(ray->hit_record_list);

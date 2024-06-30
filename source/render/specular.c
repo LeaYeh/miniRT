@@ -11,7 +11,6 @@
 /* ************************************************************************** */
 
 #include "render_private.h"
-#include "debug.h"
 
 t_vec3	specular(t_hit_record *rec, t_light *light)
 {

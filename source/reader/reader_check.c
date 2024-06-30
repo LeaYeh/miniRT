@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   reader_check.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lyeh <lyeh@student.42vienna.com>           +#+  +:+       +#+        */
+/*   By: ldulling <ldulling@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/26 17:51:22 by lyeh              #+#    #+#             */
-/*   Updated: 2024/05/29 21:36:40 by lyeh             ###   ########.fr       */
+/*   Updated: 2024/06/30 18:58:08 by ldulling         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,9 +49,7 @@ bool	is_valid_float(char *str)
 		saw_digit = true;
 		i++;
 	}
-	if (!saw_digit || (str[i] && str[i] != '\n'))
-		return (false);
-	return (true);
+	return (saw_digit && (str[i] == '\0' || str[i] == '\n'));
 }
 
 bool	is_valid_vector(char *str)

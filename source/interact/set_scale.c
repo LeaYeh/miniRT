@@ -25,10 +25,7 @@ bool	set_scale(t_obj *obj, int key)
 
 	interval = INTERVAL_SCALE;
 	if (*get_mod_key() & K_SHIFT)
-	{
-		printf("Fast ");
 		interval *= FACTOR_FAST;
-	}
 	if (obj->type == SPHERE)
 		return (set_scale_sphere(obj, key, interval));
 	else if (obj->type == CYLINDER)
@@ -40,15 +37,9 @@ bool	set_scale(t_obj *obj, int key)
 bool	set_scale_sphere(t_obj *obj, int key, double interval)
 {
 	if (key == Button4)
-	{
-		printf("Scale up\n");
 		obj->diameter += interval;
-	}
 	else if (key == Button5)
-	{
-		printf("Scale down\n");
 		obj->diameter = fmax(0, obj->diameter - interval);
-	}
 	else
 		return (false);
 	return (true);
@@ -63,15 +54,9 @@ bool	set_scale_cylinder(t_obj *obj, int key, double interval)
 	else if (key == Button3)
 		mode = (mode - 1 + SCALE_MODE_COUNT) % SCALE_MODE_COUNT;
 	else if (key == Button4)
-	{
-		printf("Scale up\n");
 		set_scale_cylinder_up(obj, interval, mode);
-	}
 	else if (key == Button5)
-	{
-		printf("Scale down\n");
 		set_scale_cylinder_down(obj, interval, mode);
-	}
 	else
 		return (false);
 	return (true);

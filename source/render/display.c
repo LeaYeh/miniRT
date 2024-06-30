@@ -1,7 +1,18 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   display.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ldulling <ldulling@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/06/30 18:52:33 by ldulling          #+#    #+#             */
+/*   Updated: 2024/06/30 18:52:36 by ldulling         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "defines.h"
 #include "minirt.h"
 #include "mlx_utils.h"
-#include "debug.h"
 
 static int	get_pixel_color(t_ray *ray);
 

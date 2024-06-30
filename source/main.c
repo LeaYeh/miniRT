@@ -10,7 +10,6 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "debug.h"
 #include "minirt.h"
 #include "mlx_utils.h"
 #include "render.h"
@@ -29,7 +28,6 @@ int	main(int argc, char *argv[])
 		return (free_minirt(&minirt), ERR_INIT);
 	if (!init_mlx(&minirt.mlx))
 		return (free_minirt(&minirt), ERR_INIT);
-	print_scene(minirt.scene);
 	setup_event_hooks(&minirt);
 	mlx_loop_hook(minirt.mlx.mlx_ptr, render, &minirt);
 	mlx_loop(minirt.mlx.mlx_ptr);

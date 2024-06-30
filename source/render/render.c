@@ -22,17 +22,17 @@ int	render(t_minirt *minirt)
 
 	pixel = &minirt->scene->camera.pixel;
 	transform_scene(minirt->scene);
-	if (minirt->stage &= CAMERA_CHANGE)
+	if (minirt->stage & CAMERA_CHANGE)
 	{
 		setup_viewport(&minirt->scene->camera);
 		setup_pixel_grid(&minirt->scene->camera);
 		reset_ray_pool(minirt->ray_pool, &minirt->scene->camera);
 	}
-	if (minirt->stage &= OBJECT_CHANGE)
+	if (minirt->stage & OBJECT_CHANGE)
 		if (!iter_pixels(
 				minirt->scene->objects, pixel, minirt->ray_pool, shoot_ray))
 			return (1);
-	if (minirt->stage &= LIGHT_CHANGE)
+	if (minirt->stage & LIGHT_CHANGE)
 		if (!iter_pixels(minirt->scene, pixel, minirt->ray_pool, render_pixel))
 			return (1);
 	if (minirt->stage != NO_CHANGE)
