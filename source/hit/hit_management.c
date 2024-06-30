@@ -14,14 +14,12 @@
 
 bool	hit_object(t_ray *ray, t_obj *obj, t_hit_record *rec)
 {
-	const t_vec3	vec3 = {.ops = init_ops()};
-
 	if (obj->type == SPHERE)
-		return (hit_sphere(vec3, ray, obj, rec));
+		return (hit_sphere(ray, obj, rec));
 	else if (obj->type == PLANE)
-		return (hit_plane(vec3, ray, obj, rec));
+		return (hit_plane(ray, obj, rec));
 	else if (obj->type == CYLINDER)
-		return (hit_cylinder(vec3, ray, obj, rec));
+		return (hit_cylinder(ray, obj, rec));
 	return (false);
 }
 

@@ -44,17 +44,15 @@ bool	set_zoom(t_camera *camera, int key)
 
 bool	reset_camera(t_camera *camera, int key)
 {
-	const t_vec3	vec3 = (t_vec3){.ops = init_ops()};
-
 	if (key == XK_space)
 		camera->rotation = vector(0.0, 0.0, 0.0);
 	else if (key == Button2)
 		camera->fov = camera->org_fov;
 	else if (key == XK_r)
 	{
-		if (vec3.ops->magnitude(camera->translation) == 0)
+		if (vec3_magnitude(camera->translation) == 0)
 		{
-			if (vec3.ops->magnitude(camera->rotation) == 0)
+			if (vec3_magnitude(camera->rotation) == 0)
 				camera->fov = camera->org_fov;
 			camera->rotation = vector(0.0, 0.0, 0.0);
 		}

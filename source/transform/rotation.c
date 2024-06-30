@@ -18,13 +18,12 @@ static t_vec3	rotate_z(t_vec3 v, double angle);
 
 t_vec3	rotate(t_vec3 v, t_vec3 rotation)
 {
-	const t_vec3	vec3 = (t_vec3){.ops = init_ops()};
-	t_vec3			result;
+	t_vec3	result;
 
 	result = rotate_x(v, rotation.x);
 	result = rotate_y(result, rotation.y);
 	result = rotate_z(result, rotation.z);
-	result = vec3.ops->normalize(result);
+	result = vec3_normalize(result);
 	return (result);
 }
 
