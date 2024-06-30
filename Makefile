@@ -56,6 +56,8 @@ LIBFLAGS		:=	$(addprefix -L,$(LIBS)) \
 LIBFLAGS_TEST	:=	$(addprefix -l,$(LIBS_EXT_TEST))
 MAKEFLAGS		:=	-j -s
 
+ARGS				?=	$(ASSET_DIR)/$(shell ls -1 $(ASSET_DIR) | head -n 1)
+
 
 #	Valgrind
 
@@ -124,7 +126,7 @@ fast			:	re
 					$(MAKE) clean
 
 run				:	all
-					"./$(NAME)" "$(ASSET_DIR)/$(shell ls -1 $(ASSET_DIR) | head -n 1)"
+					"./$(NAME)" $(ARGS)
 
 test			:
 					($(MAKE) --question build_test && echo $(MSG_NO_CHNG)) \
@@ -136,22 +138,19 @@ test			:
 san				:	CFLAGS := $(CFLAGS_STD) $(CFLAGS_SAN)
 san				:	re
 					$(MAKE) clean
-					"./$(NAME)" "$(ASSET_DIR)/$(shell ls -1 $(ASSET_DIR) | head -n 1)"
+					"./$(NAME)" $(ARGS)
 
 val				:	all
-					$(VALGRIND) $(VALGRINDFLAGS) \
-					"./$(NAME)" "$(ASSET_DIR)/$(shell ls -1 $(ASSET_DIR) | head -n 1)"
+					$(VALGRIND) $(VALGRINDFLAGS) "./$(NAME)" $(ARGS)
 
 valfd			:	all
 ifneq ($(TERMINAL),)
 					$(TERMINAL) $(TERMINALFLAGS) \
 					"bash -c 'trap \"\" SIGINT ; \
-					$(VALGRIND) $(VALGRINDFLAGS) $(VALGRINDFDFLAGS) \
-					./$(NAME) $(ASSET_DIR)/$(shell ls -1 $(ASSET_DIR) | head -n 1); \
+					$(VALGRIND) $(VALGRINDFLAGS) $(VALGRINDFDFLAGS) ./$(NAME) $(ARGS) ; \
 					exec bash'"
 else
-					$(VALGRIND) $(VALGRINDFLAGS) $(VALGRINDFDFLAGS) \
-					"./$(NAME)" "$(ASSET_DIR)/$(shell ls -1 $(ASSET_DIR) | head -n 1)"
+					$(VALGRIND) $(VALGRINDFLAGS) $(VALGRINDFDFLAGS) "./$(NAME)" $(ARGS)
 endif
 
 
