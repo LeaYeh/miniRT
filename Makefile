@@ -124,7 +124,7 @@ fast			:	re
 					$(MAKE) clean
 
 run				:	all
-					"./$(NAME)"
+					"./$(NAME)" "$(ASSET_DIR)/$(shell ls -1 $(ASSET_DIR) | head -n 1)"
 
 test			:
 					($(MAKE) --question build_test && echo $(MSG_NO_CHNG)) \
