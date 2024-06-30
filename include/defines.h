@@ -6,7 +6,7 @@
 /*   By: ldulling <ldulling@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/26 15:41:00 by lyeh              #+#    #+#             */
-/*   Updated: 2024/06/29 20:10:15 by ldulling         ###   ########.fr       */
+/*   Updated: 2024/06/30 20:14:52 by ldulling         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,6 @@
 
 # include "libft.h"
 # include <stdio.h>
-# include <stdbool.h>
 # include <math.h>
 
 /* Error Messages */

@@ -6,7 +6,7 @@
 /*   By: ldulling <ldulling@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/29 01:02:26 by ldulling          #+#    #+#             */
-/*   Updated: 2024/06/29 17:45:28 by ldulling         ###   ########.fr       */
+/*   Updated: 2024/06/30 20:15:26 by ldulling         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 # define INTERACT_H
 
 # include "minirt.h"
-# include "libft.h"
 
 typedef enum e_interact_mode
 {

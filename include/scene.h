@@ -6,16 +6,16 @@
 /*   By: ldulling <ldulling@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/01 11:22:43 by lyeh              #+#    #+#             */
-/*   Updated: 2024/06/30 20:10:19 by ldulling         ###   ########.fr       */
+/*   Updated: 2024/06/30 20:10:31 by ldulling         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef SCENE_H
 # define SCENE_H
 
-# include "libft.h"
 # include "vec3.h"
 # include "camera.h"
+# include "libft.h"
 
 typedef struct s_amblight
 {
