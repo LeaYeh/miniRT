@@ -53,8 +53,8 @@ static void	setup_hit_record(
 	rec->point = vec3.ops->add(ray->origin, vec3.ops->mul(ray->direction, t));
 	rec->norm = obj->norm;
 	rec->color = obj->color;
-	rec->front_face = vec3.ops->dot(ray->direction, rec->norm) < 0;
-	if (!rec->front_face)
+	if (vec3.ops->dot(ray->direction, rec->norm) >= 0)
 		rec->norm = vec3.ops->mul(rec->norm, -1);
+	rec->front_face = true;
 	rec->t = t;
 }
