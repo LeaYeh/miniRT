@@ -41,6 +41,7 @@
 # define HORIZONTAL_UNIT		1
 # define VERTICAL_UNIT			1
 
+# define SHINYNESS				100
 # define MAX_DEPTH				1
 
 # define INTERVAL_TRANSLATE		0.5
