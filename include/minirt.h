@@ -6,7 +6,7 @@
 /*   By: ldulling <ldulling@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/28 12:18:37 by lyeh              #+#    #+#             */
-/*   Updated: 2024/06/29 01:17:08 by ldulling         ###   ########.fr       */
+/*   Updated: 2024/06/30 20:06:26 by ldulling         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 # define MINIRT_H
 
 # include "reader.h"
-# include "environment.h"
+# include "scene.h"
 # include "camera.h"
 # include "utils.h"
 # include <mlx.h>

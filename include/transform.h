@@ -13,7 +13,7 @@
 #ifndef TRANSFORM_H
 # define TRANSFORM_H
 
-# include "environment.h"
+# include "scene.h"
 # include "vec3.h"
 
 void	transform_scene(t_scene *scene);

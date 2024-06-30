@@ -15,7 +15,7 @@
 
 # include "defines.h"
 # include "get_next_line.h"
-# include "environment.h"
+# include "scene.h"
 # include "object.h"
 
 t_scene	*read_scene(char *filename);
