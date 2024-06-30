@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   test_hit_sphere.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lyeh <lyeh@student.42vienna.com>           +#+  +:+       +#+        */
+/*   By: ldulling <ldulling@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/17 15:28:28 by lyeh              #+#    #+#             */
-/*   Updated: 2024/06/21 15:42:42 by lyeh             ###   ########.fr       */
+/*   Updated: 2024/06/29 21:16:07 by ldulling         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ Test(hit, hit_sphere_outside_x)
 		.position = vector(0, 0, 0),
 		.norm = vector(0, 1, 0),
 		.color= vector(0, 255, 0),
-		.d_param1 = 1.0};
+		.diameter = 1.0};
 	cr_assert_eq(hit_sphere(vec3, &ray, &sphere, &rec), true, "hit_sphere() detection incorrect");
 	cr_assert_eq(rec.t, 1.0, "hit_sphere() t value incorrect");
 	cr_assert_eq(rec.front_face, true, "hit_sphere() front_face value incorrect");
@@ -56,7 +56,7 @@ Test(hit, hit_sphere_outside_y)
 		.position = vector(0, 0, 0),
 		.norm = vector(0, 1, 0),
 		.color= vector(0, 255, 0),
-		.d_param1 = 1.0};
+		.diameter = 1.0};
 	cr_assert_eq(hit_sphere(vec3, &ray, &sphere, &rec), true, "hit_sphere() detection incorrect");
 	cr_assert_eq(rec.t, 1.0, "hit_sphere() t value incorrect");
 	cr_assert_eq(rec.front_face, true, "hit_sphere() front_face value incorrect");
@@ -85,7 +85,7 @@ Test(hit, hit_sphere_outside_z)
 		.position = vector(0, 0, 0),
 		.norm = vector(0, 1, 0),
 		.color= vector(0, 255, 0),
-		.d_param1 = 1.0};
+		.diameter = 1.0};
 	cr_assert_eq(hit_sphere(vec3, &ray, &sphere, &rec), true, "hit_sphere() detection incorrect");
 	cr_assert_eq(rec.t, 1.0, "hit_sphere() t value incorrect");
 	cr_assert_eq(rec.front_face, true, "hit_sphere() front_face value incorrect");
@@ -114,7 +114,7 @@ Test(hit, hit_sphere_inside)
 		.position = vector(0, 0, 0),
 		.norm = vector(0, 1, 0),
 		.color= vector(0, 255, 0),
-		.d_param1 = 10.0};
+		.diameter = 10.0};
 	cr_assert_eq(hit_sphere(vec3, &ray, &sphere, &rec), true, "hit_sphere() detection incorrect");
 	cr_assert_eq(rec.t, 5.0, "hit_sphere() t value incorrect");
 	cr_assert_eq(rec.front_face, false, "hit_sphere() front_face value incorrect");
@@ -143,6 +143,6 @@ Test(hit, hit_sphere_miss)
 		.position = vector(0, 0, 0),
 		.norm = vector(0, 1, 0),
 		.color= vector(0, 255, 0),
-		.d_param1 = 1.0};
+		.diameter = 1.0};
 	cr_assert_eq(hit_sphere(vec3, &ray, &sphere, &rec), false, "hit_sphere() detection incorrect");
 }

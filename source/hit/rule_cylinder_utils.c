@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   rule_cylinder_utils.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lyeh <lyeh@student.42vienna.com>           +#+  +:+       +#+        */
+/*   By: ldulling <ldulling@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/24 19:38:11 by lyeh              #+#    #+#             */
-/*   Updated: 2024/06/24 21:26:35 by lyeh             ###   ########.fr       */
+/*   Updated: 2024/06/29 21:16:25 by ldulling         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ bool	is_point_in_cap_range(t_vec3 p,
 			t_obj *cylinder, t_vec3 center_top, t_vec3 center_bottom)
 {
 	const t_vec3	vec3 = (t_vec3){.ops = init_ops()};
-	const double	radius = cylinder->d_param1 / 2.0;
+	const double	radius = cylinder->diameter / 2.0;
 	double			proj;
 	double			dist;
 
@@ -40,9 +40,9 @@ bool	is_point_in_height_range(t_vec3 p, t_obj *cylinder)
 
 	pc_proj = vec3.ops->dot(p, cylinder->norm);
 	cy_proj_min = vec3.ops->dot(
-			cylinder->position, cylinder->norm) - cylinder->d_param2 / 2;
+			cylinder->position, cylinder->norm) - cylinder->height / 2;
 	cy_proj_max = vec3.ops->dot(
-			cylinder->position, cylinder->norm) + cylinder->d_param2 / 2;
+			cylinder->position, cylinder->norm) + cylinder->height / 2;
 	if (pc_proj < cy_proj_min || \
 		pc_proj > cy_proj_max)
 		return (false);

@@ -6,7 +6,7 @@
 /*   By: ldulling <ldulling@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/29 01:01:57 by ldulling          #+#    #+#             */
-/*   Updated: 2024/06/29 15:37:43 by ldulling         ###   ########.fr       */
+/*   Updated: 2024/06/29 23:38:41 by ldulling         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,8 @@ bool	set_zoom(t_camera *camera, int key)
 
 bool	reset_camera(t_camera *camera, int key)
 {
+	const t_vec3	vec3 = (t_vec3){.ops = init_ops()};
+
 	if (key == XK_space)
 	{
 		printf("Reset camera orientation\n");
@@ -63,8 +65,9 @@ bool	reset_camera(t_camera *camera, int key)
 	else if (key == XK_r)
 	{
 		printf("Reset camera\n");
+		if (vec3.ops->magnitude(camera->translation) == 0)
+			camera->rotation = vector(0.0, 0.0, 0.0);
 		camera->translation = vector(0.0, 0.0, 0.0);
-		camera->rotation = vector(0.0, 0.0, 0.0);
 	}
 	else
 		return (false);

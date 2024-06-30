@@ -6,7 +6,7 @@
 /*   By: ldulling <ldulling@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/15 16:35:18 by lyeh              #+#    #+#             */
-/*   Updated: 2024/06/25 17:48:46 by ldulling         ###   ########.fr       */
+/*   Updated: 2024/06/29 21:16:25 by ldulling         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ bool	hit_cylinder_side(t_vec3 vec3,
 			vec3.ops->dot(oc, cylinder->norm));
 	c = vec3.ops->dot(oc, oc) - \
 			pow(vec3.ops->dot(oc, cylinder->norm), 2) - \
-			pow(cylinder->d_param1 / 2.0, 2);
+			pow(cylinder->diameter / 2.0, 2);
 	t_intersection = calc_sphere_min_root(a, b, c);
 	if (t_intersection < 0)
 		return (false);
@@ -83,9 +83,9 @@ bool	hit_cylinder_caps(t_vec3 vec3,
 	t_vec3	center_bottom;
 
 	center_top = vec3.ops->add(cylinder->position,
-			vec3.ops->mul(cylinder->norm, cylinder->d_param2 / 2));
+			vec3.ops->mul(cylinder->norm, cylinder->height / 2));
 	center_bottom = vec3.ops->sub(cylinder->position,
-			vec3.ops->mul(cylinder->norm, cylinder->d_param2 / 2));
+			vec3.ops->mul(cylinder->norm, cylinder->height / 2));
 	top_plane = init_plane(center_top, cylinder->norm, cylinder->color);
 	bottom_plane = init_plane(center_bottom, vec3.ops->mul(cylinder->norm, -1),
 			cylinder->color);

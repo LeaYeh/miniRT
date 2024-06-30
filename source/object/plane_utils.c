@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   plane_utils.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lyeh <lyeh@student.42vienna.com>           +#+  +:+       +#+        */
+/*   By: ldulling <ldulling@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/24 16:59:30 by lyeh              #+#    #+#             */
-/*   Updated: 2024/06/24 17:01:47 by lyeh             ###   ########.fr       */
+/*   Updated: 2024/06/29 21:16:25 by ldulling         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ t_obj	init_plane(t_vec3 position, t_vec3 norm, t_vec3 color)
 	plane.norm = norm;
 	plane.color = color;
 	plane.type = PLANE;
-	plane.d_param1 = 0;
-	plane.d_param2 = 0;
+	plane.diameter = 0;
+	plane.height = 0;
 	return (plane);
 }

@@ -6,7 +6,7 @@
 /*   By: ldulling <ldulling@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/26 15:41:00 by lyeh              #+#    #+#             */
-/*   Updated: 2024/06/28 21:13:10 by ldulling         ###   ########.fr       */
+/*   Updated: 2024/06/29 20:10:15 by ldulling         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,9 +19,9 @@
 # include <math.h>
 
 /* Error Codes */
-# define SUCCESS			0
-# define ERR_ARGC			1
-# define ERR_INIT			2
+# define SUCCESS				0
+# define ERR_ARGC				1
+# define ERR_INIT				2
 
 /* Error Messages */
 # define INVALID_FILE_FMT		"Invalid file format."
@@ -38,16 +38,17 @@
 # define FAILED_CLOSE_FILE		"Failed to close file."
 # define FAILED_ALLOC_MEM		"Failed to allocate memory."
 
-# define WINDOW_WIDTH		640
-# define WINDOW_HEIGHT		360
-# define HORIZONTAL_UNIT	1
-# define VERTICAL_UNIT		1
+# define WINDOW_WIDTH			640
+# define WINDOW_HEIGHT			360
+# define HORIZONTAL_UNIT		1
+# define VERTICAL_UNIT			1
 
-# define MAX_DEPTH			1
+# define MAX_DEPTH				1
 
-# define INTERVAL_TRANSLATE	0.5
-# define INTERVAL_ROTATE	0.5
-# define INTERVAL_FOV		1
-# define FACTOR_FAST		10
+# define INTERVAL_TRANSLATE		0.5
+# define INTERVAL_ROTATE		0.5
+# define INTERVAL_SCALE			0.5
+# define INTERVAL_FOV			1
+# define FACTOR_FAST			10
 
 #endif

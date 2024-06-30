@@ -6,7 +6,7 @@
 /*   By: ldulling <ldulling@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/29 20:33:13 by lyeh              #+#    #+#             */
-/*   Updated: 2024/06/28 20:04:12 by ldulling         ###   ########.fr       */
+/*   Updated: 2024/06/29 22:04:39 by ldulling         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,10 @@ void	print_object(t_obj *object)
 	print_vector(object->org_norm);
 	printf("\tNorm: ");
 	print_vector(object->norm);
-	printf("\tParam1: %f\n", object->d_param1);
-	printf("\tParam2: %f\n", object->d_param2);
+	printf("\tOrg Diameter: %f\n", object->org_diameter);
+	printf("\tDiameter: %f\n", object->diameter);
+	printf("\tOrg Height: %f\n", object->org_height);
+	printf("\tHeight: %f\n", object->height);
 	printf("\tColor: ");
 	print_vector(object->color);
 }

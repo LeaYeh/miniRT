@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   hit_record.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lyeh <lyeh@student.42vienna.com>           +#+  +:+       +#+        */
+/*   By: ldulling <ldulling@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/16 15:42:14 by lyeh              #+#    #+#             */
-/*   Updated: 2024/06/20 16:04:31 by lyeh             ###   ########.fr       */
+/*   Updated: 2024/06/29 21:16:07 by ldulling         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,13 +25,13 @@
 // 		rec->norm = obj->norm;
 // 	else if (obj->type == SPHERE)
 // 		rec->norm = vec3.ops->div(
-// 				vec3.ops->sub(rec->point, obj->position), obj->d_param1);
+// 				vec3.ops->sub(rec->point, obj->position), obj->diameter);
 // 	else if (obj->type == CYLINDER)
 // 	{
 // 		oc = vec3.ops->sub(rec->point, obj->position);
 // 		projection = vec3.ops->mul(obj->norm, vec3.ops->dot(oc, obj->norm));
 // 		rec->norm = vec3.ops->sub(oc, projection);
-// 		rec->norm = vec3.ops->div(rec->norm, obj->d_param1);
+// 		rec->norm = vec3.ops->div(rec->norm, obj->diameter);
 // 	}
 // 	rec->color = obj->color;
 // 	rec->front_face = vec3.ops->dot(ray->direction, rec->norm) < 0;

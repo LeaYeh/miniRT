@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   rule_sphere.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lyeh <lyeh@student.42vienna.com>           +#+  +:+       +#+        */
+/*   By: ldulling <ldulling@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/15 16:30:43 by lyeh              #+#    #+#             */
-/*   Updated: 2024/06/24 22:56:09 by lyeh             ###   ########.fr       */
+/*   Updated: 2024/06/29 21:16:07 by ldulling         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ bool	hit_sphere(t_vec3 vec3, t_ray *ray, t_obj *sphere, t_hit_record *rec)
 	oc = vec3.ops->sub(ray->origin, sphere->position);
 	a = vec3.ops->dot(ray->direction, ray->direction);
 	b = 2 * vec3.ops->dot(oc, ray->direction);
-	c = vec3.ops->dot(oc, oc) - sphere->d_param1 * sphere->d_param1;
+	c = vec3.ops->dot(oc, oc) - sphere->diameter * sphere->diameter;
 	t_intersection = calc_sphere_min_root(a, b, c);
 	if (t_intersection < 0)
 		return (false);
@@ -62,7 +62,7 @@ static void	setup_hit_record(
 	rec->shoot_direction = ray->direction;
 	rec->point = vec3.ops->add(ray->origin, vec3.ops->mul(ray->direction, t));
 	rec->norm = vec3.ops->div(
-			vec3.ops->sub(rec->point, obj->position), obj->d_param1);
+			vec3.ops->sub(rec->point, obj->position), obj->diameter);
 	rec->color = obj->color;
 	rec->front_face = vec3.ops->dot(ray->direction, rec->norm) < 0;
 	if (!rec->front_face)

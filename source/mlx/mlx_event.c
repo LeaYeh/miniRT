@@ -6,7 +6,7 @@
 /*   By: ldulling <ldulling@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/28 21:00:37 by ldulling          #+#    #+#             */
-/*   Updated: 2024/06/29 18:03:18 by ldulling         ###   ########.fr       */
+/*   Updated: 2024/06/29 20:06:39 by ldulling         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,8 @@
 
 static int	handle_keypress_event(int key, t_minirt *minirt);
 static int	handle_keyrelease_event(int key, t_minirt *minirt);
+static int	handle_buttonpress_event(
+				int button, int x, int y, t_minirt *minirt);
 
 void	setup_event_hooks(t_minirt *minirt)
 {
@@ -23,6 +25,8 @@ void	setup_event_hooks(t_minirt *minirt)
 		KeyPress, KeyPressMask, handle_keypress_event, minirt);
 	mlx_hook(minirt->mlx.win_ptr,
 		KeyRelease, KeyReleaseMask, handle_keyrelease_event, minirt);
+	mlx_hook(minirt->mlx.win_ptr,
+		ButtonPress, ButtonPressMask, handle_buttonpress_event, minirt);
 }
 
 int	handle_keypress_event(int key, t_minirt *minirt)
@@ -45,5 +49,13 @@ int	handle_keyrelease_event(int key, t_minirt *minirt)
 {
 	(void)minirt;
 	release_mod_key(key);
+	return (0);
+}
+
+int	handle_buttonpress_event(int button, int x, int y, t_minirt *minirt)
+{
+	(void)x;
+	(void)y;
+	interact_object(button, minirt);
 	return (0);
 }

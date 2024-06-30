@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   test_hit_cylinder.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lyeh <lyeh@student.42vienna.com>           +#+  +:+       +#+        */
+/*   By: ldulling <ldulling@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/17 16:30:12 by lyeh              #+#    #+#             */
-/*   Updated: 2024/06/21 13:41:24 by lyeh             ###   ########.fr       */
+/*   Updated: 2024/06/29 21:16:25 by ldulling         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,8 @@ Test(hit, hit_cylinder_miss)
 		.type = CYLINDER,
 		.position = vector(0, 0, 0),
 		.norm = vector(0, 1, 0),
-		.d_param1 = 1.0,
-		.d_param2 = 5.0};
+		.diameter = 1.0,
+		.height = 5.0};
 	cr_assert_eq(hit_cylinder(vec3, &ray, &cylinder, &rec), false, "hit_cylinder() detection incorrect");
 }
 
@@ -44,8 +44,8 @@ Test(hit, hit_cylinder_outside_side_x)
 		.type = CYLINDER,
 		.position = vector(0, 0, 0),
 		.norm = vector(0, 1, 0),
-		.d_param1 = 1.0,
-		.d_param2 = 5.0};
+		.diameter = 1.0,
+		.height = 5.0};
 	cr_assert_eq(hit_cylinder(vec3, &ray, &cylinder, &rec), true, "hit_cylinder() detection incorrect");
 	cr_assert_eq(rec.t, 1.0, "hit_cylinder() t value incorrect");
 	cr_assert_eq(rec.front_face, true, "hit_cylinder() front_face value incorrect");
@@ -71,8 +71,8 @@ Test(hit, hit_cylinder_outside_side_x)
 // 		.type = CYLINDER,
 // 		.position = (t_vec3){.x = 0, .y = 0, .z = 0},
 // 		.norm = (t_vec3){.x = 0, .y = 1, .z = 0},
-// 		.d_param1 = 1.0,
-// 		.d_param2 = 5.0};
+// 		.diameter = 1.0,
+// 		.height = 5.0};
 // 	cr_assert_eq(hit_cylinder(vec3, &ray, &cylinder, &rec), true, "hit_cylinder() detection incorrect");
 // 	cr_assert_eq(rec.t, 1.0, "hit_cylinder() t value incorrect");
 // 	cr_assert_eq(rec.front_face, true, "hit_cylinder() front_face value incorrect");
@@ -99,8 +99,8 @@ Test(hit, hit_cylinder_outside_side_x)
 // 		.type = CYLINDER,
 // 		.position = (t_vec3){.x = 0, .y = 0, .z = 0},
 // 		.norm = (t_vec3){.x = 0, .y = 1, .z = 0},
-// 		.d_param1 = 1.0,
-// 		.d_param2 = 5.0};
+// 		.diameter = 1.0,
+// 		.height = 5.0};
 // 	cr_assert_eq(hit_cylinder(vec3, &ray, &cylinder, &rec), true, "hit_cylinder() detection incorrect");
 // 	cr_assert_eq(rec.t, 1.0, "hit_cylinder() t value incorrect");
 // 	cr_assert_eq(rec.front_face, false, "hit_cylinder() front_face value incorrect");
@@ -126,8 +126,8 @@ Test(hit, hit_cylinder_outside_side_x)
 // 		.type = CYLINDER,
 // 		.position = (t_vec3){.x = 0, .y = 0, .z = 0},
 // 		.norm = (t_vec3){.x = 0, .y = 1, .z = 0},
-// 		.d_param1 = 1.0,
-// 		.d_param2 = 5.0};
+// 		.diameter = 1.0,
+// 		.height = 5.0};
 // 	cr_assert_eq(hit_cylinder(vec3, &ray, &cylinder, &rec), true, "hit_cylinder() detection incorrect");
 // 	cr_assert_eq(rec.t, 1.0, "hit_cylinder() t value incorrect");
 // 	cr_assert_eq(rec.front_face, false, "hit_cylinder() front_face value incorrect");
@@ -153,8 +153,8 @@ Test(hit, hit_cylinder_outside_top)
 		.position = vector(0, 0, 0),
 		.norm = vector(0, 1, 0),
 		.color = vector(0, 255, 0),
-		.d_param1 = 1.0,
-		.d_param2 = 5.0};
+		.diameter = 1.0,
+		.height = 5.0};
 	cr_assert_eq(hit_cylinder(vec3, &ray, &cylinder, &rec), true, "hit_cylinder() detection incorrect");
 	cr_assert_eq(rec.t, 17.5, "hit_cylinder() t value incorrect");
 	cr_assert_eq(rec.front_face, true, "hit_cylinder() front_face value incorrect");
@@ -183,8 +183,8 @@ Test(hit, hit_cylinder_inside_top)
 		.position = vector(0, 0, 0),
 		.norm = vector(0, 1, 0),
 		.color = vector(0, 0, 0),
-		.d_param1 = 1.0,
-		.d_param2 = 5.0};
+		.diameter = 1.0,
+		.height = 5.0};
 	printf("hit: %d\n", hit_cylinder(vec3, &ray, &cylinder, &rec));
 	print_hit_record(&rec);
 	cr_assert_eq(hit_cylinder(vec3, &ray, &cylinder, &rec), true, "hit_cylinder() detection incorrect");
@@ -215,8 +215,8 @@ Test(hit, hit_cylinder_outside_bottom)
 		.position = vector(0, 0, 0),
 		.norm = vector(0, 1, 0),
 		.color = vector(0, 255, 0),
-		.d_param1 = 1.0,
-		.d_param2 = 5.0};
+		.diameter = 1.0,
+		.height = 5.0};
 	cr_assert_eq(hit_cylinder(vec3, &ray, &cylinder, &rec), true, "hit_cylinder() detection incorrect");
 	cr_assert_eq(rec.t, 17.5, "hit_cylinder() t value incorrect");
 	cr_assert_eq(rec.front_face, true, "hit_cylinder() front_face value incorrect");
@@ -245,8 +245,8 @@ Test(hit, hit_cylinder_inside_bottom)
 		.position = vector(0, 0, 0),
 		.norm = vector(0, 1, 0),
 		.color = vector(0, 0, 0),
-		.d_param1 = 1.0,
-		.d_param2 = 5.0};
+		.diameter = 1.0,
+		.height = 5.0};
 	cr_assert_eq(hit_cylinder(vec3, &ray, &cylinder, &rec), true, "hit_cylinder() detection incorrect");
 	cr_assert_eq(rec.t, 2.5, "hit_cylinder() t value incorrect");
 	cr_assert_eq(rec.front_face, false, "hit_cylinder() front_face value incorrect");
@@ -274,8 +274,8 @@ Test(hit, hit_cylinder_outside_edge)
 		.type = CYLINDER,
 		.position = vector(0, 0, 0),
 		.norm = vector(0, 1, 0),
-		.d_param1 = 1.0,
-		.d_param2 = 5.0};
+		.diameter = 1.0,
+		.height = 5.0};
 	cr_assert_eq(hit_cylinder(vec3, &ray, &cylinder, &rec), true, "hit_cylinder() detection incorrect");
 	cr_assert_eq(rec.t, 1.0, "hit_cylinder() t value incorrect");
 	cr_assert_eq(rec.front_face, true, "hit_cylinder() front_face value incorrect");
