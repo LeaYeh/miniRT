@@ -20,6 +20,7 @@
 typedef struct s_amblight
 {
 	t_vec3	color;
+	double	org_brightness;
 	double	brightness;
 }	t_amblight;
 
@@ -29,6 +30,7 @@ typedef struct s_light
 	t_vec3	position;
 	t_vec3	translation;
 	t_vec3	color;
+	double	org_brightness;
 	double	brightness;
 }	t_light;
 

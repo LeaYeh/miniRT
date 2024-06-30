@@ -14,6 +14,7 @@
 
 static bool	set_brightness(double *brightness, int key);
 static bool	reset_light(t_light *light, int key);
+static bool	reset_amblight(t_amblight *amblight, int key);
 
 void	interact_light(int key, t_minirt *minirt)
 {
@@ -31,7 +32,8 @@ void	interact_light(int key, t_minirt *minirt)
 void	interact_amblight(int key, t_minirt *minirt)
 {
 	if (set_color(&minirt->scene->amblight.color, key) || \
-		set_brightness(&minirt->scene->amblight.brightness, key))
+		set_brightness(&minirt->scene->amblight.brightness, key) || \
+		reset_amblight(&minirt->scene->amblight, key))
 	{
 		minirt->stage |= LIGHT_CHANGE;
 	}
@@ -66,10 +68,36 @@ bool	set_brightness(double *brightness, int key)
 
 bool	reset_light(t_light *light, int key)
 {
-	if (key == XK_r)
+	const t_vec3	vec3 = (t_vec3){.ops = init_ops()};
+
+	if (key == Button2)
+	{
+		printf("Reset light brightness\n");
+		light->brightness = light->org_brightness;
+	}
+	else if (key == XK_r)
 	{
 		printf("Reset light\n");
+		if (vec3.ops->magnitude(light->translation) == 0)
+			light->brightness = light->org_brightness;
 		light->translation = vector(0.0, 0.0, 0.0);
+	}
+	else
+		return (false);
+	return (true);
+}
+
+bool	reset_amblight(t_amblight *amblight, int key)
+{
+	if (key == Button2)
+	{
+		printf("Reset ambient light brightness\n");
+		amblight->brightness = amblight->org_brightness;
+	}
+	else if (key == XK_r)
+	{
+		printf("Reset ambient light\n");
+		amblight->brightness = amblight->org_brightness;
 	}
 	else
 		return (false);
