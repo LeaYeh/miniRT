@@ -24,8 +24,6 @@ void	interact_camera(int key, t_minirt *minirt)
 	{
 		minirt->stage |= CAMERA_CHANGE;
 	}
-	else
-		printf("key press: %x\n", key);
 }
 
 bool	set_zoom(t_camera *camera, int key)
@@ -34,20 +32,11 @@ bool	set_zoom(t_camera *camera, int key)
 
 	interval = INTERVAL_FOV;
 	if (*get_mod_key() & K_SHIFT)
-	{
-		printf("Fast ");
 		interval *= FACTOR_FAST;
-	}
 	if (key == XK_KP_Add)
-	{
-		printf("Zoom in\n");
 		camera->fov -= interval;
-	}
 	else if (key == XK_KP_Subtract)
-	{
-		printf("Zoom out\n");
 		camera->fov += interval;
-	}
 	else
 		return (false);
 	return (true);
@@ -58,13 +47,9 @@ bool	reset_camera(t_camera *camera, int key)
 	const t_vec3	vec3 = (t_vec3){.ops = init_ops()};
 
 	if (key == XK_space)
-	{
-		printf("Reset camera orientation\n");
 		camera->rotation = vector(0.0, 0.0, 0.0);
-	}
 	else if (key == XK_r)
 	{
-		printf("Reset camera\n");
 		if (vec3.ops->magnitude(camera->translation) == 0)
 			camera->rotation = vector(0.0, 0.0, 0.0);
 		camera->translation = vector(0.0, 0.0, 0.0);

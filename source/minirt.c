@@ -24,15 +24,11 @@ bool	init_minirt(t_minirt *minirt, char *filename)
 	minirt->scene = read_scene(filename);
 	if (!minirt->scene)
 		return (false);
-	printf("haha 0\n");
 	init_camera(&minirt->scene->camera);
-	printf("haha 1\n");
 	if (!init_ray_pool(&minirt->ray_pool, &minirt->scene->camera))
 		return (false);
-	printf("haha 2\n");
 	minirt->stage = CAMERA_CHANGE;
 	print_camera_detail(minirt->scene->camera);
-	printf("haha 3\n");
 	return (true);
 }
 
