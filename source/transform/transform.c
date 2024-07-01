@@ -43,7 +43,8 @@ void	transform_objects(t_list_d *object_list)
 	{
 		object = object_list->content;
 		object->position = translate(object->org_position, object->translation);
-		object->norm = rotate(object->org_norm, object->rotation);
+		if (object->type != SPHERE)
+			object->norm = rotate(object->org_norm, object->rotation);
 		object_list = object_list->next;
 	}
 }
