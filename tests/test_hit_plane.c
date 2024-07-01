@@ -15,7 +15,6 @@
 
 Test(hit, hit_plane_under)
 {
-	const t_vec3	vec3 = {.ops = init_ops()};
 	t_ray			ray;
 	t_obj			plane;
 	t_hit_record	rec;
@@ -27,7 +26,7 @@ Test(hit, hit_plane_under)
 		.position = vector(0, 0, 0),
 		.color = vector(0, 0, 0),
 		.norm = vector(0, 1, 0)};
-	cr_assert_eq(hit_plane(vec3, &ray, &plane, &rec), true, "hit_plane() detection incorrect");
+	cr_assert_eq(hit_plane(&ray, &plane, &rec), true, "hit_plane() detection incorrect");
 	cr_assert_eq(rec.t, 1.0, "hit_plane() t value incorrect");
 	cr_assert_eq(rec.front_face, false, "hit_plane() front_face value incorrect");
 	cr_assert_eq(rec.point.x, 0.0, "hit_plane() point.x value incorrect");
@@ -40,7 +39,6 @@ Test(hit, hit_plane_under)
 
 Test(hit, hit_plane_above)
 {
-	const t_vec3	vec3 = {.ops = init_ops()};
 	t_ray			ray;
 	t_obj			plane;
 	t_hit_record	rec;
@@ -52,7 +50,7 @@ Test(hit, hit_plane_above)
 		.position = vector(0, 0, 0),
 		.color = vector(0, 0, 0),
 		.norm = vector(0, 1, 0)};
-	cr_assert_eq(hit_plane(vec3, &ray, &plane, &rec), true, "hit_plane() detection incorrect");
+	cr_assert_eq(hit_plane(&ray, &plane, &rec), true, "hit_plane() detection incorrect");
 	cr_assert_eq(rec.t, 2.0, "hit_plane() t value incorrect");
 	cr_assert_eq(rec.front_face, true, "hit_plane() front_face value incorrect");
 	cr_assert_eq(rec.point.x, 0.0, "hit_plane() point.x value incorrect");
@@ -65,7 +63,6 @@ Test(hit, hit_plane_above)
 
 Test(hit, hit_plane_miss)
 {
-	const t_vec3	vec3 = {.ops = init_ops()};
 	t_ray			ray;
 	t_obj			plane;
 	t_hit_record	rec;
@@ -77,5 +74,5 @@ Test(hit, hit_plane_miss)
 		.position = vector(0, 0, 0),
 		.norm = vector(0, 1, 0),
 		.color = vector(0, 0, 0)};
-	cr_assert_eq(hit_plane(vec3, &ray, &plane, &rec), false, "hit_plane() detection incorrect");
+	cr_assert_eq(hit_plane(&ray, &plane, &rec), false, "hit_plane() detection incorrect");
 }

@@ -14,10 +14,10 @@
 # define UNIT_TESTS_H
 
 # include <criterion/criterion.h>
-# include "vec3_private.h"
-# include "camera_private.h"
+# include "vec3.h"
+# include "camera.h"
 # include "reader_private.h"
-# include "ray_private.h"
+# include "ray.h"
 # include "hit_private.h"
 # include "object.h"
 # include "render_private.h"

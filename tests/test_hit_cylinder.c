@@ -15,7 +15,6 @@
 
 Test(hit, hit_cylinder_miss)
 {
-	const t_vec3	vec3 = {.ops = init_ops()};
 	t_ray			ray;
 	t_obj			cylinder;
 	t_hit_record	rec;
@@ -28,12 +27,11 @@ Test(hit, hit_cylinder_miss)
 		.norm = vector(0, 1, 0),
 		.diameter = 1.0,
 		.height = 5.0};
-	cr_assert_eq(hit_cylinder(vec3, &ray, &cylinder, &rec), false, "hit_cylinder() detection incorrect");
+	cr_assert_eq(hit_cylinder(&ray, &cylinder, &rec), false, "hit_cylinder() detection incorrect");
 }
 
 Test(hit, hit_cylinder_outside_side_x)
 {
-	const t_vec3	vec3 = {.ops = init_ops()};
 	t_ray			ray;
 	t_obj			cylinder;
 	t_hit_record	rec;
@@ -46,7 +44,7 @@ Test(hit, hit_cylinder_outside_side_x)
 		.norm = vector(0, 1, 0),
 		.diameter = 1.0,
 		.height = 5.0};
-	cr_assert_eq(hit_cylinder(vec3, &ray, &cylinder, &rec), true, "hit_cylinder() detection incorrect");
+	cr_assert_eq(hit_cylinder(&ray, &cylinder, &rec), true, "hit_cylinder() detection incorrect");
 	cr_assert_eq(rec.t, 1.0, "hit_cylinder() t value incorrect");
 	cr_assert_eq(rec.front_face, true, "hit_cylinder() front_face value incorrect");
 	cr_assert_eq(rec.point.x, 1.0, "hit_cylinder() point.x value incorrect");
@@ -59,7 +57,6 @@ Test(hit, hit_cylinder_outside_side_x)
 
 // Test(hit, hit_cylinder_outside_side_z)
 // {
-// 	const t_vec3	vec3 = {.ops = init_ops()};
 // 	t_ray			ray;
 // 	t_obj			cylinder;
 // 	t_hit_record	rec;
@@ -73,7 +70,7 @@ Test(hit, hit_cylinder_outside_side_x)
 // 		.norm = (t_vec3){.x = 0, .y = 1, .z = 0},
 // 		.diameter = 1.0,
 // 		.height = 5.0};
-// 	cr_assert_eq(hit_cylinder(vec3, &ray, &cylinder, &rec), true, "hit_cylinder() detection incorrect");
+// 	cr_assert_eq(hit_cylinder(&ray, &cylinder, &rec), true, "hit_cylinder() detection incorrect");
 // 	cr_assert_eq(rec.t, 1.0, "hit_cylinder() t value incorrect");
 // 	cr_assert_eq(rec.front_face, true, "hit_cylinder() front_face value incorrect");
 // 	cr_assert_eq(rec.point.x, 0.0, "hit_cylinder() point.x value incorrect");
@@ -87,7 +84,6 @@ Test(hit, hit_cylinder_outside_side_x)
 
 // Test(hit, hit_cylinder_inside_side_x)
 // {
-// 	const t_vec3	vec3 = {.ops = init_ops()};
 // 	t_ray			ray;
 // 	t_obj			cylinder;
 // 	t_hit_record	rec;
@@ -101,7 +97,7 @@ Test(hit, hit_cylinder_outside_side_x)
 // 		.norm = (t_vec3){.x = 0, .y = 1, .z = 0},
 // 		.diameter = 1.0,
 // 		.height = 5.0};
-// 	cr_assert_eq(hit_cylinder(vec3, &ray, &cylinder, &rec), true, "hit_cylinder() detection incorrect");
+// 	cr_assert_eq(hit_cylinder(&ray, &cylinder, &rec), true, "hit_cylinder() detection incorrect");
 // 	cr_assert_eq(rec.t, 1.0, "hit_cylinder() t value incorrect");
 // 	cr_assert_eq(rec.front_face, false, "hit_cylinder() front_face value incorrect");
 // 	cr_assert_eq(rec.point.x, 1.0, "hit_cylinder() point.x value incorrect");
@@ -114,7 +110,6 @@ Test(hit, hit_cylinder_outside_side_x)
 
 // Test(hit, hit_cylinder_inside_side_z)
 // {
-// 	const t_vec3	vec3 = {.ops = init_ops()};
 // 	t_ray			ray;
 // 	t_obj			cylinder;
 // 	t_hit_record	rec;
@@ -128,7 +123,7 @@ Test(hit, hit_cylinder_outside_side_x)
 // 		.norm = (t_vec3){.x = 0, .y = 1, .z = 0},
 // 		.diameter = 1.0,
 // 		.height = 5.0};
-// 	cr_assert_eq(hit_cylinder(vec3, &ray, &cylinder, &rec), true, "hit_cylinder() detection incorrect");
+// 	cr_assert_eq(hit_cylinder(&ray, &cylinder, &rec), true, "hit_cylinder() detection incorrect");
 // 	cr_assert_eq(rec.t, 1.0, "hit_cylinder() t value incorrect");
 // 	cr_assert_eq(rec.front_face, false, "hit_cylinder() front_face value incorrect");
 // 	cr_assert_eq(rec.point.x, 0.0, "hit_cylinder() point.x value incorrect");
@@ -141,7 +136,6 @@ Test(hit, hit_cylinder_outside_side_x)
 
 Test(hit, hit_cylinder_outside_top)
 {
-	const t_vec3	vec3 = {.ops = init_ops()};
 	t_ray			ray;
 	t_obj			cylinder;
 	t_hit_record	rec;
@@ -155,7 +149,7 @@ Test(hit, hit_cylinder_outside_top)
 		.color = vector(0, 255, 0),
 		.diameter = 1.0,
 		.height = 5.0};
-	cr_assert_eq(hit_cylinder(vec3, &ray, &cylinder, &rec), true, "hit_cylinder() detection incorrect");
+	cr_assert_eq(hit_cylinder(&ray, &cylinder, &rec), true, "hit_cylinder() detection incorrect");
 	cr_assert_eq(rec.t, 17.5, "hit_cylinder() t value incorrect");
 	cr_assert_eq(rec.front_face, true, "hit_cylinder() front_face value incorrect");
 	cr_assert_eq(rec.point.x, 0.0, "hit_cylinder() point.x value incorrect");
@@ -171,7 +165,6 @@ Test(hit, hit_cylinder_outside_top)
 
 Test(hit, hit_cylinder_inside_top)
 {
-	const t_vec3	vec3 = {.ops = init_ops()};
 	t_ray			ray;
 	t_obj			cylinder;
 	t_hit_record	rec;
@@ -185,9 +178,9 @@ Test(hit, hit_cylinder_inside_top)
 		.color = vector(0, 0, 0),
 		.diameter = 1.0,
 		.height = 5.0};
-	printf("hit: %d\n", hit_cylinder(vec3, &ray, &cylinder, &rec));
+	printf("hit: %d\n", hit_cylinder(&ray, &cylinder, &rec));
 	print_hit_record(&rec);
-	cr_assert_eq(hit_cylinder(vec3, &ray, &cylinder, &rec), true, "hit_cylinder() detection incorrect");
+	cr_assert_eq(hit_cylinder(&ray, &cylinder, &rec), true, "hit_cylinder() detection incorrect");
 	cr_assert_eq(rec.t, 2.5, "hit_cylinder() t value incorrect");
 	cr_assert_eq(rec.front_face, false, "hit_cylinder() front_face value incorrect");
 	cr_assert_eq(rec.point.x, 0.0, "hit_cylinder() point.x value incorrect");
@@ -203,7 +196,6 @@ Test(hit, hit_cylinder_inside_top)
 
 Test(hit, hit_cylinder_outside_bottom)
 {
-	const t_vec3	vec3 = {.ops = init_ops()};
 	t_ray			ray;
 	t_obj			cylinder;
 	t_hit_record	rec;
@@ -217,7 +209,7 @@ Test(hit, hit_cylinder_outside_bottom)
 		.color = vector(0, 255, 0),
 		.diameter = 1.0,
 		.height = 5.0};
-	cr_assert_eq(hit_cylinder(vec3, &ray, &cylinder, &rec), true, "hit_cylinder() detection incorrect");
+	cr_assert_eq(hit_cylinder(&ray, &cylinder, &rec), true, "hit_cylinder() detection incorrect");
 	cr_assert_eq(rec.t, 17.5, "hit_cylinder() t value incorrect");
 	cr_assert_eq(rec.front_face, true, "hit_cylinder() front_face value incorrect");
 	cr_assert_eq(rec.point.x, 0.0, "hit_cylinder() point.x value incorrect");
@@ -233,7 +225,6 @@ Test(hit, hit_cylinder_outside_bottom)
 
 Test(hit, hit_cylinder_inside_bottom)
 {
-	const t_vec3	vec3 = {.ops = init_ops()};
 	t_ray			ray;
 	t_obj			cylinder;
 	t_hit_record	rec;
@@ -247,7 +238,7 @@ Test(hit, hit_cylinder_inside_bottom)
 		.color = vector(0, 0, 0),
 		.diameter = 1.0,
 		.height = 5.0};
-	cr_assert_eq(hit_cylinder(vec3, &ray, &cylinder, &rec), true, "hit_cylinder() detection incorrect");
+	cr_assert_eq(hit_cylinder(&ray, &cylinder, &rec), true, "hit_cylinder() detection incorrect");
 	cr_assert_eq(rec.t, 2.5, "hit_cylinder() t value incorrect");
 	cr_assert_eq(rec.front_face, false, "hit_cylinder() front_face value incorrect");
 	cr_assert_eq(rec.point.x, 0.0, "hit_cylinder() point.x value incorrect");
@@ -263,7 +254,6 @@ Test(hit, hit_cylinder_inside_bottom)
 
 Test(hit, hit_cylinder_outside_edge)
 {
-	const t_vec3	vec3 = {.ops = init_ops()};
 	t_ray			ray;
 	t_obj			cylinder;
 	t_hit_record	rec;
@@ -276,7 +266,7 @@ Test(hit, hit_cylinder_outside_edge)
 		.norm = vector(0, 1, 0),
 		.diameter = 1.0,
 		.height = 5.0};
-	cr_assert_eq(hit_cylinder(vec3, &ray, &cylinder, &rec), true, "hit_cylinder() detection incorrect");
+	cr_assert_eq(hit_cylinder(&ray, &cylinder, &rec), true, "hit_cylinder() detection incorrect");
 	cr_assert_eq(rec.t, 1.0, "hit_cylinder() t value incorrect");
 	cr_assert_eq(rec.front_face, true, "hit_cylinder() front_face value incorrect");
 	cr_assert_eq(rec.point.x, 1.0, "hit_cylinder() point.x value incorrect");

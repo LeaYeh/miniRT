@@ -15,7 +15,6 @@
 
 Test(hit, hit_sphere_outside_x)
 {
-	const t_vec3	vec3 = {.ops = init_ops()};
 	t_ray			ray;
 	t_obj			sphere;
 	t_hit_record	rec;
@@ -28,7 +27,7 @@ Test(hit, hit_sphere_outside_x)
 		.norm = vector(0, 1, 0),
 		.color= vector(0, 255, 0),
 		.diameter = 1.0};
-	cr_assert_eq(hit_sphere(vec3, &ray, &sphere, &rec), true, "hit_sphere() detection incorrect");
+	cr_assert_eq(hit_sphere(&ray, &sphere, &rec), true, "hit_sphere() detection incorrect");
 	cr_assert_eq(rec.t, 1.0, "hit_sphere() t value incorrect");
 	cr_assert_eq(rec.front_face, true, "hit_sphere() front_face value incorrect");
 	cr_assert_eq(rec.point.x, 1.0, "hit_sphere() point.x value incorrect");
@@ -44,7 +43,6 @@ Test(hit, hit_sphere_outside_x)
 
 Test(hit, hit_sphere_outside_y)
 {
-	const t_vec3	vec3 = {.ops = init_ops()};
 	t_ray			ray;
 	t_obj			sphere;
 	t_hit_record	rec;
@@ -57,7 +55,7 @@ Test(hit, hit_sphere_outside_y)
 		.norm = vector(0, 1, 0),
 		.color= vector(0, 255, 0),
 		.diameter = 1.0};
-	cr_assert_eq(hit_sphere(vec3, &ray, &sphere, &rec), true, "hit_sphere() detection incorrect");
+	cr_assert_eq(hit_sphere(&ray, &sphere, &rec), true, "hit_sphere() detection incorrect");
 	cr_assert_eq(rec.t, 1.0, "hit_sphere() t value incorrect");
 	cr_assert_eq(rec.front_face, true, "hit_sphere() front_face value incorrect");
 	cr_assert_eq(rec.point.x, 0.0, "hit_sphere() point.x value incorrect");
@@ -73,7 +71,6 @@ Test(hit, hit_sphere_outside_y)
 
 Test(hit, hit_sphere_outside_z)
 {
-	const t_vec3	vec3 = {.ops = init_ops()};
 	t_ray			ray;
 	t_obj			sphere;
 	t_hit_record	rec;
@@ -86,7 +83,7 @@ Test(hit, hit_sphere_outside_z)
 		.norm = vector(0, 1, 0),
 		.color= vector(0, 255, 0),
 		.diameter = 1.0};
-	cr_assert_eq(hit_sphere(vec3, &ray, &sphere, &rec), true, "hit_sphere() detection incorrect");
+	cr_assert_eq(hit_sphere(&ray, &sphere, &rec), true, "hit_sphere() detection incorrect");
 	cr_assert_eq(rec.t, 1.0, "hit_sphere() t value incorrect");
 	cr_assert_eq(rec.front_face, true, "hit_sphere() front_face value incorrect");
 	cr_assert_eq(rec.point.x, 0.0, "hit_sphere() point.x value incorrect");
@@ -102,7 +99,6 @@ Test(hit, hit_sphere_outside_z)
 
 Test(hit, hit_sphere_inside)
 {
-	const t_vec3	vec3 = {.ops = init_ops()};
 	t_ray			ray;
 	t_obj			sphere;
 	t_hit_record	rec;
@@ -115,7 +111,7 @@ Test(hit, hit_sphere_inside)
 		.norm = vector(0, 1, 0),
 		.color= vector(0, 255, 0),
 		.diameter = 10.0};
-	cr_assert_eq(hit_sphere(vec3, &ray, &sphere, &rec), true, "hit_sphere() detection incorrect");
+	cr_assert_eq(hit_sphere(&ray, &sphere, &rec), true, "hit_sphere() detection incorrect");
 	cr_assert_eq(rec.t, 5.0, "hit_sphere() t value incorrect");
 	cr_assert_eq(rec.front_face, false, "hit_sphere() front_face value incorrect");
 	cr_assert_eq(rec.point.x, 0.0, "hit_sphere() point.x value incorrect");
@@ -131,7 +127,6 @@ Test(hit, hit_sphere_inside)
 
 Test(hit, hit_sphere_miss)
 {
-	const t_vec3	vec3 = {.ops = init_ops()};
 	t_ray			ray;
 	t_obj			sphere;
 	t_hit_record	rec;
@@ -144,5 +139,5 @@ Test(hit, hit_sphere_miss)
 		.norm = vector(0, 1, 0),
 		.color= vector(0, 255, 0),
 		.diameter = 1.0};
-	cr_assert_eq(hit_sphere(vec3, &ray, &sphere, &rec), false, "hit_sphere() detection incorrect");
+	cr_assert_eq(hit_sphere(&ray, &sphere, &rec), false, "hit_sphere() detection incorrect");
 }
