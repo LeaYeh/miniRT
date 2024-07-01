@@ -23,8 +23,9 @@ Need to allow tab bc in subject examples it also uses tab
 # Todo
 - [ ] Rename objects to object_list.
 - [X] We don't do anything with ratio/brightness atm.
-- [ ] Reset zoom.
+- [X] Reset zoom.
 - [X] Check if max values of subject should be checked in parsing.
+- [X] Rename environment to scene.
 
 # MLX functions
 mlx_get_screen_size()
