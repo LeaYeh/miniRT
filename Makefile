@@ -46,10 +46,11 @@ BUILDFILES		:=	Makefile \
 
 CC 				?=	cc
 CC_VERSION		:=	$(shell $(CC) --version | head -1)
-CFLAGS_STD		:=	-Wall -Wextra -Werror -ggdb3
+CFLAGS_STD		:=	-Wall -Wextra -Werror
+CFLAGS_DBG		:=	-ggdb3
 CFLAGS_SAN		:=	-fsanitize=address,undefined,bounds,float-divide-by-zero
 CFLAGS_OPT		:=	-O3
-CFLAGS 			?=	$(CFLAGS_STD)
+CFLAGS 			?=	$(CFLAGS_STD) $(CFLAGS_DBG)
 INCFLAGS 		:=	$(addprefix -I,$(INC_DIR) $(LIB_INCLUDES))
 LIBFLAGS		:=	$(addprefix -L,$(LIBS)) \
 					$(addprefix -l,$(patsubst lib%,%,$(notdir $(LIBS) $(LIBS_EXT))))
@@ -135,7 +136,7 @@ test			:
 							|| (echo $(MSG_FAILURE) && exit 42))
 					"./$(NAME_TEST)"
 
-san				:	CFLAGS := $(CFLAGS_STD) $(CFLAGS_SAN)
+san				:	CFLAGS := $(CFLAGS_STD) $(CFLAGS_DBG) $(CFLAGS_SAN)
 san				:	re
 					$(MAKE) clean
 					"./$(NAME)" $(ARGS)
