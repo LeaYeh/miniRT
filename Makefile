@@ -44,7 +44,7 @@ BUILDFILES		:=	Makefile \
 
 #	Flags
 
-CC 				:=	cc
+CC 				?=	cc
 CC_VERSION		:=	$(shell $(CC) --version | head -1)
 CFLAGS_STD		:=	-Wall -Wextra -Werror -ggdb3
 CFLAGS_SAN		:=	-fsanitize=address,undefined,bounds,float-divide-by-zero
