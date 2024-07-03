@@ -13,7 +13,6 @@
 #include "minirt.h"
 #include "mlx_utils.h"
 #include "render.h"
-#include "ft_printf.h"
 
 int	main(int argc, char *argv[])
 {
@@ -21,7 +20,7 @@ int	main(int argc, char *argv[])
 
 	if (argc != 2)
 	{
-		ft_dprintf(STDERR_FILENO, "Error: %s", INVALID_NUM_ARG);
+		print_error(INVALID_NUM_ARG);
 		return (ERR_ARGC);
 	}
 	if (!init_minirt(&minirt, argv[1]))
