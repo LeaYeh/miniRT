@@ -44,12 +44,13 @@ BUILDFILES		:=	Makefile \
 
 #	Flags
 
-CC 				:=	cc
+CC 				?=	cc
 CC_VERSION		:=	$(shell $(CC) --version | head -1)
-CFLAGS_STD		:=	-Wall -Wextra -Werror -ggdb3
+CFLAGS_STD		:=	-Wall -Wextra -Werror
+CFLAGS_DBG		:=	-ggdb3
 CFLAGS_SAN		:=	-fsanitize=address,undefined,bounds,float-divide-by-zero
 CFLAGS_OPT		:=	-O3
-CFLAGS 			?=	$(CFLAGS_STD)
+CFLAGS 			?=	$(CFLAGS_STD) $(CFLAGS_DBG)
 INCFLAGS 		:=	$(addprefix -I,$(INC_DIR) $(LIB_INCLUDES))
 LIBFLAGS		:=	$(addprefix -L,$(LIBS)) \
 					$(addprefix -l,$(patsubst lib%,%,$(notdir $(LIBS) $(LIBS_EXT))))
@@ -116,10 +117,19 @@ DEP_SUBDIRS		:=	$(sort $(dir $(DEP)))
 #	Compilation
 
 all				:
-					($(MAKE) --question build && echo $(MSG_NO_CHNG)) \
-						|| (echo -n $(MSG_INFO)$(MSG_START) \
-							&& ($(MAKE) build && echo $(MSG_SUCCESS)) \
-							|| (echo $(MSG_FAILURE) && exit 42))
+					if $(MAKE) --question build; then \
+						echo $(MSG_NO_CHNG); \
+					else \
+						echo -n $(MSG_INFO)$(MSG_START); \
+						if $(MAKE) build; then \
+							echo; \
+							echo $(MSG_SUCCESS); \
+						else \
+							echo; \
+							echo $(MSG_FAILURE); \
+							exit 42; \
+						fi; \
+					fi
 
 fast			:	CFLAGS := $(CFLAGS_STD) $(CFLAGS_OPT)
 fast			:	re
@@ -129,13 +139,22 @@ run				:	all
 					"./$(NAME)" $(ARGS)
 
 test			:
-					($(MAKE) --question build_test && echo $(MSG_NO_CHNG)) \
-						|| (echo -n $(MSG_INFO)$(MSG_START_TEST) \
-							&& ($(MAKE) build_test && echo $(MSG_SUCCESS)) \
-							|| (echo $(MSG_FAILURE) && exit 42))
+					if $(MAKE) --question build_test; then \
+						echo $(MSG_NO_CHNG); \
+					else \
+						echo -n $(MSG_INFO)$(MSG_START_TEST); \
+						if $(MAKE) build_test; then \
+							echo; \
+							echo $(MSG_SUCCESS); \
+						else \
+							echo; \
+							echo $(MSG_FAILURE); \
+							exit 42; \
+						fi; \
+					fi
 					"./$(NAME_TEST)"
 
-san				:	CFLAGS := $(CFLAGS_STD) $(CFLAGS_SAN)
+san				:	CFLAGS := $(CFLAGS_STD) $(CFLAGS_DBG) $(CFLAGS_SAN)
 san				:	re
 					$(MAKE) clean
 					"./$(NAME)" $(ARGS)
