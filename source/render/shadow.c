@@ -14,19 +14,18 @@
 
 bool	is_shadow(t_light light, t_list_d *object_list, t_hit_record rec)
 {
-	const t_vec3	vec3 = (t_vec3){.ops = init_ops()};
 	t_ray			shadow_ray;
 	t_vec3			point2light;
 	t_hit_record	tmp_rec;
 
-	point2light = vec3.ops->sub(light.position, rec.point);
+	point2light = vec3_sub(light.position, rec.point);
 	shadow_ray = init_ray(
-			vec3.ops->add(rec.point, vec3.ops->mul(rec.norm, 1e-3)),
-			vec3.ops->normalize(point2light));
+			vec3_add(rec.point, vec3_mul(rec.norm, 1e-3)),
+			vec3_normalize(point2light));
 	while (object_list)
 	{
 		if (hit_object(&shadow_ray, object_list->content, &tmp_rec) && \
-			is_min_positive_t(tmp_rec.t, vec3.ops->magnitude(point2light)))
+			is_min_positive_t(tmp_rec.t, vec3_magnitude(point2light)))
 			return (true);
 		object_list = object_list->next;
 	}

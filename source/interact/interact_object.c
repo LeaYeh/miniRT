@@ -33,8 +33,6 @@ void	interact_object(int key, t_minirt *minirt)
 
 bool	reset_object(t_obj *obj, int key)
 {
-	const t_vec3	vec3 = (t_vec3){.ops = init_ops()};
-
 	if (key == XK_space)
 		obj->rotation = vector(0.0, 0.0, 0.0);
 	else if (key == Button2)
@@ -44,9 +42,9 @@ bool	reset_object(t_obj *obj, int key)
 	}
 	else if (key == XK_r)
 	{
-		if (vec3.ops->magnitude(obj->translation) == 0)
+		if (vec3_magnitude(obj->translation) == 0)
 		{
-			if (vec3.ops->magnitude(obj->rotation) == 0)
+			if (vec3_magnitude(obj->rotation) == 0)
 			{
 				obj->diameter = obj->org_diameter;
 				obj->height = obj->org_height;
